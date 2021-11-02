@@ -17,20 +17,20 @@
             </div>    
             
             <div class="logo">
-                <a href="index.html"><img src="photos/logo3.png" alt="logo" class="logo_id"></a>
+                <a href="index.php"><img src="photos/logo3.png" alt="logo" class="logo_id"></a>
                 
             </div>
 
             <div class="rightsite">
                 <div class="logowanie">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
                     
                 </div>
                 <div class="wyszukiwanie">
-                    <a href="wyszukiwarka.html"><img class="lupa" src="icons/lupa.png" alt="alt"/></a>
+                    <a href="wyszukiwarka.php"><img class="lupa" src="icons/lupa.png" alt="alt"/></a>
                 </div>
                 <div class="koszyk">
-                    <a href="koszyk.html"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
                 </div>
             </div>      
         </div>
@@ -80,10 +80,10 @@
 
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
                 </div>
                 <div class="koszyk_w_menu col-4">
-                    <a href="koszyk.html"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
                 </div>
                 
             </div>

@@ -17,22 +17,23 @@ and open the template in the editor.
     <body>
         <?php
             include("./php/load_database.php");
+            include("./php/registration.php");
         ?>
         <div class="row" id="logo_zaw">
             <div class="help">   
             </div>    
             <div class="logo">
-                <a href="index.html"><img src="photos/logo3.png" alt="logo"></a>  
+                <a href="index.php"><img src="photos/logo3.png" alt="logo"></a>  
             </div>
             <div class="rightsite">
                 <div class="logowanie">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
                 </div>
                 <div class="wyszukiwanie">
-                    <a href="wyszukiwarka.html"><img class="lupa" src="ikony/lupa.png" alt="alt"/></a>
+                    <a href="wyszukiwarka.php"><img class="lupa" src="ikony/lupa.png" alt="alt"/></a>
                 </div>
                 <div class="koszyk">
-                    <a href="koszyk.html"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
                 </div>
             </div>      
         </div>
@@ -56,10 +57,10 @@ and open the template in the editor.
                     <span class="bars"></span>
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
                 </div>
                 <div class="koszyk_w_menu col-4">
-                    <a href="koszyk.html"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
                 </div>
                 
             </div>
@@ -85,40 +86,36 @@ and open the template in the editor.
                     Imię:
                     </div>
                     <div class="imie_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="firstname" type="text" id="input_imie">
+                    <input class="input_logowanie" required name="firstname" type="text" id="input_imie">
                     </div>
                     <div class="nazwisko_napis col-xs-12 col-sm-12 col-lg-5">
                     Nazwisko:
                     </div>
                     <div class="nazwisko_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="surname" type="text" id="input_nazwisko">
+                    <input class="input_logowanie" required name="surname" type="text" id="input_nazwisko">
                     </div>
                     <div class="login_napis col-xs-12 col-sm-12 col-lg-5">
                     Email:
                     </div>
                     <div class="login_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="email" type="email" id="input_login">
+                    <input class="input_logowanie" requried name="email" type="email" id="input_login">
                     </div>
                     <div class="haslo_napis col-xs-12 col-sm-12 col-lg-5">
                     Hasło:
                     </div>
                     <div class="haslo_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="password" type="password" id="input_haslo">
+                    <input class="input_logowanie" required name="password" type="password" id="input_haslo">
                     </div>
                     <div class="akceptacja_regulaminu col-12">
-                        <input type="checkbox" name=""> Akceptuje regulamin
+                        <input type="checkbox" required name="checkbox_submit"> Akceptuje regulamin
                     </div>
                     <div class="panel_logowanie_button col-12">
                         <button class="button_logowanie" type="submit" name="make_account">ZAŁÓŻ KONTO</button>
                     </div>
                     <div class="napis_1 col-12">
-                        <a href="logowanie.html">Posiadam już konto</a>
+                        <a href="logowanie.php">Posiadam już konto</a>
                     </div>
                 </form>
-                <?php
-                        include("./php/registration.php");
-                    ?>
-                
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">
