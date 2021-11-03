@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 03 Lis 2021, 21:21
--- Wersja serwera: 10.4.17-MariaDB
--- Wersja PHP: 8.0.1
+-- Czas generowania: 03 Lis 2021, 22:52
+-- Wersja serwera: 10.4.21-MariaDB
+-- Wersja PHP: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `shop`
 --
-
+CREATE DATABASE shop;
+use shop;
 -- --------------------------------------------------------
 
 --
@@ -79,7 +80,14 @@ INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (5, 2, 'photos/produkty/bluza.jpg', 1),
 (6, 2, 'photos/produkty/bluza_1.jpg', 0),
 (7, 2, 'photos/produkty/bluza_2.jpg', 0),
-(8, 2, 'photos/produkty/bluza_3.jpg', 0);
+(8, 2, 'photos/produkty/bluza_3.jpg', 0),
+(9, 4, 'photos/produkty/bluza_4.jpg', 1),
+(10, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
+(11, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
+(12, 5, 'photos/produkty/bluza_3.jpg', 1),
+(13, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
+(14, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
+(15, 6, 'photos/produkty/bluza_2.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -115,8 +123,11 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id_product`, `product_name`, `id_category`, `price`, `amount`) VALUES
 (1, 'Bluzka G', 1, 50, 20),
-(2, 'Bluza', 2, 150, 20),
-(3, 'Spodnie', 3, 120, 20);
+(2, 'Bluza UFO', 2, 150, 20),
+(3, 'Spodnie', 3, 120, 20),
+(4, 'Szara bluza z długim rękawem', 2, 89.99, 20),
+(5, 'Bluza Adidas', 2, 129.99, 20),
+(6, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
 
 -- --------------------------------------------------------
 
@@ -208,7 +219,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT dla tabeli `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `orders`
@@ -220,7 +231,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT dla tabeli `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
