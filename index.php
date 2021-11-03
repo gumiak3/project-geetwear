@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
-        
         <div class="row" id="logo_zaw">
             <div class="help">   
             </div>    
@@ -89,7 +88,7 @@
             </div>
            
             <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
+                <li class="kategoria"><a href="nowosc.php">NOWOŚCI</a></li>
                 <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
                 <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
                 <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
@@ -113,70 +112,9 @@
         </div> 
         <div class="zawartosc">  
             <h2 class="title_of_product col-lg-12 ">POLECANE</h2>
-           
-            <div class="orange_line"></div>
-                <div class="produkty">
-                <ul id="produkt-grid" class="newproduct_grid product_list grid row gridcount">
-                    <li class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc">
-                        <a href="produkt.html" class="img_product" ><img src="photos/produkty/koszulka.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt.html" class="produkt1">Czarna Koszulka</a></span>
-                            <div class="product-price">
-                                <span class="cena">19,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc2">
-                        <a href="produkt2.html" class="img_product" > <img src="photos/produkty/koszulka.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt2.html" class="produkt1">Czarna Koszulka</a></span>
-                            <div class="product-price">
-                                <span class="cena">19,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc3">
-                        <a href="produkt3.html" class="img_product" > <img src="photos/produkty/bluza_4.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt3.html" class="produkt1">Szara Bluza z długim rękawem</a></span>
-                            <div class="product-price">
-                                <span class="cena">89,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc4">
-                        <a href="produkt4.html" class="img_product"> <img src="photos/produkty/bluza_3.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt4.html" class="produkt1">Bluza Adias </a></span>
-                            <div class="product-price">
-                                <span class="cena">129,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc5">
-                        <a href="produkt5.html" class="img_product"> <img src="photos/produkty/bluza_2.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt5.html" class="produkt1">Czarna Bluza z długim rękawem</a></span>
-                            <div class="product-price">
-                                <span class="cena">99,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="product_item col-xs-12 col-sm-6 col-md-6 col-lg-4" id="produkt_calosc6">
-                        <a href="produkt6.html" class="img_product"> <img src="photos/produkty/bluza_1.jpg" alt="product" class="produkt"></a>
-                        <div class="product-description">
-                            <span class="h3 product-title"><a href="produkt6.html" class="produkt1">Czarna Bluza UFO</a></span>
-                            <div class="product-price">
-                                <span class="cena">219,99 zł</span>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    
-                </ul>  
-            </div>
+            
+            <div id="productsData"></div>
+
                 <div class="under_products">
                     <div class="fast_delivery  ">
                         <img class="margin" src="icons/delivery.png" alt="alt">
@@ -246,6 +184,8 @@
             </div>     
                 
         </div>    
-        </div>         
+        </div>  
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="./jscript/getProducts.js"></script>         
     </body>
 </html>

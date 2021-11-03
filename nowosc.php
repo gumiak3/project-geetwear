@@ -19,7 +19,7 @@ and open the template in the editor.
             <div class="help">   
             </div>    
             <div class="logo">
-                <a href="index.html"><img src="photos/logo3.png" alt="logo"></a>
+                <a href="index.php"><img src="photos/logo3.png" alt="logo"></a>
                 
             </div>
             <div class="rightsite">
@@ -64,7 +64,7 @@ and open the template in the editor.
             </div>
            
             <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
+                <li class="kategoria"><a href="nowosc.php">NOWOŚCI</a></li>
                 <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
                 <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
                 <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>

@@ -1,12 +1,12 @@
 $(document).ready(function(){
-
+    
     getProducts();
 
 });
 
 function getProducts(){
     $.ajax({
-        url: "getProducts.php",
+        url: "php/getProducts.php",
         method: 'POST'
     }).done(function( data ) {
         $('#productsData').html(data);

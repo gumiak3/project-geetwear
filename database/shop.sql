@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 01 Lis 2021, 17:09
--- Wersja serwera: 10.4.21-MariaDB
--- Wersja PHP: 8.0.10
+-- Czas generowania: 03 Lis 2021, 21:21
+-- Wersja serwera: 10.4.17-MariaDB
+-- Wersja PHP: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `getwear_shop`
+-- Baza danych: `shop`
 --
 
 -- --------------------------------------------------------
@@ -63,8 +63,23 @@ INSERT INTO `categories` (`id_category`, `category_name`) VALUES
 CREATE TABLE `gallery` (
   `id_foto` int(11) NOT NULL,
   `id_product` int(11) DEFAULT NULL,
-  `foto` varchar(100) DEFAULT NULL
+  `foto` varchar(100) DEFAULT NULL,
+  `main` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `gallery`
+--
+
+INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
+(1, 1, 'photos/produkty/koszulka.jpg', 1),
+(2, 1, 'photos/produkty/koszulka_biala.jpg', 0),
+(3, 1, 'photos/produkty/koszulka_model.jpg', 0),
+(4, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
+(5, 2, 'photos/produkty/bluza.jpg', 1),
+(6, 2, 'photos/produkty/bluza_1.jpg', 0),
+(7, 2, 'photos/produkty/bluza_2.jpg', 0),
+(8, 2, 'photos/produkty/bluza_3.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +208,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT dla tabeli `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `orders`
