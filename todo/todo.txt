@@ -5,3 +5,7 @@ SQL
 
 php 
     wyświetlanie według identyfikatora produktu na głownej
+
+
+rejestracja
+    wyświetalnie błedu, jezeli email jest już w użytku.

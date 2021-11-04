@@ -12,6 +12,7 @@ and open the template in the editor.
         <link href="css/rejestracja.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="jscript/validRegistration.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
@@ -78,21 +79,22 @@ and open the template in the editor.
         <!-- reszta -->
         <div class="space_between_slider"> 
         </div>
-        <div class="zawartosc">  
+        <div class="zawartosc"> 
             <h2 class="h1 title_of_product col-lg-12 ">ZAŁÓŻ KONTO</h2>
                 <!-- logowanie -->
+                <div id='error-div'></div>
                 <form class="panel_logowania row " method="POST">
                     <div class="imie_napis col-xs-12 col-sm-12 col-lg-5">
                     Imię:
                     </div>
                     <div class="imie_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" required name="firstname" type="text" id="input_imie">
+                    <input class="input_logowanie" required name="firstname" type="text" id="input_imie" value="<?php if(isset($_POST['make_account']))echo $_POST['firstname']?>">
                     </div>
                     <div class="nazwisko_napis col-xs-12 col-sm-12 col-lg-5">
                     Nazwisko:
                     </div>
                     <div class="nazwisko_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" required name="surname" type="text" id="input_nazwisko">
+                    <input class="input_logowanie" required name="surname" type="text" id="input_nazwisko" value="<?php if(isset($_POST['make_account']))echo $_POST['surname']?>">
                     </div>
                     <div class="login_napis col-xs-12 col-sm-12 col-lg-5">
                     Email:
