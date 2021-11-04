@@ -1,0 +1,7 @@
+SQL
+    kolumna rozmiary
+    kolumna identyfikator produktu
+
+
+php 
+    wyświetlanie według identyfikatora produktu na głownej

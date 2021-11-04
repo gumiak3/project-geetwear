@@ -52,8 +52,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id_category`, `category_name`) VALUES
 (1, 'bluzka'),
-(2, 'bluza'),
-(3, 'spodnie');
+(2, 'bluza');
 
 -- --------------------------------------------------------
 
@@ -124,10 +123,9 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id_product`, `product_name`, `id_category`, `price`, `amount`) VALUES
 (1, 'Bluzka G', 1, 50, 20),
 (2, 'Bluza UFO', 2, 150, 20),
-(3, 'Spodnie', 3, 120, 20),
-(4, 'Szara bluza z długim rękawem', 2, 89.99, 20),
-(5, 'Bluza Adidas', 2, 129.99, 20),
-(6, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
+(3, 'Szara bluza z długim rękawem', 2, 89.99, 20),
+(4, 'Bluza Adidas', 2, 129.99, 20),
+(5, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
 
 -- --------------------------------------------------------
 

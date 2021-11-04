@@ -112,7 +112,7 @@
         </div> 
         <div class="zawartosc">  
             <h2 class="title_of_product col-lg-12 ">POLECANE</h2>
-            
+            <div class="orange_line"></div>
             <div id="productsData"></div>
 
                 <div class="under_products">
