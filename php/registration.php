@@ -7,19 +7,19 @@
         $emailError = false;
         foreach($check_emails as $row_checkEmails)
         {
-            if($row_checkEmails==$email){
+            if($row_checkEmails['email']==$email){
                 $emailError = true;
             }
         }
         $password = $_POST['password'];
         $password = password_hash($password,PASSWORD_DEFAULT);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        if($emailError)
+        if(!$emailError)
         {
             $make_account = $pdo->exec("INSERT INTO users (firstname,surname,email,password,type) values ('$firstname','$surname','$email','$password','user')");
             header("location:logowanie.php");
         }else{
-            // tutaj dałbym ten error ale nw jak to dokladnie. Jutro pomysle dzisiaj juz leb paruje pozdro
+            echo '<div class="error-div">Email jest już w użyciu</div>';
         }
     }
     

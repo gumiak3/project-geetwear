@@ -12,13 +12,11 @@ and open the template in the editor.
         <link href="css/rejestracja.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="jscript/validRegistration.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
         <?php
             include("./php/load_database.php");
-            include("./php/registration.php");
         ?>
         <div class="row" id="logo_zaw">
             <div class="help">   
@@ -82,6 +80,7 @@ and open the template in the editor.
         <div class="zawartosc"> 
             <h2 class="h1 title_of_product col-lg-12 ">ZAŁÓŻ KONTO</h2>
                 <!-- logowanie -->
+               <?php include("./php/registration.php");?>
                 <div id='error-div'></div>
                 <form class="panel_logowania row " method="POST">
                     <div class="imie_napis col-xs-12 col-sm-12 col-lg-5">
