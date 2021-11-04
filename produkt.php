@@ -16,11 +16,27 @@ and open the template in the editor.
         <script src="newjavascript.js"></script>
     </head>
     <body>
+        <?php
+            include('php/load_database.php') ;
+            $id_product = $_POST['id_product'];
+            $stmt = $pdo->query('SELECT * FROM products WHERE id_product='.$id_product);
+            echo $_POST['id_product'];
+            foreach ($stmt as $row) {
+                
+                $stmt2 = $pdo->query('SELECT * FROM gallery WHERE id_product='.$row['id_product']);
+                foreach($stmt2 as $row2){
+                }
+                $stmt3 = $pdo->query('SELECT * FROM gallery WHERE main = 1 AND id_product='.$row['id_product']);
+                foreach($stmt3 as $row3){
+                }
+            }
+        ?>
+        
         <div class="row" id="logo_zaw">
             <div class="help">   
             </div>    
             <div class="logo">
-                <a href="index.html"><img src="photos/logo3.png" alt="logo"></a>
+                <a href="index.php"><img src="photos/logo3.png" alt="logo"></a>
                 
             </div>
             <div class="rightsite">
@@ -79,17 +95,19 @@ and open the template in the editor.
         <div class="space_between_slider"> 
             
         </div>
-            <a href="index.html" class="back_main_page col-12">STRONA GŁÓWNA</a> 
+            <a href="index.php" class="back_main_page col-12">STRONA GŁÓWNA</a> 
         <div class="zawartosc">  
-             
+
+
+
             <div class="calosc row grid ">
                 <div class="zdjecie_produktu col-xs-12 col-sm-12 col-lg-6">
-                    <img src="photos/produkty/koszulka_model.jpg" alt="product" id="produkt">
+                    <img src="<?php echo $row3['foto']?>" alt="product" id="produkt">
                 </div>
                 <div class="nazwa_produktu col-xs-12 col-sm-12 col-lg-6">
-                    <h1 id="nazwa_produktu_id">Czarna koszulka</h1>
+                    <h1 id="nazwa_produktu_id"><?php echo $row['product_name']?></h1>
                     <div class="cena_produktu col-12">
-                        19,00 zł
+                    <?php echo $row['price']?>
                     </div>
                     <div class="opis_produktu col-12">
                         <p>Męska koszulka polo to kwintesencja sportowej elegancji, co wpływa na fakt, że jest podstawowym elementem każdej garderoby. Czarny kolor koszulki pasuje do wszystkiego, a sama koszulka świetnie prezentuje się na sylwetce. Bezwarunkowo jest to podstawa w szafie, którą można nosić z wieloma rzeczami i zawsze wyglądać świetnie!</p>
@@ -120,7 +138,7 @@ and open the template in the editor.
                     <div class="ustawienie_ilości col-xs-12 col-sm-3 col-lg-3">
                         ILOŚĆ:
                         <br>
-                        <input type="number" class="input_ilosci" min="1" max="100" value="1" >
+                        <input type="number" class="input_ilosci" min="1" max="100" value="<?php echo $row['amount']?>" >
                     </div>
                     <div class="przycisk_dodaj_do_koszyka col-xs-12 col-sm-6 col-lg-6">
                         <button class="przycisk_koszyk" type="button">DO KOSZYKA</button>
@@ -128,6 +146,9 @@ and open the template in the editor.
                 </div>
             </div>  
                 
+
+
+
                 
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
