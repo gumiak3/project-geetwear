@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 03 Lis 2021, 22:52
+-- Czas generowania: 08 Lis 2021, 14:06
 -- Wersja serwera: 10.4.21-MariaDB
--- Wersja PHP: 7.3.31
+-- Wersja PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -143,7 +143,7 @@ CREATE TABLE `users` (
   `house_number` int(11) NOT NULL,
   `apartment_number` int(11) DEFAULT NULL,
   `email` varchar(60) NOT NULL,
-  `password` varchar(30) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -157,7 +157,10 @@ INSERT INTO `users` (`id_user`, `firstname`, `surname`, `city`, `street`, `ZIP`,
 (3, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
 (4, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
 (5, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
-(6, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user');
+(6, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
+(7, 'dsakld', 'ldksaldk', '', '', '', 0, NULL, 'gumiacz@gmail.com', '$2y$10$0AXhHRC7vjvxlUgKz7.J9Oi', 'user'),
+(8, 'sdakldsa', 'kdlsakldksal', '', '', '', 0, NULL, 'guma@gmail.com', '$2y$10$ijgisZJLrLMHA9gVolE4GOC', 'user'),
+(9, 'sdalkd', 'kdslakdla', '', '', '', 0, NULL, 'jd123@gmail.com', '$2y$10$6qBeRavsN2PoT7HnwMyefuMrIvjU0nYeQs5TfyKTPWA4YDfiEzE5q', 'user');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -235,7 +238,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -248,18 +251,6 @@ ALTER TABLE `basket`
   ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
   ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`),
   ADD CONSTRAINT `basket_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
-
---
--- Ograniczenia dla tabeli `gallery`
---
-ALTER TABLE `gallery`
-  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
-
---
--- Ograniczenia dla tabeli `products`
---
-ALTER TABLE `products`
-  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

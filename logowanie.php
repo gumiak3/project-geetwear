@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if($_SESSION && $_SESSION['login']){
+        header("location:user_login.php");
+    }
+    
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -20,7 +27,6 @@ and open the template in the editor.
             </div>    
             <div class="logo">
                 <a href="index.php"><img src="photos/logo3.png" alt="logo"></a>
-                
             </div>
             <div class="rightsite">
                 <div class="logowanie">
@@ -76,23 +82,29 @@ and open the template in the editor.
         <div class="space_between_slider"> 
         </div>
         <div class="zawartosc">  
+            <?php
+                include("./php/load_database.php")
+            ?>
             <h2 class="h1 title_of_product col-lg-12 ">LOGOWANIE</h2>
                 <!-- logowanie -->
-                <div class="panel_logowania row ">
+                <?php 
+                    include("./php/login.php");
+                ?>
+                <form class="panel_logowania row" method='POST'>
                     <div class="login_napis col-xs-12 col-sm-12 col-lg-5">
                     Email:
                     </div>
                     <div class="login_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="email" type="text" id="input_login">
+                    <input class="input_logowanie" name="email" type="text" id="input_login" value="<?php if(isset($_POST['try-login']))echo $_POST['email']?>">
                     </div>
                     <div class="haslo_napis col-xs-12 col-sm-12 col-lg-5">
                     Hasło:
                     </div>
                     <div class="haslo_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" name="haslo" type="password" id="input_haslo">
+                    <input class="input_logowanie" name="password" type="password" id="input_haslo">
                     </div>
                     <div class="panel_logowanie_button col-12">
-                        <button class="button_logowanie" type="button">ZALOGUJ SIĘ</button>
+                        <button name="try-login" class="button_logowanie" type="submit">ZALOGUJ SIĘ</button>
                     </div>
                     <div class="napis_1 col-6">
                         <a href="rejestracja.php">Nie masz konta?</a>
@@ -100,7 +112,7 @@ and open the template in the editor.
                     <div class="napis_2 col-6">
                         <a href="odzyskiwanie_hasla.php">Odzyskaj konto</a>
                     </div>
-                </div>
+                </form>
                 
                 
             <div class="fotter">

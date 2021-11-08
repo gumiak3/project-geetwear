@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl-PL">
     <head>
@@ -22,7 +25,14 @@
 
             <div class="rightsite">
                 <div class="logowanie">
-                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <?php
+                    if($_SESSION){
+
+                        echo '<a href="logowanie.php"><p class="loguj"> PANEL</p></a>';
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
                     
                 </div>
                 <div class="wyszukiwanie">
@@ -79,7 +89,14 @@
 
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <?php
+                    if($_SESSION){
+
+                        echo '<a href="logowanie.php"><p class="loguj"> PANEL</p></a>';
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
