@@ -28,7 +28,7 @@ session_start();
                     <?php
                     if($_SESSION){
 
-                        echo '<a href="logowanie.php"><p class="loguj"> PANEL</p></a>';
+                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -92,7 +92,7 @@ session_start();
                     <?php
                     if($_SESSION){
 
-                        echo '<a href="logowanie.php"><p class="loguj"> PANEL</p></a>';
+                        echo '<a href="logowanie.php"><p class="loguj"><img src="./icons/user.png"></p></a>';
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }

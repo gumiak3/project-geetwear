@@ -12,6 +12,9 @@ html,body
 /*
 LOGO + MENU
 */
+.user_logo{
+    width:25px;
+}
 .loguj{
     color:black;
     font-weight: bold;
