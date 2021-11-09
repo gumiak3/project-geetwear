@@ -73,20 +73,19 @@ CREATE TABLE `gallery` (
 
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (1, 1, 'photos/produkty/koszulka.jpg', 1),
-(2, 1, 'photos/produkty/koszulka_biala.jpg', 0),
-(3, 1, 'photos/produkty/koszulka_model.jpg', 0),
-(4, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
-(5, 2, 'photos/produkty/bluza.jpg', 1),
-(6, 2, 'photos/produkty/bluza_1.jpg', 0),
-(7, 2, 'photos/produkty/bluza_2.jpg', 0),
-(8, 2, 'photos/produkty/bluza_3.jpg', 0),
-(9, 4, 'photos/produkty/bluza_4.jpg', 1),
-(10, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
-(11, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
-(12, 5, 'photos/produkty/bluza_3.jpg', 1),
-(13, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
-(14, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
-(15, 6, 'photos/produkty/bluza_2.jpg', 1);
+(2, 1, 'photos/produkty/koszulka_model.jpg', 0),
+(3, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
+(4, 2, 'photos/produkty/bluza.jpg', 1),
+(5, 2, 'photos/produkty/bluza_1.jpg', 0),
+(6, 2, 'photos/produkty/bluza_2.jpg', 0),
+(7, 2, 'photos/produkty/bluza_3.jpg', 0),
+(8, 4, 'photos/produkty/bluza_4.jpg', 1),
+(9, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
+(10, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
+(11, 5, 'photos/produkty/bluza_3.jpg', 1),
+(12, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
+(13, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
+(14, 6, 'photos/produkty/bluza_2.jpg', 1);
 
 -- --------------------------------------------------------
 
