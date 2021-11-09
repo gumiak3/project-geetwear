@@ -20,7 +20,6 @@ and open the template in the editor.
             include('php/load_database.php') ;
             $id_product = $_POST['id_product'];
             $stmt = $pdo->query('SELECT * FROM products WHERE id_product='.$id_product);
-            echo $_POST['id_product'];
             foreach ($stmt as $row) {
                 
                 $stmt2 = $pdo->query('SELECT * FROM gallery WHERE id_product='.$row['id_product']);
@@ -80,16 +79,9 @@ and open the template in the editor.
                 
             </div>
            
-            <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
-                <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
-                <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
-                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
-                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
-                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
-                <li class="kategoria"><a href="Inne.html">INNE</a></li>
-               
-            </ul>
+            <?php
+            include('php/getCategories.php');
+            ?>
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 
@@ -119,9 +111,13 @@ and open the template in the editor.
                     </div>    
                 </div>
                 <div class="zdjecia_pod col-xs-12 col-sm-12 col-lg-6" id="zdjecia_pod">
-                   <img src="photos/produkty/koszulka_model.jpg" alt="product" class="zdjecie_produktu_small"> 
-                   <img src="photos/produkty/koszulka.jpg" alt="product" class="zdjecie_produktu_small">
-                   <img src="photos/produkty/koszulka_model_back.jpg" alt="product" class="zdjecie_produktu_small"> 
+                    <?php
+                        echo '<img src="'.$row3['foto'].'" alt="product" class="zdjecie_produktu_small">';
+                        $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main = 0 AND id_product='.$row['id_product']);
+                        foreach($stmt4 as $row4){
+                            echo '<img src="'.$row4['foto'].'" alt="product" class="zdjecie_produktu_small">';
+                        }
+                    ?>
                 </div>
                 <div class="przyciski_pod col-xs-12 col-sm-12 col-lg-6 row">
                     <div class="ustawienie_rozmiaru col-xs-12 col-sm-3 col-lg-3">

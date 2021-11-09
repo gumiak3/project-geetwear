@@ -7,7 +7,7 @@ session_start();
         <title>GEET-WEAR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/css.css" rel="stylesheet" type="text/css"/>
+        <link href="css/podstrony_produktu.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="icons/ikona1.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="slider_javascript.js"></script>
@@ -109,23 +109,42 @@ session_start();
             
         </nav>
         <!-- reszta -->
-   
-        <div class="slider">            
-            <ul id="zdjecia">
-                <li><img src="photos/slider.png" alt="alt" class="zdjecie"/></li>
-                <li><img src="photos/slider2.png" alt="alt" class="zdjecie"/></li>
-                <li><img src="photos/slider3.png" alt="alt" class="zdjecie"/></li>
-            </ul>
-            <img src="photos/left-arrow.png" alt="alt" id="prev" class="arrows">
-            <img src="photos/right-arrow.png" alt="alt" id="next" class="arrows">
+        <div class="panel_podstrony_2">
+            <div class="linia_podstrony">
+            </div>
+            <div class="panel_podstrony "> 
+                <h1 class="title_of_product "><?php echo $row100['category_name']?></h1>          
+                <div class="sortowanie_panel col-12 row">
+                    <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
+                        <select class="select_rozmiarow ">
+                            <option value="0">ROZMIAR</option>
+                            <option value="1">S</option>
+                            <option value="2">M</option>
+                            <option value="3">L</option>
+                            <option value="4">XL</option>
+                            <option value="5">XXL</option>
+                        </select>
+                    </div>
+                    <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
+                        <select class="select_sortuj">
+                            <option value="0">SORTUJ</option>
+                            <option value="1">Od najtańszych</option>
+                            <option value="2">Od najdroższych</option>
+                            <option value="3">A-Z</option>
+                            <option value="4">Z-A</option>
+                        </select>
+                    </div>
+                </div>  
+            </div>             
         </div>
-        <div class="space_between_slider"> 
-        </div> 
         <div class="zawartosc">  
-            <h2 class="title_of_product col-lg-12 ">POLECANE</h2>
-            <div class="orange_line"></div>
+            <!--Wyświetlane produkty-->
+            <?php
+            $idc = $_GET['idc'];
+            echo '<script>var id_cat = '.$idc.'</script>';
+            ?>
             <div id="productsData"></div>
-
+            <!-- Dół -->
                 <div class="under_products">
                     <div class="fast_delivery  ">
                         <img class="margin" src="icons/delivery.png" alt="alt">
@@ -197,6 +216,6 @@ session_start();
         </div>    
         </div>  
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="./jscript/getProducts.js"></script>         
+        <script type="text/javascript" src="./jscript/getProductsWCat.js"></script>         
     </body>
 </html>
