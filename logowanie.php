@@ -1,7 +1,7 @@
 <?php
     session_start();
     if($_SESSION && $_SESSION['login']){
-        header("location:user_login.php");
+        header("location:profile.php");
     }
     
 ?>

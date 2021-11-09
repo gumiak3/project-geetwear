@@ -1,20 +1,32 @@
 <?php
 session_start();
-   
+if($_SESSION){
+    $_SESSION['id_user'];
+}else{
+    header('location:logowanie.php');
+}
+
 ?>
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html lang="pl-PL">
     <head>
-        <title>GEET-WEAR</title>
+        <title>GETT-WEAR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/css.css" rel="stylesheet" type="text/css"/>
-        <link rel="shortcut icon" type="image/png" href="icons/ikona1.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="slider_javascript.js"></script>
+        <link href="css/profile.css" rel="stylesheet" type="text/css"/>
+        <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
+        <?php
+            include("./php/load_database.php");
+        ?>
         <div class="row" id="logo_zaw">
             <div class="help">   
             </div>    
@@ -115,40 +127,23 @@ session_start();
             </ul>
         </nav>
         <!-- reszta -->
-   
-        <div class="slider">            
-            <ul id="zdjecia">
-                <li><img src="photos/slider.png" alt="alt" class="zdjecie"/></li>
-                <li><img src="photos/slider2.png" alt="alt" class="zdjecie"/></li>
-                <li><img src="photos/slider3.png" alt="alt" class="zdjecie"/></li>
-            </ul>
-            <img src="photos/left-arrow.png" alt="alt" id="prev" class="arrows">
-            <img src="photos/right-arrow.png" alt="alt" id="next" class="arrows">
-        </div>
         <div class="space_between_slider"> 
-        </div> 
-        <div class="zawartosc">  
-            <h2 class="title_of_product col-lg-12 ">POLECANE</h2>
-            <div class="orange_line"></div>
-            <div id="productsData"></div>
-
-                <div class="under_products">
-                    <div class="fast_delivery  ">
-                        <img class="margin" src="icons/delivery.png" alt="alt">
-                        <div class="fast">SZYBKA DOSTAWA</div>   
-                        <div class="podpis">Przesyłka dotrze do Ciebie w przeciągu 3 dni roboczych od zaksięgowania płatności</div>
-                    </div>
-                    <div  class="safety ">
-                        <img class="margin" src="icons/safety.png" alt="alt">
-                        <div class="safe">BEZPIECZNY ZAKUP</div>
-                        <div class="podpis">Każdą paczkę dokładnie pakujemy żeby podczas podróży pod Twoje drzwi nic jej się nie stało</div>
-                    </div>
-                    <div class="secured  ">
-                        <img class="margin" src="icons/secured.png" alt="alt">
-                        <div class="bez">ZABEZPIECZONA PACZKA</div>
-                        <div class="podpis">W naszym sklepie korzystamy z bezpiecznych systemów płatności</div>
-                    </div>
+        </div>
+        <div class="zawartosc"> 
+            <div class="profile-panel row">
+                <div class='div-left-side-menu col-3'>
+                    <ul class='left-side-menu'>
+                        <li id='contact-details-btn'>Dane kontaktowe</li>
+                        <li>Zamówienia</li>
+                        <li></li>
+                    </ul>
                 </div>
+                <div id='profile-content'class='profile-content col-9'>
+                </div>
+            </div>
+            <form method='POST'>
+                <button name='log-out' type='submit' class='log-out'>wyloguj się</button>
+            </form>
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">
@@ -181,28 +176,34 @@ session_start();
                         <span>geetwear@gmail.com</span>
                     </div>
                     <div class="mail_ikona col-6">
-                        <img src="icons/poczta.png" alt="alt" class="ikona_poczty"/>
+                        <img src="ikony/poczta.png" alt="alt" class="ikona_poczty"/>
                     </div>
                     <div class="mail col-6">
                         <span>435432543</span>
                     </div>
                     <div class="mail_ikona col-6">
-                        <img src="icons/telefon.png" alt="alt" class="ikona_poczty"/>
+                        <img src="ikony/telefon.png" alt="alt" class="ikona_poczty"/>
                     </div>
                     <div class="mail col-6">
                         <a class="twitter" href="https://twitter.com/gumiak_">@Gumiak_</a>
                     </div>
                     <div class="mail_ikona col-6">
-                        <img src="icons/twitter.png" alt="alt" class="ikona_poczty"/>
+                        <img src="ikony/twitter.png" alt="alt" class="ikona_poczty"/>
                     </div>
       
                     
                 </div>
-            </div>     
+            </div>
                 
-        </div>    
-        </div>  
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="./jscript/getProducts.js"></script>         
+            </div>
+        </div>     
     </body>
 </html>
+<script type='text/javascript'src='./jscript/profile_menu.js'></script>
+
+<?php
+    if(isset($_POST['log-out'])){
+        header('location:logowanie.php');
+        session_destroy();
+    }
+?>

@@ -9,7 +9,6 @@ html,body
 /*
 LOGO + MENU
 */
-
 .loguj{
     color:black;
     font-weight: bold;
@@ -25,10 +24,8 @@ LOGO + MENU
     background-color: #f1f1f1; 
     width:100%;
     position: relative;
-    left:15px;
-   
+    left:15px; 
 }
-
 .logo{
     width:33.3%;
 }
@@ -189,85 +186,13 @@ ul li a, ul li a:hover{
     }
 }
 
-
 /*
 ZAWARTOŚĆ:
 */
 /* panel logowania */
-.error-div{
-    color:red;
-    margin-bottom:30px;
-}
-.input_logowanie{
-    width:300px;
-    height: 40px;
-}
-.login_napis, .haslo_napis{
-    text-align:right;
-    top:5px;
-    margin-bottom: 10px;
-    right:40px;
-}
 
-.login_pole, .haslo_pole{
-    text-align: left;
-    line-height: 10px;
-    right:40px;
-    
-}
-#input_haslo, #input_login{ 
-    outline: 5px solid #f1f1f1;
-    margin-bottom:40px;
-}
-.button_logowanie{
-    width:150px;
-    height: 60px;
-    text-align: center;
-    border-radius: 30px;
-    outline: none;
-    cursor: pointer;
-    background: #050200;
-    color:white;
-    border:0;
-    
-}
-.panel_logowanie_button{
-    margin-bottom:30px;
-}
-.button_logowanie:focus{
-   outline:none;
-}
-.napis_1{
-    text-align:right;
-    right:30px;
-}
-.napis_2{
-    text-align:left;
-    left:30px;
-}
-.napis_1 a, .napis_2 a, .napis_1 a:hover, .napis_2 a:hover{
-    color:black;
-    
-}
-.panel_logowania{
-    margin-bottom: 100px;
-}
-@media(max-width:991px)
-{
-    .login_napis, .login_pole, .haslo_napis, .haslo_pole{
-        text-align: center;
-        left:0;
-    }
-}
-.space_between_slider{
-    height: 50px;
-}
-.line{
-    width:100%;
-    margin:10px;
-}
 .zawartosc {
-    text-align:center;
+    text-align: center;
     width:100%;
     margin-left: auto;
     margin-right: auto;
@@ -275,12 +200,20 @@ ZAWARTOŚĆ:
     padding-right: 20px;
     font-family: 'Akaya Telivigala', cursive;  
 }
-.title_of_product {
-    text-align: center;
-    padding-bottom: 60px; 
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
+.profile-panel{
+    margin-top:50px;
 }
-
+.left-side-menu li{
+    width:100%;
+    background:#f1f1f1;
+}
+.left-side-menu li:hover{
+    background:#f6f6f6;
+    cursor:pointer;
+}
+.user_logo{
+    width:25px; 
+}
 
 /*
 STOPKA :
@@ -409,7 +342,7 @@ STOPKA :
 @media(max-width:600px)
 {
     .under_products{
-        padding-botom:800px;
+        padding-bottom:800px;
     }
 }
 @media(max-width: 1000px)

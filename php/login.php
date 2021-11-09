@@ -39,13 +39,8 @@ if(isset($_POST['try-login'])){
         }
     }
     if($error){
-        echo 'nie ma takiego konta';
+        echo "<div class=error-div>Błędne dane logowania</div>";
     }else{
-        echo 'pomyśle zalogowano';
-        if(!isset($_SESSION)) 
-        { 
-            session_start(); 
-        } 
         $_SESSION['login'] = true;
         header("location:index.php");
     }
