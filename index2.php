@@ -113,7 +113,14 @@ session_start();
             <div class="linia_podstrony">
             </div>
             <div class="panel_podstrony "> 
-                <h1 class="title_of_product "><?php echo $row100['category_name']?></h1>          
+                <h1 class="title_of_product ">
+                    <?php 
+                        $idc = $_GET['idc'];
+                        $stmt10 = $pdo->query('SELECT * FROM categories WHERE id_category = '.$idc);
+                        foreach($stmt10 as $row10){}
+                        echo $row10['category_name']
+                    ?>
+                </h1>          
                 <div class="sortowanie_panel col-12 row">
                     <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
                         <select class="select_rozmiarow ">

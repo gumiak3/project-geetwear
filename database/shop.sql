@@ -73,22 +73,26 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
-(1, 1, 'photos/produkty/koszulka.jpg', 1),
-(2, 1, 'photos/produkty/koszulka_model.jpg', 0),
-(3, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
-(4, 2, 'photos/produkty/bluza.jpg', 1),
-(5, 2, 'photos/produkty/bluza_1.jpg', 0),
-(6, 2, 'photos/produkty/bluza_2.jpg', 0),
-(7, 2, 'photos/produkty/bluza_3.jpg', 0),
-(8, 3, 'photos/produkty/bluza_4.jpg', 1),
-(9, 3, 'photos/produkty/bluza_4_przod.jpg', 0),
-(10, 3, 'photos/produkty/bluza_4_tyl.jpg', 0),
-(11, 4, 'photos/produkty/bluza_3.jpg', 1),
-(12, 4, 'photos/produkty/bluza_3_przod.jpg', 0),
-(13, 4, 'photos/produkty/bluza_3_tyl.jpg', 0),
-(14, 5, 'photos/produkty/bluza_2.jpg', 1),
-(15, 5, 'photos/produkty/bluza_2.jpg', 0),
-(16, 5, 'photos/produkty/bluza_2.jpg', 0),
+(1, 1, 'photos/produkty/koszulka_1.jpg', 1),
+(2, 1, 'photos/produkty/koszulka_2.jpg', 0),
+(3, 1, 'photos/produkty/koszulka_3.jpg', 0),
+
+(4, 2, 'photos/produkty/bluza_UFO_1.jpg', 1),
+(5, 2, 'photos/produkty/bluza_UFO_2.jpg', 0),
+(6, 2, 'photos/produkty/bluza_UFO_3.jpg', 0),
+
+(8, 3, 'photos/produkty/bluza_sz_1.jpg', 1),
+(9, 3, 'photos/produkty/bluza_sz_2.jpg', 0),
+(10, 3, 'photos/produkty/bluza_sz_3.jpg', 0),
+
+(11, 4, 'photos/produkty/bluza_Adid_1.jpg', 1),
+(12, 4, 'photos/produkty/bluza_Adid_2.jpg', 0),
+(13, 4, 'photos/produkty/bluza_Adid_3.jpg', 0),
+
+(14, 5, 'photos/produkty/bluza_cz_1.jpg', 1),
+(15, 5, 'photos/produkty/bluza_cz_2.jpg', 0),
+(16, 5, 'photos/produkty/bluza_cz_3.jpg', 0),
+
 (17, 6, 'photos/produkty/skieta_1.jpg', 1),
 (18, 6, 'photos/produkty/skieta_2.jpg', 0),
 (19, 6, 'photos/produkty/skieta_3.jpg', 0);
@@ -283,6 +287,18 @@ ALTER TABLE `basket`
   ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`),
   ADD CONSTRAINT `basket_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `gallery`
+--
+ALTER TABLE `gallery`
+  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
+
+--
+-- Ograniczenia dla tabeli `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

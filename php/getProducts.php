@@ -3,8 +3,7 @@
 <?php
 include('load_database.php') ;
 
-
-$stmt = $pdo->query('SELECT * FROM products');
+$stmt = $pdo->query('SELECT DISTINCT id_product, product_name, price FROM products');
 
 $html = '';
 
