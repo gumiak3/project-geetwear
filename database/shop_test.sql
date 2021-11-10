@@ -30,7 +30,7 @@ use shop;
 
 CREATE TABLE `basket` (
   `id_user` int(11) DEFAULT NULL,
-  `id_product` int(11) DEFAULT NULL,
+  `id` int(11) DEFAULT NULL,
   `amount` int(11) DEFAULT NULL,
   `id_order` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -51,8 +51,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id_category`, `category_name`) VALUES
-(1, 'bluzka'),
-(2, 'bluza');
+(1, 'Koszulki'),
+(2, 'Bluzy'),
+(3, 'Skiety');
 
 -- --------------------------------------------------------
 
@@ -79,13 +80,18 @@ INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (5, 2, 'photos/produkty/bluza_1.jpg', 0),
 (6, 2, 'photos/produkty/bluza_2.jpg', 0),
 (7, 2, 'photos/produkty/bluza_3.jpg', 0),
-(8, 4, 'photos/produkty/bluza_4.jpg', 1),
-(9, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
-(10, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
-(11, 5, 'photos/produkty/bluza_3.jpg', 1),
-(12, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
-(13, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
-(14, 6, 'photos/produkty/bluza_2.jpg', 1);
+(8, 3, 'photos/produkty/bluza_4.jpg', 1),
+(9, 3, 'photos/produkty/bluza_4_przod.jpg', 0),
+(10, 3, 'photos/produkty/bluza_4_tyl.jpg', 0),
+(11, 4, 'photos/produkty/bluza_3.jpg', 1),
+(12, 4, 'photos/produkty/bluza_3_przod.jpg', 0),
+(13, 4, 'photos/produkty/bluza_3_tyl.jpg', 0),
+(14, 5, 'photos/produkty/bluza_2.jpg', 1),
+(15, 5, 'photos/produkty/bluza_2.jpg', 0),
+(16, 5, 'photos/produkty/bluza_2.jpg', 0),
+(17, 6, 'photos/produkty/skieta_1.jpg', 1),
+(18, 6, 'photos/produkty/skieta_2.jpg', 0),
+(19, 6, 'photos/produkty/skieta_3.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -108,8 +114,10 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
   `id_product` int(11) NOT NULL,
   `product_name` varchar(50) NOT NULL,
+  `size` varchar(50) NOT NULL,
   `id_category` int(11) NOT NULL,
   `price` double NOT NULL,
   `amount` int(11) DEFAULT NULL
@@ -119,12 +127,36 @@ CREATE TABLE `products` (
 -- Zrzut danych tabeli `products`
 --
 
-INSERT INTO `products` (`id_product`, `product_name`, `id_category`, `price`, `amount`) VALUES
-(1, 'Bluzka G', 1, 50, 20),
-(2, 'Bluza UFO', 2, 150, 20),
-(3, 'Szara bluza z długim rękawem', 2, 89.99, 20),
-(4, 'Bluza Adidas', 2, 129.99, 20),
-(5, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
+INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category`, `price`, `amount`) VALUES
+(1, 1, 'Bluzka G', 'S', 1, 50, 20),
+(2, 1, 'Bluzka G', 'M', 1, 50, 20),
+(3, 1, 'Bluzka G', 'L', 1, 50, 20),
+(4, 1, 'Bluzka G', 'XL', 1, 50, 20),
+
+(5, 2, 'Bluza UFO', 'S', 2, 150, 20),
+(6, 2, 'Bluza UFO', 'M', 2, 150, 20),
+(7, 2, 'Bluza UFO', 'L', 2, 150, 20),
+(8, 2, 'Bluza UFO', 'XL', 2, 150, 20),
+
+(9, 3, 'Szara bluza z długim rękawem', 'S', 2, 89.99, 20),
+(10, 3, 'Szara bluza z długim rękawem', 'M', 2, 89.99, 20),
+(11, 3, 'Szara bluza z długim rękawem', 'L', 2, 89.99, 20),
+(12, 3, 'Szara bluza z długim rękawem', 'XL', 2, 89.99, 20),
+
+(13, 4, 'Bluza Adidas', 'S', 2, 129.99, 20),
+(14, 4, 'Bluza Adidas', 'M', 2, 129.99, 20),
+(15, 4, 'Bluza Adidas', 'L', 2, 129.99, 20),
+(16, 4, 'Bluza Adidas', 'XL', 2, 129.99, 20),
+
+(17, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
+(18, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
+(19, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
+(20, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
+
+(21, 6, 'Biała skieta', '38', 3, 25, 20),
+(22, 6, 'Biała skieta', '40', 3, 25, 20),
+(23, 6, 'Biała skieta', '42', 3, 25, 20),
+(24, 6, 'Biała skieta', '44', 3, 25, 20);
 
 -- --------------------------------------------------------
 
@@ -169,7 +201,7 @@ INSERT INTO `users` (`id_user`, `firstname`, `surname`, `city`, `street`, `ZIP`,
 -- Indeksy dla tabeli `basket`
 --
 ALTER TABLE `basket`
-  ADD KEY `id_product` (`id_product`),
+  ADD KEY `id` (`id`),
   ADD KEY `id_order` (`id_order`),
   ADD KEY `id_user` (`id_user`);
 
@@ -196,7 +228,8 @@ ALTER TABLE `orders`
 -- Indeksy dla tabeli `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`id_product`),
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_product` (`id_product`),
   ADD KEY `id_category` (`id_category`);
 
 --
@@ -231,7 +264,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT dla tabeli `products`
 --
 ALTER TABLE `products`
-  MODIFY `id_product` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
@@ -247,7 +280,7 @@ ALTER TABLE `users`
 -- Ograniczenia dla tabeli `basket`
 --
 ALTER TABLE `basket`
-  ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
+  ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`),
   ADD CONSTRAINT `basket_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 COMMIT;
