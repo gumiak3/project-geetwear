@@ -1,3 +1,12 @@
+<?php
+session_start();
+if($_SESSION){
+    $_SESSION['id_user'];
+}else{
+    header('location:logowanie.php');
+}
+
+?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -9,62 +18,106 @@ and open the template in the editor.
         <title>GETT-WEAR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/produkt.css" rel="stylesheet" type="text/css"/>
+        <link href="css/profile.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="newjavascript.js"></script>
     </head>
     <body>
+        <?php
+            include("./php/load_database.php");
+        ?>
         <div class="row" id="logo_zaw">
             <div class="help">   
             </div>    
+            
             <div class="logo">
-                <a href="index.html"><img src="photos/logo3.png" alt="logo"></a>
+                <a href="index.php"><img src="photos/logo3.png" alt="logo" class="logo_id"></a>
                 
             </div>
+
             <div class="rightsite">
                 <div class="logowanie">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <?php
+                    if($_SESSION){
+
+                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
+                    
                 </div>
                 <div class="wyszukiwanie">
-                    <a href="wyszukiwarka.html"><img class="lupa" src="ikony/lupa.png" alt="alt"/></a>
+                    <a href="wyszukiwarka.php"><img class="lupa" src="icons/lupa.png" alt="alt"/></a>
                 </div>
                 <div class="koszyk">
-                    <a href="koszyk.html"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
                 </div>
             </div>      
         </div>
         <script>
             $(function(){
-                $(".toggle").on("click",function(){
+                let deviceWidth;
+                $(window).resize(function(){
+                    
+                    deviceWidth = $(window).width();
+                    if(deviceWidth>=951)
+                    {
                     if($(".kategoria").hasClass("active")){
                         $(".kategoria").removeClass("active");
                         $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass('active');
+                        $(".bar2").removeClass('active');
+                        $(".bar3").removeClass('active');
+                        console.log(deviceWidth);
+                    }
+                    }
+                });
+                $(".toggle").on("click",function(){             
+                    if($(".kategoria").hasClass("active")){
+                        $(".kategoria").removeClass("active");
+                        $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass("active");
+                        $(".bar2").removeClass("active");
+                        $(".bar3").removeClass("active");
                     }
                     else{
                         $(".kategoria").addClass("active");
                         $(".menu_cale").addClass("active");
+                        $(".bar1").addClass("active");
+                        $(".bar2").addClass("active");
+                        $(".bar3").addClass("active");
                     }
                 });
+                
             });
         </script>
         <nav class="nabar sticky-top" id="menu_cale">
             <div class="po_zmianie grid row gridcount">
                 <div class="toggle col-4">
-                    <span class="bars"></span>
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                    <?php
+                    if($_SESSION){
+                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" src="./icons/user.png"></p></a>';
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
                 </div>
                 <div class="koszyk_w_menu col-4">
-                    <a href="koszyk.html"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
                 </div>
                 
             </div>
            
             <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
+                <li class="kategoria"><a href="nowosc.php">NOWOŚCI</a></li>
                 <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
                 <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
                 <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
@@ -76,56 +129,21 @@ and open the template in the editor.
         <!-- reszta -->
         <div class="space_between_slider"> 
         </div>
-        <a href="index.html" class="back_main_page">STRONA GŁÓWNA</a>
-        <div class="zawartosc">  
-            <div class="zawartosc">  
-            
-            <div class="calosc row grid ">
-                <div class="zdjecie_produktu col-xs-12 col-sm-12 col-lg-6">
-                    <img src="photos/produkty/bluza_3.jpg" alt="product" id="produkt">
+        <div class="zawartosc"> 
+            <div class="profile-panel row">
+                <div class='div-left-side-menu col-3'>
+                    <ul class='left-side-menu'>
+                        <li id='contact-details-btn'>Dane kontaktowe</li>
+                        <li>Zamówienia</li>
+                        <li></li>
+                    </ul>
                 </div>
-                <div class="nazwa_produktu col-xs-12 col-sm-12 col-lg-6">
-                    <h1 id="nazwa_produktu_id">Bluza Adidas</h1>
-                    <div class="cena_produktu col-12">
-                        129,99 zł
-                    </div>
-                    <div class="opis_produktu col-12">
-                        <p>Męska Bluza to kwintesencja sportowej elegancji, co wpływa na fakt, że jest podstawowym elementem każdej garderoby. Czarny kolor bluzy pasuje do wszystkiego, a sama bluzy świetnie prezentuje się na sylwetce. Bezwarunkowo jest to podstawa w szafie, którą można nosić z wieloma rzeczami i zawsze wyglądać świetnie!</p>
-                        <ul>
-                            <li class="wypunktowane">Produkcja: Polska, z troską o naturalne środowisko.</li>
-                            <li class="wypunktowane">Materiał: 100% bawełna, splot pique</li>
-                            <li class="wypunktowane">Tkanina: wytrzymała, o gramaturze 210 g/m²</li> 
-                        </ul>
-                                              
-                    </div>    
+                <div id='profile-content'class='profile-content col-9'>
                 </div>
-                <div class="zdjecia_pod col-xs-12 col-sm-12 col-lg-6" id="zdjecia_pod">
-                   <img src="photos/produkty/bluza_3.jpg" alt="product" class="zdjecie_produktu_small"> 
-                   <img src="photos/produkty/bluza_3_przod.jpg" alt="product" class="zdjecie_produktu_small">
-                   <img src="photos/produkty/bluza_3_tyl.jpg" alt="product" class="zdjecie_produktu_small"> 
-                </div>
-                <div class="przyciski_pod col-xs-12 col-sm-12 col-lg-6 row">
-                    <div class="ustawienie_rozmiaru col-xs-12 col-sm-3 col-lg-3">
-                        ROZMIAR:
-                        <br>
-                        <select class="input_rozmiaru ">
-                      <option value="1" title="S">S</option>
-                      <option value="2" title="M">M</option>
-                      <option value="3" title="L">L</option>
-                      <option value="4" title="XL" selected="selected">XL</option>
-                      <option value="5" title="XXL">XXL</option>
-                     </select>
-                    </div>
-                    <div class="ustawienie_ilości col-xs-12 col-sm-3 col-lg-3">
-                        ILOŚĆ:
-                        <br>
-                        <input type="number" class="input_ilosci" min="1" max="100" value="1" >
-                    </div>
-                    <div class="przycisk_dodaj_do_koszyka col-xs-12 col-sm-6 col-lg-6">
-                        <button class="przycisk_koszyk" type="button">DO KOSZYKA</button>
-                    </div>
-                </div>
-            </div>       
+            </div>
+            <form method='POST'>
+                <button name='log-out' type='submit' class='log-out'>wyloguj się</button>
+            </form>
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">
@@ -150,7 +168,8 @@ and open the template in the editor.
                     <div class="polityka col-lg-6">
                         <span>Tabela rozmiarów</span>
                     </div>
-                </div> 
+                </div>
+                
                 <div class="kontakt col-lg-6 row">
                     <h3 class="napis_kontakt col-lg-12">KONTAKT</h3>
                     <div class="mail col-6">
@@ -171,10 +190,20 @@ and open the template in the editor.
                     <div class="mail_ikona col-6">
                         <img src="ikony/twitter.png" alt="alt" class="ikona_poczty"/>
                     </div>
-              </div>
-            </div>       
-        </div>
-        </div> 
-        </div>
+      
+                    
+                </div>
+            </div>
+                
+            </div>
+        </div>     
     </body>
 </html>
+<script type='text/javascript'src='./jscript/profile_menu.js'></script>
+
+<?php
+    if(isset($_POST['log-out'])){
+        header('location:logowanie.php');
+        session_destroy();
+    }
+?>
