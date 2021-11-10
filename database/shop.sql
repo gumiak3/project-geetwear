@@ -187,15 +187,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `firstname`, `surname`, `city`, `street`, `ZIP`, `house_number`, `apartment_number`, `email`, `password`, `type`) VALUES
-(1, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
-(2, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
-(3, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
-(4, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
-(5, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
-(6, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
-(7, 'dsakld', 'ldksaldk', '', '', '', 0, NULL, 'gumiacz@gmail.com', '$2y$10$0AXhHRC7vjvxlUgKz7.J9Oi', 'user'),
-(8, 'sdakldsa', 'kdlsakldksal', '', '', '', 0, NULL, 'guma@gmail.com', '$2y$10$ijgisZJLrLMHA9gVolE4GOC', 'user'),
-(9, 'sdalkd', 'kdslakdla', '', '', '', 0, NULL, 'jd123@gmail.com', '$2y$10$6qBeRavsN2PoT7HnwMyefuMrIvjU0nYeQs5TfyKTPWA4YDfiEzE5q', 'user');
+(1, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'qwer123', 'admin'),
+(2, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'qwer123', 'admin'),
+(3, 'dsakld', 'ldksaldk', '', '', '', 0, NULL, 'gumiacz@gmail.com', '$2y$10$0AXhHRC7vjvxlUgKz7.J9Oi', 'user'),
+(4, 'sdakldsa', 'kdlsakldksal', '', '', '', 0, NULL, 'guma@gmail.com', '$2y$10$ijgisZJLrLMHA9gVolE4GOC', 'user'),
+(5, 'sdalkd', 'kdslakdla', '', '', '', 0, NULL, 'jd123@gmail.com', '$2y$10$6qBeRavsN2PoT7HnwMyefuMrIvjU0nYeQs5TfyKTPWA4YDfiEzE5q', 'user');
 
 --
 -- Indeksy dla zrzutów tabel
