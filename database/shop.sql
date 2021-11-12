@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 08 Lis 2021, 14:06
+-- Czas generowania: 10 Lis 2021, 16:36
 -- Wersja serwera: 10.4.21-MariaDB
--- Wersja PHP: 8.0.10
+-- Wersja PHP: 7.3.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE shop;
 use shop;
+
 -- --------------------------------------------------------
 
 --
@@ -52,7 +53,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id_category`, `category_name`) VALUES
 (1, 'bluzka'),
-(2, 'bluza');
+(2, 'bluza'),
+(3, 'spodnie');
 
 -- --------------------------------------------------------
 
@@ -73,19 +75,20 @@ CREATE TABLE `gallery` (
 
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (1, 1, 'photos/produkty/koszulka.jpg', 1),
-(2, 1, 'photos/produkty/koszulka_model.jpg', 0),
-(3, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
-(4, 2, 'photos/produkty/bluza.jpg', 1),
-(5, 2, 'photos/produkty/bluza_1.jpg', 0),
-(6, 2, 'photos/produkty/bluza_2.jpg', 0),
-(7, 2, 'photos/produkty/bluza_3.jpg', 0),
-(8, 4, 'photos/produkty/bluza_4.jpg', 1),
-(9, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
-(10, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
-(11, 5, 'photos/produkty/bluza_3.jpg', 1),
-(12, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
-(13, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
-(14, 6, 'photos/produkty/bluza_2.jpg', 1);
+(2, 1, 'photos/produkty/koszulka_biala.jpg', 0),
+(3, 1, 'photos/produkty/koszulka_model.jpg', 0),
+(4, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
+(5, 2, 'photos/produkty/bluza.jpg', 1),
+(6, 2, 'photos/produkty/bluza_1.jpg', 0),
+(7, 2, 'photos/produkty/bluza_2.jpg', 0),
+(8, 2, 'photos/produkty/bluza_3.jpg', 0),
+(9, 4, 'photos/produkty/bluza_4.jpg', 1),
+(10, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
+(11, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
+(12, 5, 'photos/produkty/bluza_3.jpg', 1),
+(13, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
+(14, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
+(15, 6, 'photos/produkty/bluza_2.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -122,9 +125,10 @@ CREATE TABLE `products` (
 INSERT INTO `products` (`id_product`, `product_name`, `id_category`, `price`, `amount`) VALUES
 (1, 'Bluzka G', 1, 50, 20),
 (2, 'Bluza UFO', 2, 150, 20),
-(3, 'Szara bluza z długim rękawem', 2, 89.99, 20),
-(4, 'Bluza Adidas', 2, 129.99, 20),
-(5, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
+(3, 'Spodnie', 3, 120, 20),
+(4, 'Szara bluza z długim rękawem', 2, 89.99, 20),
+(5, 'Bluza Adidas', 2, 129.99, 20),
+(6, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
 
 -- --------------------------------------------------------
 
@@ -142,7 +146,7 @@ CREATE TABLE `users` (
   `house_number` int(11) NOT NULL,
   `apartment_number` int(11) DEFAULT NULL,
   `email` varchar(60) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `password` varchar(30) NOT NULL,
   `type` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -157,9 +161,11 @@ INSERT INTO `users` (`id_user`, `firstname`, `surname`, `city`, `street`, `ZIP`,
 (4, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
 (5, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
 (6, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
-(7, 'dsakld', 'ldksaldk', '', '', '', 0, NULL, 'gumiacz@gmail.com', '$2y$10$0AXhHRC7vjvxlUgKz7.J9Oi', 'user'),
-(8, 'sdakldsa', 'kdlsakldksal', '', '', '', 0, NULL, 'guma@gmail.com', '$2y$10$ijgisZJLrLMHA9gVolE4GOC', 'user'),
-(9, 'sdalkd', 'kdslakdla', '', '', '', 0, NULL, 'jd123@gmail.com', '$2y$10$6qBeRavsN2PoT7HnwMyefuMrIvjU0nYeQs5TfyKTPWA4YDfiEzE5q', 'user');
+(8, 'Łukasz', 'Gumienniczuk', '', '', '', 0, NULL, 'gumiakk1234@gmail.com', '$2y$10$DNhFgD7s4c.g.K2IfO4Cqui', 'user'),
+(9, 'dsada', 'sdadada', '', '', '', 0, NULL, 'dsadada@gmail.com', '$2y$10$0qpCatc9aoe49bN4K8H7z.b', 'user'),
+(12, 'lukasz', 'dsajkldakj', '', '', '', 0, NULL, 'sdadk@gmail.com', '$2y$10$mv1HKMVZ4D09FiUl3neKkuv', 'user'),
+(13, 'adsada', 'dsada', '', '', '', 0, NULL, 'asddada@12.com', '$2y$10$GlJWicN80Giw50pzsMohLej', 'user'),
+(14, 'dsadad', 'asdada', '', '', '', 0, NULL, '', '$2y$10$qPlASD9cWjx2qTFRm6NvzuX', 'user');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -237,7 +243,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Ograniczenia dla zrzutów tabel
@@ -250,6 +256,18 @@ ALTER TABLE `basket`
   ADD CONSTRAINT `basket_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`),
   ADD CONSTRAINT `basket_ibfk_2` FOREIGN KEY (`id_order`) REFERENCES `orders` (`id_order`),
   ADD CONSTRAINT `basket_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `gallery`
+--
+ALTER TABLE `gallery`
+  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
+
+--
+-- Ograniczenia dla tabeli `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_category`) REFERENCES `categories` (`id_category`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
