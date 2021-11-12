@@ -5,7 +5,7 @@ include('load_database.php') ;
 
             $idc = $_POST['id'];
 
-$stmt = $pdo->query('SELECT * FROM products WHERE id_category = '.$idc);
+$stmt = $pdo->query('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = '.$idc);
 
 $html = '';
 

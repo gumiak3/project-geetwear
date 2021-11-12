@@ -124,17 +124,19 @@ and open the template in the editor.
                         ROZMIAR:
                         <br>
                         <select class="input_rozmiaru">
-                      <option value="1" title="S">S</option>
-                      <option value="2" title="M">M</option>
-                      <option value="3" title="L">L</option>
-                      <option value="4" title="XL" selected="selected">XL</option>
-                      <option value="5" title="XXL">XXL</option>
+                            <?php
+                                $stmt25 = $pdo->query('SELECT id, size FROM products WHERE id_product='.$id_product);
+                                
+                                foreach ($stmt25 as $row25) {
+                                    echo '<option value="'.$row25['id'].'" title="'.$row25['size'].'">'.$row25['size'].'</option>';
+                                }
+                            ?>
                      </select>
                     </div>
                     <div class="ustawienie_ilości col-xs-12 col-sm-3 col-lg-3">
                         ILOŚĆ:
                         <br>
-                        <input type="number" class="input_ilosci" min="1" max="100" value="<?php echo $row['amount']?>" >
+                        <input type="number" class="input_ilosci" min="1" max="5" value="1" >
                     </div>
                     <div class="przycisk_dodaj_do_koszyka col-xs-12 col-sm-6 col-lg-6">
                         <button class="przycisk_koszyk" type="button">DO KOSZYKA</button>

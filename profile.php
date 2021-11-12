@@ -1,10 +1,12 @@
 <?php
+ob_start();
 session_start();
-if($_SESSION){
-    $_SESSION['id_user'];
+if($_SESSION['login']){
+
 }else{
-    header('location:logowanie.php');
+    header("location:logowanie.php");
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -41,7 +43,7 @@ and open the template in the editor.
                     <?php
                     if($_SESSION){
 
-                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
+                        echo '<a href="profile.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -142,7 +144,7 @@ and open the template in the editor.
                 </div>
             </div>
             <form method='POST'>
-                <button name='log-out' type='submit' class='log-out'>wyloguj się</button>
+                <button name='log_out' type='submit' class='log-out'>wyloguj się</button>
             </form>
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
@@ -202,8 +204,22 @@ and open the template in the editor.
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 
 <?php
-    if(isset($_POST['log-out'])){
-        header('location:logowanie.php');
+    if(isset($_POST['log_out'])){
         session_destroy();
+        header("location:logowanie.php");
+    }
+?>
+
+<?php
+    if(isset($_POST['edit-submit'])){
+        $id = $_SESSION['id_user'];
+        $city = $_POST['city'];
+        $street = $_POST['street'];
+        $zip = $_POST['zip'];
+        $house_number = $_POST['house_number'];
+        $apartment_number = $_POST['apartment_number'];
+        $stmt = $pdo->prepare("UPDATE users set city=?,street=?,zip=?,house_number=?,apartment_number=? where id_user='$id'");
+        $stmt -> execute([$city,$street,$zip,$house_number,$apartment_number]);
+
     }
 ?>

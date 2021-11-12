@@ -18,7 +18,6 @@ function if_exists($variable,$variable_to_check,$what_check){
 if(isset($_POST['try-login'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
-    
     $error;
     $getrecords = $pdo->query("SELECT email from users");
     foreach($getrecords as $row_records){

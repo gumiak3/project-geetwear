@@ -2,6 +2,7 @@ $(document).ready(function(){
     ChangeContent();
     $('#contact-details-btn').click(function(){
         ChangeContent();
+        $('#contact-details-btn').addClass("active");
     })
 
 });

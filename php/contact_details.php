@@ -1,6 +1,11 @@
 <?php
 session_start();
-$id = $_SESSION['id_user'];
+if($_SESSION['login'])
+{
+    $id = $_SESSION['id_user'];
+}else{
+    
+}
 
 include("./load_database.php");
 $getrecords = $pdo->query("SELECT * FROM users where id_user='$id'");
@@ -17,33 +22,80 @@ foreach($getrecords as $row_records)
     $email = $row_records['email'];
 }
 ?>
-<div class='contact-content-div'>
-    <label>Imię</label>
-    <input name='firstname' value='<?=$firstname?>'></input>
+<form method='POST'>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Imię</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='text' name='firstname' value='<?=$firstname?>' readonly></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Nazwisko</label>
-    <input name='surname' value='<?=$surname?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Nazwisko</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='text' name='surname' value='<?=$surname?>' readonly></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Miasto</label>
-    <input name='city' value='<?php if($city)echo $city?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Miasto</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='text' class='contact-in' name='city' value='<?php if($city)echo $city?>' readonly ></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Ulica</label>
-    <input name='street' value='<?php if($street)echo $street?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Ulica</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='text' class='contact-in' name='street' value='<?php if($street)echo $street?>' readonly ></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Kod pocztowy</label>
-    <input name='zip' value='<?php if($zip)echo $zip?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Kod pocztowy</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='number' class='contact-in' name='zip' value='<?php if($zip)echo $zip?>' readonly></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Numer domu</label>
-    <input name='house_numbe,r' value='<?php if($house_number)echo $house_number?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Numer domu</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='number' class='contact-in' name='house_number' value='<?php if($house_number)echo $house_number?>' readonly></input>
+    </div>
 </div>
-<div class='contact-content-div'>
-    <label>Numer mieszkania</label>
-    <input name='apartment_number' value='<?php if($apartment_number)echo $apartment_number?>'></input>
+<div class='contact-content-div row'>
+    <div class='contact-label col-5'>
+        <label>Numer mieszkania</label>
+    </div>
+    <div class='contact-input col-7'>
+        <input type='number' class='contact-in' name='apartment_number' value='<?php if($apartment_number)echo $apartment_number?>' readonly></input>
+    </div>
 </div>
+<button name='edit-submit' id='save-btn'class='save-btn' type='submit'>Zapisz</button>
+</form>
+    <button class='edit-btn' id='edit-btn'>Edytuj</button>
+<script>
+$(document).ready(function(){
+    $('#edit-btn').click(function(){
+        $(".contact-in").removeAttr("readonly");
+        $(this).addClass("editting");
+        $("#save-btn").addClass("editting");
+    });
+    $("#save-btn").click(function(){
+        $(".contact-in").addAttr("readonly");
+        $(this).removeClass("editting");
+        $("#edit-btn").removeClass("editting");
+    });
+})
+    </script>
+
 
 
