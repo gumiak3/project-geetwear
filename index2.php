@@ -26,7 +26,7 @@ session_start();
             <div class="rightsite">
                 <div class="logowanie">
                     <?php
-                    if($_SESSION){
+                    if($_SESSION['login']){
 
                         echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
                     }else{
@@ -152,23 +152,7 @@ session_start();
             ?>
             <div id="productsData"></div>
             <!-- Dół -->
-                <div class="under_products">
-                    <div class="fast_delivery  ">
-                        <img class="margin" src="icons/delivery.png" alt="alt">
-                        <div class="fast">SZYBKA DOSTAWA</div>   
-                        <div class="podpis">Przesyłka dotrze do Ciebie w przeciągu 3 dni roboczych od zaksięgowania płatności</div>
-                    </div>
-                    <div  class="safety ">
-                        <img class="margin" src="icons/safety.png" alt="alt">
-                        <div class="safe">BEZPIECZNY ZAKUP</div>
-                        <div class="podpis">Każdą paczkę dokładnie pakujemy żeby podczas podróży pod Twoje drzwi nic jej się nie stało</div>
-                    </div>
-                    <div class="secured  ">
-                        <img class="margin" src="icons/secured.png" alt="alt">
-                        <div class="bez">ZABEZPIECZONA PACZKA</div>
-                        <div class="podpis">W naszym sklepie korzystamy z bezpiecznych systemów płatności</div>
-                    </div>
-                </div>
+                
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">

@@ -39,6 +39,7 @@ if(isset($_POST['try-login'])){
     }
     if($error){
         echo "<div class=error-div>Błędne dane logowania</div>";
+        $_SESSION['login'] = false;
     }else{
         $_SESSION['login'] = true;
         header("location:index.php");
