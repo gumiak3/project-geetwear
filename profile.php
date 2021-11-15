@@ -136,7 +136,7 @@ and open the template in the editor.
                 <div class='div-left-side-menu col-3'>
                     <ul class='left-side-menu'>
                         <li id='contact-details-btn'>Dane kontaktowe</li>
-                        <li>Zamówienia</li>
+                        <li id='orders-btn'>Zamówienia</li>
                         <li></li>
                     </ul>
                 </div>
