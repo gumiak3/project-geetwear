@@ -27,8 +27,7 @@ session_start();
             <div class="rightsite">
                 <div class="logowanie">
                     <?php
-                    if($_SESSION['login']){
-
+                    if($_SESSION && $_SESSION['login']){
                         echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';

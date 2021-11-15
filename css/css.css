@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fruktur&family=Space+Mono&family=Zen+Antique&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
 html,body
 {
     
@@ -98,14 +98,9 @@ ul li a, ul li a:hover{
     padding:0 20px;
     font-family: 'Lato', Helvetica, Arial, sans-serif;
     font-weight: bold;
-    
-   
 }
-
 .kategoria:hover{
-    background-color:#f6f6f6;
-    
-    
+    background-color:#f6f6f6;   
 }
 .przycisk_na_menu{
     position: absolute;
@@ -405,7 +400,7 @@ ZAWARTOŚĆ:
     width:100%;
     margin-left: auto;
     margin-right: auto;
-    font-family: 'Akaya Telivigala', cursive;
+    font-family: 'M PLUS 1p', sans-serif;
     
 }
 .title_of_product {

@@ -22,7 +22,9 @@ if(isset($_POST['try-login'])){
     $getrecords = $pdo->query("SELECT email from users");
     foreach($getrecords as $row_records){
         if(if_exists($row_records['email'],$email,'email')){
-            $getpassword = $pdo->query("SELECT id_user, password from users where email='$email'");
+            $getpassword = $pdo->prepare("SELECT id_user, password from users where email=:email");
+            $getpassword -> bindValue(':email',$_POST['email'],PDO::PARAM_STR);
+            $getpassword -> execute();
             foreach($getpassword as $passwordrow){
                 $hashedpassword = $passwordrow['password'];
                 if(password_verify($password,$hashedpassword)){

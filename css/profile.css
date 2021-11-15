@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
 html,body
 {
     width: 100%;
@@ -198,7 +199,7 @@ ZAWARTOŚĆ:
     margin-right: auto;
     padding-left: 10px;
     padding-right: 20px;
-    font-family: 'Akaya Telivigala', cursive;  
+      
 }
 .profile-panel{
     margin-top:50px;
@@ -206,6 +207,8 @@ ZAWARTOŚĆ:
     padding:0;
 }
 .left-side-menu{
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-weight:bold;
     margin-top:15px;
 }
 .left-side-menu li{
@@ -217,6 +220,15 @@ ZAWARTOŚĆ:
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
     transform:translateY(-2px);
 }
+input{
+    width: 60%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
 .left-side-menu li:hover{
     background:#f6f6f6;
     cursor:pointer;
@@ -227,9 +239,18 @@ ZAWARTOŚĆ:
 }
 .contact-label{
     text-align:right;
+    padding:15px;
 }
 .contact-input{
     text-align: left;
+}
+.contact-input input{
+    color:grey;
+    background:rgba(0, 0, 0, 0.05);
+}
+.contact-input input.editting{
+    color:black;
+    background:white;
 }
 .user_logo{
     width:25px; 
@@ -240,8 +261,8 @@ ZAWARTOŚĆ:
 .edit-btn{
     margin-left:auto;
     margin-right:auto;
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top:50px;
+    margin-bottom:50px;
     border-radius:10px;
     outline:none;
     width:100px;
@@ -267,8 +288,8 @@ ZAWARTOŚĆ:
     display:block;
     margin-left:auto;
     margin-right:auto;
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top:50px;
+    margin-bottom:50px;
 }
 .edit-btn:hover, .save-btn:hover{
     transform:translateY(-2px);

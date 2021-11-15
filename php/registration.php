@@ -20,7 +20,12 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             if(!$emailError)
             {
-                $make_account = $pdo->exec("INSERT INTO users (firstname,surname,email,password,type) values ('$firstname','$surname','$email','$password','user')");
+                $make_account = $pdo->prepare("INSERT INTO users (firstname,surname,email,password,type) values (:firstname,:surname,:email,:password,'user')");
+                $make_account -> bindValue(':firstname',$firstname,PDO::PARAM_STR);
+                $make_account -> bindValue(':surname',$surname,PDO::PARAM_STR);
+                $make_account -> bindValue(':email',$email,PDO::PARAM_STR);
+                $make_account -> bindValue(':password',$password,PDO::PARAM_STR);
+                $make_account -> execute();
                 header("location:logowanie.php");
             }else{
                 echo '<div class="error-div">Email jest już w użyciu</div>';
