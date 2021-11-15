@@ -52,15 +52,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id_category`, `category_name`) VALUES
-<<<<<<< HEAD
-(1, 'bluzka'),
-(2, 'bluza'),
-(3, 'spodnie');
-=======
 (1, 'Koszulki'),
 (2, 'Bluzy'),
 (3, 'Skiety');
->>>>>>> 394fa09fb7b62b19f63d0569bc21609c05aea76f
 
 -- --------------------------------------------------------
 
@@ -80,23 +74,6 @@ CREATE TABLE `gallery` (
 --
 
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
-<<<<<<< HEAD
-(1, 1, 'photos/produkty/koszulka.jpg', 1),
-(2, 1, 'photos/produkty/koszulka_biala.jpg', 0),
-(3, 1, 'photos/produkty/koszulka_model.jpg', 0),
-(4, 1, 'photos/produkty/koszulka_model_back.jpg', 0),
-(5, 2, 'photos/produkty/bluza.jpg', 1),
-(6, 2, 'photos/produkty/bluza_1.jpg', 0),
-(7, 2, 'photos/produkty/bluza_2.jpg', 0),
-(8, 2, 'photos/produkty/bluza_3.jpg', 0),
-(9, 4, 'photos/produkty/bluza_4.jpg', 1),
-(10, 4, 'photos/produkty/bluza_4_przod.jpg', 0),
-(11, 4, 'photos/produkty/bluza_4_tyl.jpg', 0),
-(12, 5, 'photos/produkty/bluza_3.jpg', 1),
-(13, 5, 'photos/produkty/bluza_3_przod.jpg', 0),
-(14, 5, 'photos/produkty/bluza_3_tyl.jpg', 0),
-(15, 6, 'photos/produkty/bluza_2.jpg', 1);
-=======
 (1, 1, 'photos/produkty/koszulka_1.jpg', 1),
 (2, 1, 'photos/produkty/koszulka_2.jpg', 0),
 (3, 1, 'photos/produkty/koszulka_3.jpg', 0),
@@ -120,7 +97,6 @@ INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (17, 6, 'photos/produkty/skieta_1.jpg', 1),
 (18, 6, 'photos/produkty/skieta_2.jpg', 0),
 (19, 6, 'photos/produkty/skieta_3.jpg', 0);
->>>>>>> 394fa09fb7b62b19f63d0569bc21609c05aea76f
 
 -- --------------------------------------------------------
 
@@ -156,15 +132,7 @@ CREATE TABLE `products` (
 -- Zrzut danych tabeli `products`
 --
 
-<<<<<<< HEAD
-INSERT INTO `products` (`id_product`, `product_name`, `id_category`, `price`, `amount`) VALUES
-(1, 'Bluzka G', 1, 50, 20),
-(2, 'Bluza UFO', 2, 150, 20),
-(3, 'Spodnie', 3, 120, 20),
-(4, 'Szara bluza z długim rękawem', 2, 89.99, 20),
-(5, 'Bluza Adidas', 2, 129.99, 20),
-(6, 'Czarna bluza z długim rękawem', 2, 99.99, 20);
-=======
+
 INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category`, `price`, `amount`) VALUES
 (1, 1, 'Bluzka G', 'S', 1, 50, 20),
 (2, 1, 'Bluzka G', 'M', 1, 50, 20),
@@ -195,7 +163,7 @@ INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category
 (22, 6, 'Biała skieta', '40', 3, 25, 20),
 (23, 6, 'Biała skieta', '42', 3, 25, 20),
 (24, 6, 'Biała skieta', '44', 3, 25, 20);
->>>>>>> 394fa09fb7b62b19f63d0569bc21609c05aea76f
+
 
 -- --------------------------------------------------------
 
@@ -222,25 +190,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `firstname`, `surname`, `city`, `street`, `ZIP`, `house_number`, `apartment_number`, `email`, `password`, `type`) VALUES
-<<<<<<< HEAD
-(1, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
-(2, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
-(3, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
-(4, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'passwd123', 'admin'),
-(5, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'passwd123', 'admin'),
-(6, 'Marcin', 'Palimat', 'Siedlce', 'Konarskiego', '08-110', 0, 14, 'marcinp@gmail.com', 'marcin123', 'user'),
-(8, 'Łukasz', 'Gumienniczuk', '', '', '', 0, NULL, 'gumiakk1234@gmail.com', '$2y$10$DNhFgD7s4c.g.K2IfO4Cqui', 'user'),
-(9, 'dsada', 'sdadada', '', '', '', 0, NULL, 'dsadada@gmail.com', '$2y$10$0qpCatc9aoe49bN4K8H7z.b', 'user'),
-(12, 'lukasz', 'dsajkldakj', '', '', '', 0, NULL, 'sdadk@gmail.com', '$2y$10$mv1HKMVZ4D09FiUl3neKkuv', 'user'),
-(13, 'adsada', 'dsada', '', '', '', 0, NULL, 'asddada@12.com', '$2y$10$GlJWicN80Giw50pzsMohLej', 'user'),
-(14, 'dsadad', 'asdada', '', '', '', 0, NULL, '', '$2y$10$qPlASD9cWjx2qTFRm6NvzuX', 'user');
-=======
 (1, 'Maciej', 'Ślepowroński', 'Siedlce', 'Aleksandrowska', '08-110', 0, 2, 'slepy@gmail.com', 'qwer123', 'admin'),
 (2, 'Łukasz', 'Gumienniczuk', 'Siedlce', 'Daszyńskiego', '08-110', 0, 1, 'gumiak@gmail.com', 'qwer123', 'admin'),
 (3, 'dsakld', 'ldksaldk', '', '', '', 0, NULL, 'gumiacz@gmail.com', '$2y$10$0AXhHRC7vjvxlUgKz7.J9Oi', 'user'),
 (4, 'sdakldsa', 'kdlsakldksal', '', '', '', 0, NULL, 'guma@gmail.com', '$2y$10$ijgisZJLrLMHA9gVolE4GOC', 'user'),
 (5, 'sdalkd', 'kdslakdla', '', '', '', 0, NULL, 'jd123@gmail.com', '$2y$10$6qBeRavsN2PoT7HnwMyefuMrIvjU0nYeQs5TfyKTPWA4YDfiEzE5q', 'user');
->>>>>>> 394fa09fb7b62b19f63d0569bc21609c05aea76f
 
 --
 -- Indeksy dla zrzutów tabel
