@@ -1,3 +1,11 @@
+<?php
+session_start();
+if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
+
+}else{
+    header("location:logowanie.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +22,7 @@
 
   </head>
   <body>
+    <!-- navbar start -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container-fluid">
         <button
@@ -57,10 +66,9 @@
                 <i class="bi bi-person-fill"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="./index.php">Sklep</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
+                  <a class="dropdown-item" href="#">Wyloguj się</a>
                 </li>
               </ul>
             </li>
@@ -68,11 +76,67 @@
         </div>
       </div>
     </nav>
+    <!-- navbar end -->
+    <!-- Offcanvas START -->
+    <div
+      class="offcanvas offcanvas-start sidebar-nav bg-dark"
+      tabindex="-1"
+      id="sidebar"
+    >
+      <div class="offcanvas-body p-0">
+        <nav class="navbar-dark">
+          <ul class="navbar-nav">
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3">
+                CORE
+              </div>
+            </li>
+            <li>
+              <a href="#" class="dashboard nav-link px-3 active">
+                <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                <span>Dashboard</span>
+              </a>
+            </li>
+            <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+            <li>
+              <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
+                MANAGEMENT
+              </div>
+            </li>
+              <a href="#" class="categories nav-link px-3">
+                <span class="me-2"><i class="bi bi-tag"></i></span>
+                <span>Categories</span>
+              </a>
+              <a href="#" class="pages nav-link px-3">
+                <span class="me-2"><i class="bi bi-book-fill"></i></span>
+                <span>Pages</span>
+              </a>
+              <a href="#" class="users nav-link px-3">
+                <span class="me-2"><i class="bi bi-people"></i></span>
+                <span>Users</span>
+              </a>
+              <a href="#" class="orders nav-link px-3">
+                <span class="me-2"><i class="bi bi-box-seam"></i></span>
+                <span>Orders</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Offcanvas END -->
+    <main class="mt-5 pt-3">
+      <div class="container-fluid">
+        <div id='content'class="row">
+          
+        </div>
+    </main>
    <script src="./js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="./js_bootstrap/jquery-3.5.1.js"></script>
     <script src="./js_bootstrap/jquery.dataTables.min.js"></script>
     <script src="./js_bootstrap/dataTables.bootstrap5.min.js"></script>
     <script src="./js_bootstrap/script.js"></script>
+    <script src="./jscript/adminManagement.js"></script>
   </body>
 </html>

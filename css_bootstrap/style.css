@@ -39,3 +39,9 @@ button {
     top: var(--topNavbarHeight);
   }
 }
+
+
+/* CONTENT*/
+h2{
+  text-align: center;
+}

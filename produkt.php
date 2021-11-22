@@ -44,8 +44,8 @@ and open the template in the editor.
             </div>
             <div class="rightsite">
                 <div class="logowanie">
-                    <?php
-                    if($_SESSION){
+                <?php
+                    if($_SESSION && $_SESSION['login']){
                         ?>
                         <div class="dropdown show">
                         <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,7 +69,6 @@ and open the template in the editor.
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
                     ?>
-                    
                 </div>
                 <div class="wyszukiwanie">
                     <a href="wyszukiwarka.php"><img class="lupa" src="icons/lupa.png" alt="alt"/></a>
