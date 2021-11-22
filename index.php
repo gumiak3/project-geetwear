@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ob_start();
 ?>
 <!DOCTYPE html>
 <html lang="pl-PL">
@@ -26,9 +26,27 @@ session_start();
 
             <div class="rightsite">
                 <div class="logowanie">
-                    <?php
+                <?php
                     if($_SESSION && $_SESSION['login']){
-                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin'){
+                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -104,8 +122,7 @@ session_start();
             </div>
            <?php
             include('php/getCategories.php');
-           ?>
-            
+           ?>         
         </nav>
         <!-- reszta -->
    
@@ -199,3 +216,12 @@ session_start();
         <script type="text/javascript" src="./jscript/getProducts.js"></script>         
     </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type='text/javascript'src='./jscript/profile_menu.js'></script>
+
+<?php
+    include("./php/logout.php");
+?>

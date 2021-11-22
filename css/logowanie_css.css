@@ -280,6 +280,33 @@ ZAWARTOŚĆ:
     padding-bottom: 60px; 
     font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
+.dropdown-menu{
+    z-index:9999 !important;
+}
+
+.dropdown-menu a button{
+    width:100%;
+    height:100%;
+    background:inherit;
+    border:none;
+    cursor:pointer;
+    text-align: center;
+}
+.dropdown-menu a button:focus{
+    border:none;
+    outline:none;
+    background:inherit;
+
+}
+.dropdown-menu a{
+    margin:0;
+    padding:0;
+    text-align: center;
+}
+.dropdown-menu a:focus{
+    background:inherit;
+    color:black;
+}
 
 
 /*

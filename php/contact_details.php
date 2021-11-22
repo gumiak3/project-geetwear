@@ -28,7 +28,7 @@ foreach($getrecords as $row_records)
         <label>Imię</label>
     </div>
     <div class='contact-input col-9'>
-        <input type='text' name='firstname' value='<?=$firstname?>' readonly></input>
+        <input type='text' class='contact-in' name='firstname' value='<?=$firstname?>' readonly></input>
     </div>
 </div>
 <div class='contact-content-div row'>
@@ -36,7 +36,7 @@ foreach($getrecords as $row_records)
         <label>Nazwisko</label>
     </div>
     <div class='contact-input col-9'>
-        <input type='text' name='surname' value='<?=$surname?>' readonly></input>
+        <input type='text' name='surname' class='contact-in' value='<?=$surname?>' readonly></input>
     </div>
 </div>
 <div class='contact-content-div row'>

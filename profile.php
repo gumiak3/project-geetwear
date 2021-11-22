@@ -22,7 +22,6 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/profile.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
@@ -42,8 +41,25 @@ and open the template in the editor.
                 <div class="logowanie">
                     <?php
                     if($_SESSION){
-
-                        echo '<a href="profile.php"><p class="loguj"><img class="user_logo" alt="alt"src="./icons/user.png"></p></a>';
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin'){
+                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -143,9 +159,6 @@ and open the template in the editor.
                 <div id='profile-content'class='profile-content col-9'>
                 </div>
             </div>
-            <form method='POST'>
-                <button name='log_out' type='submit' class='log-out'>wyloguj się</button>
-            </form>
             <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">
@@ -201,13 +214,14 @@ and open the template in the editor.
         </div>     
     </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 
 <?php
-    if(isset($_POST['log_out'])){
-        session_destroy();
-        header("location:logowanie.php");
-    }
+    include("./php/logout.php");
 ?>
 
 <?php
