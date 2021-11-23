@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
 
@@ -12,13 +13,13 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <title>GEETWEAR ADMIN PANEL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css_bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="css_bootstrap/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="css_bootstrap/style.css" />
+    <link rel="stylesheet" href="../css_bootstrap/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="../css_bootstrap/style.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
 
   </head>
@@ -104,7 +105,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 ZARZĄDZANIE
               </div>
             </li>
-              <a href="./adminPanel/categoriesManagement.php" class="categories nav-link px-3">
+              <a href="#" class="categories nav-link px-3">
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
@@ -129,21 +130,78 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <main class="mt-5 pt-3">
       <div class="container-fluid">
         <div id='content'class="row">
-          
+        <div class='col-12'>
+    <h2>Kategorie</h2>
+</div>
+<table id="MyTable" class="table table-striped table-dark">
+    <thead class="table-head">
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">NAZWA</th>
+        <th scope="col">EDYCJA</th>
+        <th scope="col">USUWANIE</th>        
+        </tr>
+    </thead>
+    <tbody class="table-body">
+<?php
+include("../php/load_database.php");
+$get_categories = $pdo->query("SELECT * FROM categories");
+foreach($get_categories as $row_categories)
+{
+    echo"<tr>" ;
+    echo "<td>".$row_categories['id_category']."</td>";
+    echo "<td>".$row_categories['category_name']."</td>";
+    ?>
+    <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
+        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>">USUŃ</button></td>
+        </form>
+        <form method='POST'>
+        <td><button name='edit_send' type=submit class='edit_record' value="<?=$row_categories['id_category']?>">EDYCJA</button></form></td>
+    <?php
+    echo "</tr>";
+}
+?>
+</tbody>
+</table>
+
+<?php
+    if(isset($_POST['edit_send'])){
+      $idToEdit = $_POST['edit_send'];
+        
+    }
+    if(isset($_POST['delete_send'])){
+        $idToDelete = $_POST['delete_send'];
+        $stmt_to_delete = $pdo->prepare("DELETE FROM categories where id_category like :id_category");
+        $stmt_to_delete->bindValue(':id_category',$idToDelete,PDO::PARAM_STR);
+        $stmt_to_delete->execute();
+        unset($_POST);
+
+        header("Refresh:0");
+    }
+?>
         </div>
     </main>
-   <script src="./js_bootstrap/bootstrap.bundle.min.js"></script>
+   <script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="./js_bootstrap/jquery-3.5.1.js"></script>
     <script src="./js_bootstrap/jquery.dataTables.min.js"></script>
     <script src="./js_bootstrap/dataTables.bootstrap5.min.js"></script>
     <script src="./js_bootstrap/script.js"></script>
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+    <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
+    <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
   </body>
 </html>
 
+
 <script>
-  $(document).ready( function () {
-    $('#myTable').DataTable();
+    $(document).ready(function() {
+        $('#MyTable').dataTable( {
+        "searching": true,
+        "info": false,
+        "pageLength": 5,
+        "bLengthChange": false
+    } );
 } );
-</script>
+    </script>
