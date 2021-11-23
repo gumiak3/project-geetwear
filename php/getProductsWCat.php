@@ -3,9 +3,28 @@
 <?php
 include('load_database.php') ;
 
-            $idc = $_POST['id'];
+if(isset($_POST['filtr'])){
+    $sort_size = $_POST['sort_size'];
+    $sort_rest = $_POST['sort_rest'];
+    $idc = $_POST['id'];
+    if($sort_size="0"){
+        $stmt = $pdo->prepare('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = :idc ORDER BY '.$sort_rest);
+        $stmt->bindValue(':idc',$idc,PDO::PARAM_STR);
+        $stmt->execute();
+    }else{
+        $stmt = $pdo->prepare('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = :idc AND size = :sort_size ORDER BY '.$sort_rest);
+        $stmt->bindValue(':idc',$idc,PDO::PARAM_STR);
+        $stmt->bindValue(':sort_size',$sort_size,PDO::PARAM_STR);
+        $stmt->execute();
+    }
+    
+}else{
+    $idc = $_POST['id'];
+    $stmt = $pdo->prepare('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = '.$idc);
+    $stmt->execute();
+}
+            
 
-$stmt = $pdo->query('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = '.$idc);
 
 $html = '';
 
@@ -26,7 +45,3 @@ echo $html;
 ?>
 </ul>
 </div>
-
-
-
-

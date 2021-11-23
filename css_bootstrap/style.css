@@ -45,3 +45,6 @@ button {
 h2{
   text-align: center;
 }
+.table-head, .table-body{
+  text-align: center;
+}

@@ -138,6 +138,7 @@ session_start();
                         echo $row10['category_name']
                     ?>
                 </h1>
+<<<<<<< HEAD
                 <form method="post">
                     <div class="sortowanie_panel col-12 row">
                         <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
@@ -163,14 +164,46 @@ session_start();
                         </div>
                     </div>
                 </form>     
+=======
+                <from class="filtr" method="post">          
+                    <div class="sortowanie_panel col-12 row">
+                        <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
+                            <label>ROZMIAR:</label>
+                            <select name="sort_size" class="select_size">
+                                <option value="0">WSZYSTKIE</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
+                            <select name="sort_rest" class="select_sort">
+                                <option value="product_name ASC">A-Z</option>
+                                <option value="product_name DESC">Z-A</option>
+                                <option value="PRICE DESC">Od najtańszych</option>
+                                <option value="PRICE ASC">Od najdroższych</option>
+                            </select>
+                        </div>
+                        
+                        <input type="submit" name="filtr">
+                    </div>
+                </form>  
+>>>>>>> df4108025830e4060f6e8e9f035860c9da218cd9
             </div>             
         </div>
         <div class="zawartosc">  
             <!--Wyświetlane produkty-->
             <?php
+<<<<<<< HEAD
             echo $_POST["sort_size"];
                     $idc = $_GET['idc'];
                     echo '<script>var id_cat = '.$idc.'</script>';
+=======
+                $idc = $_GET['idc'];
+                echo '<script>var id_cat = '.$idc.'</script>';
+>>>>>>> df4108025830e4060f6e8e9f035860c9da218cd9
             ?>
             <div id="productsData"></div>
             <!-- Dół -->
