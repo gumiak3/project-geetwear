@@ -137,35 +137,40 @@ session_start();
                         foreach($stmt10 as $row10){}
                         echo $row10['category_name']
                     ?>
-                </h1>          
-                <div class="sortowanie_panel col-12 row">
-                    <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
-                        <select class="select_rozmiarow ">
-                            <option value="0">ROZMIAR</option>
-                            <option value="1">S</option>
-                            <option value="2">M</option>
-                            <option value="3">L</option>
-                            <option value="4">XL</option>
-                            <option value="5">XXL</option>
-                        </select>
+                </h1>
+                <from class="filtr" method="post">          
+                    <div class="sortowanie_panel col-12 row">
+                        <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
+                            <label>ROZMIAR:</label>
+                            <select name="sort_size" class="select_size">
+                                <option value="0">WSZYSTKIE</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+                        <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
+                            <select name="sort_rest" class="select_sort">
+                                <option value="0">SORTUJ</option>
+                                <option value="PRICE DESC">Od najtańszych</option>
+                                <option value="PRICE ASC">Od najdroższych</option>
+                                <option value="product_name DESC">A-Z</option>
+                                <option value="product_name ASC">Z-A</option>
+                            </select>
+                        </div>
+                        
+                        <input type="submit" name="filtr">
                     </div>
-                    <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
-                        <select class="select_sortuj">
-                            <option value="0">SORTUJ</option>
-                            <option value="1">Od najtańszych</option>
-                            <option value="2">Od najdroższych</option>
-                            <option value="3">A-Z</option>
-                            <option value="4">Z-A</option>
-                        </select>
-                    </div>
-                </div>  
+                </form>  
             </div>             
         </div>
         <div class="zawartosc">  
             <!--Wyświetlane produkty-->
             <?php
-            $idc = $_GET['idc'];
-            echo '<script>var id_cat = '.$idc.'</script>';
+                $idc = $_GET['idc'];
+                echo '<script>var id_cat = '.$idc.'</script>';
             ?>
             <div id="productsData"></div>
             <!-- Dół -->
