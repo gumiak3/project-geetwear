@@ -1,5 +1,10 @@
 $(document).ready(function(){
-    
+
+    getSort();
+    $('.sortowanie_panel').click(function(){
+       Sort(); 
+    });
+
     getProducts();
 
 });
@@ -13,5 +18,14 @@ function getProducts(){
         }
     }).done(function( data ) {
         $('#productsData').html(data);
+    })
+}
+
+function Sort(){
+    $.ajax({
+        url: "php/productsDisplay/getProductsWSort.php",
+        method: 'POST'
+    }).done(function( data ) {
+        $('#content').html(data);
     })
 }
