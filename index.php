@@ -121,7 +121,7 @@ ob_start();
                 
             </div>
            <?php
-            include('php/getCategories.php');
+            include('php/getSubpages.php');
            ?>         
         </nav>
         <!-- reszta -->

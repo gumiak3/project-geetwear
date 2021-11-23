@@ -121,7 +121,7 @@ session_start();
                 
             </div>
            <?php
-            include('php/getCategories.php');
+            include('php/getSubpages.php');
            ?>
             
         </nav>
@@ -133,9 +133,9 @@ session_start();
                 <h1 class="title_of_product ">
                     <?php 
                         $idc = $_GET['idc'];
-                        $stmt10 = $pdo->query('SELECT * FROM categories WHERE id_category = '.$idc);
+                        $stmt10 = $pdo->query('SELECT subpage_name FROM subpages WHERE additional_info = "'.$idc.'"');
                         foreach($stmt10 as $row10){}
-                        echo $row10['category_name']
+                        echo $row10['subpage_name']
                     ?>
                 </h1>
                 <from class="filtr" method="post">          

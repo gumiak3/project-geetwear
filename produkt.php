@@ -108,7 +108,7 @@ and open the template in the editor.
             </div>
            
             <?php
-            include('php/getCategories.php');
+            include('php/getSubpages.php');
             ?>
         </nav>
         <!-- reszta -->

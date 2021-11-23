@@ -42,6 +42,19 @@ CREATE TABLE `basket` (
 -- Struktura tabeli dla tabeli `categories`
 --
 
+CREATE TABLE `subpages` (
+  `id_subpage` int(11) NOT NULL,
+  `subpage_name` varchar(30) NOT NULL,
+  `additional_info` varchar(30),
+  `status` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `subpages` (`id_subpage`, `subpage_name`, `additional_info`, `status`) VALUES
+(1, 'Koszulki', '1', 1),
+(2, 'Bluzy', '2', 1),
+(3, 'Skiety', '3', 1);
+
+
 CREATE TABLE `categories` (
   `id_category` int(11) NOT NULL,
   `category_name` varchar(30) NOT NULL
@@ -207,6 +220,12 @@ ALTER TABLE `basket`
   ADD KEY `id` (`id`),
   ADD KEY `id_order` (`id_order`),
   ADD KEY `id_user` (`id_user`);
+
+
+
+ALTER TABLE `subpages`
+  ADD PRIMARY KEY (`id_subpage`);
+
 
 --
 -- Indeksy dla tabeli `categories`
