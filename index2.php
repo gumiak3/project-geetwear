@@ -153,11 +153,10 @@ session_start();
                         </div>
                         <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
                             <select name="sort_rest" class="select_sort">
-                                <option value="0">SORTUJ</option>
+                                <option value="product_name ASC">A-Z</option>
+                                <option value="product_name DESC">Z-A</option>
                                 <option value="PRICE DESC">Od najtańszych</option>
                                 <option value="PRICE ASC">Od najdroższych</option>
-                                <option value="product_name DESC">A-Z</option>
-                                <option value="product_name ASC">Z-A</option>
                             </select>
                         </div>
                         
