@@ -1,10 +1,5 @@
 $(document).ready(function(){
-
-    getSort();
-    $('.sortowanie_panel').click(function(){
-       Sort(); 
-    });
-
+    
     getProducts();
 
 });
@@ -27,16 +22,6 @@ function getProducts(){
     })
 }
 
-<<<<<<< HEAD
-function Sort(){
-    $.ajax({
-        url: "php/productsDisplay/getProductsWSort.php",
-        method: 'POST'
-    }).done(function( data ) {
-        $('#content').html(data);
-    })
-}
-=======
 function getProductsSorted(){
     $.ajax({
         url: "php/getProductsWCat.php",
@@ -51,4 +36,3 @@ function getProductsSorted(){
         $('#productsData').html(data);
     })
 }
->>>>>>> df4108025830e4060f6e8e9f035860c9da218cd9

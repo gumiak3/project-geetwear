@@ -138,33 +138,6 @@ session_start();
                         echo $row10['category_name']
                     ?>
                 </h1>
-<<<<<<< HEAD
-                <form method="post">
-                    <div class="sortowanie_panel col-12 row">
-                        <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
-                            <label>Rozmiar:</label>
-                            <select class="select_rozmiarow" name="sort_size">
-                                <option value="0">WSZYSTKO</option>
-                                <option value="1">S</option>
-                                <option value="2">M</option>
-                                <option value="3">L</option>
-                                <option value="4">XL</option>
-                                <option value="5">XXL</option>
-                            </select>
-                        </div>
-                        <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
-                            <label>SORTUJ:</label>
-                            <select class="select_sortuj">
-                                <option value="1">A-Z</option>
-                                <option value="2">Z-A</option>
-                                <option value="3">Od najtańszych</option>
-                                <option value="4">Od najdroższych</option>
-                            </select>
-                            <input type="button" name="filtr" value="FILRTUJ">
-                        </div>
-                    </div>
-                </form>     
-=======
                 <from class="filtr" method="post">          
                     <div class="sortowanie_panel col-12 row">
                         <div class="panel_rozmiarow col-xs-12 col-sm-6 col-lg-6">
@@ -175,35 +148,26 @@ session_start();
                                 <option value="M">M</option>
                                 <option value="L">L</option>
                                 <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
                             </select>
                         </div>
                         <div class="panel_sortuj_wedlug col-xs-12 col-sm-6 col-lg-6">
                             <select name="sort_rest" class="select_sort">
                                 <option value="product_name ASC">A-Z</option>
                                 <option value="product_name DESC">Z-A</option>
-                                <option value="PRICE DESC">Od najtańszych</option>
-                                <option value="PRICE ASC">Od najdroższych</option>
+                                <option value="price ASC">Od najtańszych</option>
+                                <option value="price DESC">Od najdroższych</option>
                             </select>
                         </div>
-                        
                         <input type="submit" name="filtr">
                     </div>
                 </form>  
->>>>>>> df4108025830e4060f6e8e9f035860c9da218cd9
             </div>             
         </div>
         <div class="zawartosc">  
             <!--Wyświetlane produkty-->
             <?php
-<<<<<<< HEAD
-            echo $_POST["sort_size"];
-                    $idc = $_GET['idc'];
-                    echo '<script>var id_cat = '.$idc.'</script>';
-=======
                 $idc = $_GET['idc'];
                 echo '<script>var id_cat = '.$idc.'</script>';
->>>>>>> df4108025830e4060f6e8e9f035860c9da218cd9
             ?>
             <div id="productsData"></div>
             <!-- Dół -->

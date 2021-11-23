@@ -7,7 +7,7 @@ if(isset($_POST['filtr'])){
     $sort_size = $_POST['sort_size'];
     $sort_rest = $_POST['sort_rest'];
     $idc = $_POST['id'];
-    if($sort_size="0"){
+    if($sort_size=="0"){
         $stmt = $pdo->prepare('SELECT DISTINCT id_product, product_name, price FROM products WHERE id_category = :idc ORDER BY '.$sort_rest);
         $stmt->bindValue(':idc',$idc,PDO::PARAM_STR);
         $stmt->execute();
