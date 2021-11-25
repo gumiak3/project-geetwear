@@ -9,3 +9,8 @@ php
 
 rejestracja
     wyświetalnie błedu, jezeli email jest już w użytku.
+
+
+
+panel admina
+    edycja i dodawanie za pomocą modalu

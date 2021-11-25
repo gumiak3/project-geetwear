@@ -13,6 +13,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <title>GEETWEAR ADMIN PANEL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -20,6 +21,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     />
     <link rel="stylesheet" href="../css_bootstrap/dataTables.bootstrap5.min.css" />
     <link rel="stylesheet" href="../css_bootstrap/style.css" />
+    
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
 
   </head>
@@ -68,9 +70,11 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <i class="bi bi-person-fill"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="./index.php">Sklep</a></li>
+                <li><a class="dropdown-item" href="../index.php">Sklep</a></li>
                 <li>
-                  <a class="dropdown-item" href="#">Wyloguj się</a>
+                  <a class="dropdown-item" href="#"><form method='POST' action='../php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
                 </li>
               </ul>
             </li>
@@ -152,11 +156,11 @@ foreach($get_categories as $row_categories)
     echo "<td>".$row_categories['id_category']."</td>";
     echo "<td>".$row_categories['category_name']."</td>";
     ?>
+    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_categories['id_category']?>" value="<?=$row_categories['id_category']?>">EDYCJA</button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
         <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>">USUŃ</button></td>
         </form>
-        <form method='POST'>
-        <td><button name='edit_send' type=submit class='edit_record' value="<?=$row_categories['id_category']?>">EDYCJA</button></form></td>
+        
     <?php
     echo "</tr>";
 }
@@ -164,10 +168,11 @@ foreach($get_categories as $row_categories)
 </tbody>
 </table>
 
+
 <?php
     if(isset($_POST['edit_send'])){
       $idToEdit = $_POST['edit_send'];
-        
+      
     }
     if(isset($_POST['delete_send'])){
         $idToDelete = $_POST['delete_send'];
@@ -175,12 +180,36 @@ foreach($get_categories as $row_categories)
         $stmt_to_delete->bindValue(':id_category',$idToDelete,PDO::PARAM_STR);
         $stmt_to_delete->execute();
         unset($_POST);
-
         header("Refresh:0");
     }
 ?>
+        <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">EDYCJA</h4>
         </div>
+        <div id='XD'class="modal-body">
+          <form method="POST">
+          <h1 id="category_id"></h1>
+          <input type="hidden" name="category_id"></input>
+          <input name="category_name" id="category_name" ></input>
+  </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
     </main>
+    
+    
+
    <script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="./js_bootstrap/jquery-3.5.1.js"></script>
@@ -191,13 +220,30 @@ foreach($get_categories as $row_categories)
     <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   </body>
 </html>
 
-
 <script>
     $(document).ready(function() {
+        $(".edit_data").click(function(){
+          var category = $(this).attr("id");
+          $.ajax({
+            type: "POST",
+            url: "edit_category.php",
+            data: {id: category},
+            dataType:'JSON', 
+            success: function(data) {
+              
+            }
+          })
+          
+        });
         $('#MyTable').dataTable( {
+          
         "searching": true,
         "info": false,
         "pageLength": 5,
@@ -205,3 +251,4 @@ foreach($get_categories as $row_categories)
     } );
 } );
     </script>
+
