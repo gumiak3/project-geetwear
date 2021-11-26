@@ -6,7 +6,5 @@
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_BOTH);
         echo json_encode($result);
-    
-        
     }
 ?>
