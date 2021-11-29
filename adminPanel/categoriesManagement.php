@@ -100,7 +100,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
               </div>
             </li>
             <li>
-              <a href="#" class="dashboard nav-link px-3 active">
+              <a href="DashBoard.php" class="dashboard nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>
@@ -111,7 +111,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 ZARZĄDZANIE
               </div>
             </li>
-              <a href="#" class="categories nav-link px-3">
+              <a href="categoriesManagement.php" class="categories nav-link px-3">
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
