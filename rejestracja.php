@@ -38,25 +38,74 @@ and open the template in the editor.
         </div>
         <script>
             $(function(){
-                $(".toggle").on("click",function(){
+                let deviceWidth;
+                $(window).resize(function(){
+                    
+                    deviceWidth = $(window).width();
+                    if(deviceWidth>=951)
+                    {
                     if($(".kategoria").hasClass("active")){
                         $(".kategoria").removeClass("active");
                         $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass('active');
+                        $(".bar2").removeClass('active');
+                        $(".bar3").removeClass('active');
+                        console.log(deviceWidth);
+                    }
+                    }
+                });
+                $(".toggle").on("click",function(){             
+                    if($(".kategoria").hasClass("active")){
+                        $(".kategoria").removeClass("active");
+                        $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass("active");
+                        $(".bar2").removeClass("active");
+                        $(".bar3").removeClass("active");
                     }
                     else{
                         $(".kategoria").addClass("active");
                         $(".menu_cale").addClass("active");
+                        $(".bar1").addClass("active");
+                        $(".bar2").addClass("active");
+                        $(".bar3").addClass("active");
                     }
                 });
+                
             });
         </script>
         <nav class="nabar sticky-top" id="menu_cale">
             <div class="po_zmianie grid row gridcount">
                 <div class="toggle col-4">
-                    <span class="bars"></span>
+                <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                <?php
+                    if($_SESSION && $_SESSION['login']){
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin'){
+                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>

@@ -59,7 +59,7 @@ and open the template in the editor.
                             }
                             ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <a class="dropdown-item" href="/logowanie.php"><form method='POST' action='./php/logout.php'>
                             <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
                             </form></a>
                         </div>
@@ -96,10 +96,37 @@ and open the template in the editor.
         <nav class="nabar sticky-top" id="menu_cale">
             <div class="po_zmianie grid row gridcount">
                 <div class="toggle col-4">
-                    <span class="bars"></span>
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <a href="logowanie.html"><p class="loguj"> ZALOGUJ SIĘ </p></a>
+                <?php
+                    if($_SESSION && $_SESSION['login']){
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin'){
+                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.html"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
@@ -238,5 +265,9 @@ and open the template in the editor.
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 <?php
-    include("./php/logout.php");
+
+    if(isset($_POST['log_out'])){
+        session_destroy();
+        header("location:../logowanie.php");
+    }
 ?>

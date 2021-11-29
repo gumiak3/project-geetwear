@@ -89,6 +89,9 @@ ul .kategoria{
     line-height: 80px;  
     
 }
+.menu_cale{
+    text-transform:uppercase;
+}
 ul li a, ul li a:hover{
     display: block;
     text-decoration: none;
@@ -274,6 +277,7 @@ ul li a, ul li a:hover{
         display:none;
         text-align:center;
         background:#f1f1f1;
+        
     }
     .menu_cale{
         margin-top:40px;
