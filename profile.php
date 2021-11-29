@@ -4,7 +4,7 @@ session_start();
 if($_SESSION['login']){
 
 }else{
-    header("location:/logowanie.php");
+    header("location:logowanie.php");
 }
 
 
@@ -124,27 +124,9 @@ and open the template in the editor.
 
                 </div>
                 <div class="logowanie_w_menu col-4">
-                <?php
-                    if($_SESSION && $_SESSION['login']){
-                        ?>
-                        <div class="dropdown show">
-                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="./profile.php">Profil</a>
-                            <?php
-                            if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
-                            }
-                            ?>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
-                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
-                            </form></a>
-                        </div>
-                        </div>
-                      <?php
+                    <?php
+                    if($_SESSION){
+                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" src="./icons/user.png"></p></a>';
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -241,12 +223,9 @@ and open the template in the editor.
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 
 <?php
-
-    if(isset($_POST['log_out'])){
-        session_destroy();
-        header("location:logowanie.php");
-    }
+    include("./php/logout.php");
 ?>
+
 <?php
     if(isset($_POST['edit-submit'])){
         $id = $_SESSION['id_user'];
