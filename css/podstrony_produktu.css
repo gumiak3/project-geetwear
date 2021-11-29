@@ -304,6 +304,13 @@ ul li a, ul li a:hover{
 /*
 ZAWARTOŚĆ:
 */
+
+.select_size{
+
+}
+.select_sort{
+
+}
 .orange_line{
     border:3px solid #ee6621;
     width:70px;
@@ -311,22 +318,8 @@ ZAWARTOŚĆ:
     text-align: center;
     margin-bottom:100px;
 }
-.select_rozmiarow, .select_sortuj{
-    border:none;
-    width:200px;
-    height:30px;
-    outline:0;
-    border-radius: 10px;
-    cursor: pointer;
-    
-}
 
-@media(max-width:575px)
-{
-    .select_sortuj{
-        margin-top:10px;
-    }
-}
+
 
 .sortowanie_panel{
     margin-bottom:100px;  
