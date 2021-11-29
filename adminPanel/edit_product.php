@@ -25,40 +25,32 @@
     }
     ?> 
     </select>
-    <table id="MyTable" class="table table-striped">
-    <thead class="table-head">
-        <tr>
-        <th scope="col">ROZMIAR</th>
-        <th scope="col">ILOŚĆ</th> 
-        <th scope="col">EDYCJA</th> 
-        <th scope="col">USUWANIE</th> 
-        </tr>
-    </thead>
-    <tbody class="table-body">
+    <h3>ROZMIARY</h3>
     <?php
         $stmt_get_sizes = $pdo->query("SELECT * from products where id_product=$id");
         foreach($stmt_get_sizes as $row_sizes)
         {
-            echo "<tr>";
-            echo "<td>".$row_sizes['size']."</td>";
+            echo "<div class='div-of-size'><form class='edit-size'method='POST'>";
+            echo "<input class='input-size' name='input-size' type='text' value='".$row_sizes['size']."'></input>";
             $size = $row_sizes['size'];
-            echo "<td>".$row_sizes['amount']."</td>";
+            echo "<input class='input-size' name='input-amount' type='number' value='".$row_sizes['amount']."'>";
             $stmt_id = $pdo->query("SELECT * from products where id_product=$id and size='$size'"); // ID OF ACTUALL PRODUCT IT WILL BE HELPFUL FOR DELETE OR IN EDITTING OF SIZE
             foreach($stmt_id as $row_id)
             {
                 $primary_id = $row_id['id'];
             }
-            ?>
-            <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_products['id_product']?>" value="<?=$row_products['id_product']?>">EDYCJA</button></td>
-            <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-            <td><button type='submit' name='delete_send' class='delete_record' value="<?=$primary_id?>">USUŃ</button></td>
-            </form>
+            ?> 
+            <button name='edit-size-send' type='submit' class='edit_record' value="<?=$primary_id?>">ZAPISZ</button></form> 
+            <form method="POST" class='delete-size'onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
+        <td><button type='submit' name='delete-size-send' class='delete_record' value="<?=$primary_id?>">USUŃ</button></td>
+        </form>      
             <?php
-            echo "</tr>";
         }
+        echo "<div class='div-of-size'><form class='add-size'method='POST'>";
+        echo "<input class='input-size' name='input-size' type='text'></input>";
+        echo "<input class='input-size' name='input-amount' type='text'></input>";
+        echo "<button name='add-size-send' type='submit' value=$id class='edit_record'>DODAJ</button></form>";
     ?>
-    </tbody>
-    </table>  
     <?php
 }
 ?>

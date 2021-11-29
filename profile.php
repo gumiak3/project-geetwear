@@ -218,9 +218,12 @@ and open the template in the editor.
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 
 <?php
-    include("./php/logout.php");
+session_start();
+    if(isset($_POST['log_out'])){
+        session_destroy();
+        header("location:logowanie.php");
+    }
 ?>
-
 <?php
     if(isset($_POST['edit-submit'])){
         $id = $_SESSION['id_user'];

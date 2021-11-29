@@ -159,3 +159,22 @@ input{
 .btn-save{
   background:green;
 }
+.input-size{
+  width:23%;
+  margin-right:20px;
+}
+.delete-size{
+  margin-left:20px;
+  display:inline;
+  background:orangered;
+  height:50px;
+  border:none;
+  color:white;
+}
+.edit-size{
+  display:inline;
+  
+}
+.div-of-size{
+  margin:20px 0 20px 0;
+}

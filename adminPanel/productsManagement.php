@@ -13,7 +13,6 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <title>GEETWEAR ADMIN PANEL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
     <link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css" />
     <link
       rel="stylesheet"
@@ -142,7 +141,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
       <div class="container-fluid">
         <div id='content'class="row">
         <div class='col-12'>
-    <h2>Kategorie</h2>
+    <h2>Produkty</h2>
 </div>
 <button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
 <table id="MyTable" class="table table-striped table-dark">
@@ -207,7 +206,7 @@ foreach($get_products as $row_products)
 ?>
 <!-- EDIT RECORD MODAL--->
     <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog ">
     
       <!-- Modal content-->
       <div class="modal-content">
@@ -309,4 +308,42 @@ foreach($get_products as $row_products)
     
     header("Refresh:0");
   }
+?>
+
+<?php if(isset($_POST['edit-size-send'])){ ?>
+<script>
+
+  </script>
+<?php } ?>
+
+<?php
+    if(isset($_POST['edit-size-send'])){
+        $size = $_POST['input-size'];
+        $amount = $_POST['input-amount'];
+        $id = $_POST['edit-size-send'];
+        $stmt_edit_size = $pdo->prepare("UPDATE products set size=:size, amount=:amount where id=$id");
+        $stmt_edit_size->bindValue(':size',$size,PDO::PARAM_STR);
+        $stmt_edit_size->bindValue(':amount',$amount,PDO::PARAM_STR);
+        $stmt_edit_size->execute();    
+    }
+    if(isset($_POST['delete-size-send']))
+    {
+      $id = $_POST['delete-size-send'];
+      $stmt_del = $pdo->exec("DELETE from products where id=$id");
+    }
+    if(isset($_POST['add-size-send'])){
+      $id = $_POST['add-size-send'];
+      $size = $_POST['input-size'];
+      $amount = $_POST['input-amount'];
+      $stmt_get_variables = $pdo->query("SELECT * FROM products where id_product=$id");
+      foreach($stmt_get_variables as $row_variables)
+      {
+        $product_name = $row_variables['product_name'];
+        $id_category = $row_variables['id_category'];
+        $price = $row_variables['price'];
+      }
+      $stmt = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values($id,'$product_name','$size',$id_category,$price,$amount)");
+      unset($_POST['add-size_send']);
+    }
+
 ?>

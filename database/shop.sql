@@ -310,7 +310,7 @@ ALTER TABLE `basket`
 -- Ograniczenia dla tabeli `gallery`
 --
 ALTER TABLE `gallery`
-  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`);
+  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `products`
