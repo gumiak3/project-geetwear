@@ -80,17 +80,40 @@ and open the template in the editor.
         </div>
         <script>
             $(function(){
-                $(".toggle").on("click",function(){
+                let deviceWidth;
+                $(window).resize(function(){
+                    
+                    deviceWidth = $(window).width();
+                    if(deviceWidth>=951)
+                    {
                     if($(".kategoria").hasClass("active")){
                         $(".kategoria").removeClass("active");
                         $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass('active');
+                        $(".bar2").removeClass('active');
+                        $(".bar3").removeClass('active');
+                        console.log(deviceWidth);
+                    }
+                    }
+                });
+                $(".toggle").on("click",function(){             
+                    if($(".kategoria").hasClass("active")){
+                        $(".kategoria").removeClass("active");
+                        $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass("active");
+                        $(".bar2").removeClass("active");
+                        $(".bar3").removeClass("active");
                     }
                     else{
                         $(".kategoria").addClass("active");
                         $(".menu_cale").addClass("active");
+                        $(".bar1").addClass("active");
+                        $(".bar2").addClass("active");
+                        $(".bar3").addClass("active");
                     }
                 });
-            });   
+                
+            });
         </script>
         
         <nav class="nabar sticky-top" id="menu_cale">

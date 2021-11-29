@@ -363,13 +363,12 @@ ZAWARTOŚĆ:
 .panel_podstrony{
     text-align: center;
     padding-top:20px;
-    background:#f1f1f1;
-     
-    
+    background:#f1f1f1;   
 }
 .linia_podstrony{
     border-top:1px groove;
-    width:80%;
+    width:100%;
+    
 }
 .panel_podstrony_2{
     background:#f1f1f1;
@@ -404,8 +403,7 @@ ZAWARTOŚĆ:
     font-family: 'Akaya Telivigala', cursive;  
 }
 .title_of_product {
-    margin:auto;
-    
+    text-transform: uppercase;
     font-family: 'Milliard Book';
     font-weight: bold;
     
@@ -566,7 +564,7 @@ STOPKA :
 
 @media(min-width:1200px)
 {
-    .zawartosc, .title_of_product{
+    .zawartosc{
         width:1400px;       
     }
     
