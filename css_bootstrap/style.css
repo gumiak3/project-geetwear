@@ -84,11 +84,6 @@ h2{
   border:none;
   color:white;
 }
-.edit_data{
-  background:grey;
-  color:white;
-  border:none;
-}
 .delete_record{
   background:orangered;
   height:50px;
@@ -103,8 +98,8 @@ h2{
   color:white;
 }
 .btn-save{
-
-
+  margin-top:50px;
+  margin-bottom:50px;
   border-radius:10px;
   outline:none;
   width:100px;
@@ -155,7 +150,4 @@ input{
   border: 1px solid #e5e5e5;
   border-radius: 3px;
   color:black;
-}
-.btn-save{
-  background:green;
 }

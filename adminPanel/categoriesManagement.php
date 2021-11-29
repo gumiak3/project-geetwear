@@ -115,10 +115,6 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
-              <a href="productsManagement.php" class="orders nav-link px-3">
-                <span class="me-2"><i class="bi bi-cart-dash"></i></span>
-                <span>Produkty</span>
-              </a>
               <a href="" class="pages nav-link px-3">
                 <span class="me-2"><i class="bi bi-book-fill"></i></span>
                 <span>Strony</span>
@@ -131,7 +127,6 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>
               </a>
-              
             </li>
           </ul>
         </nav>
@@ -144,7 +139,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
         <div class='col-12'>
     <h2>Kategorie</h2>
 </div>
-<button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
+<button class="add-btn">DODAJ REKORD</button>
 <table id="MyTable" class="table table-striped table-dark">
     <thead class="table-head">
         <tr>
@@ -191,8 +186,7 @@ foreach($get_categories as $row_categories)
         header("Refresh:0");
     }
 ?>
-<!-- EDIT RECORD MODAL--->
-    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -206,41 +200,12 @@ foreach($get_categories as $row_categories)
             <input type="hidden" id="id_category" name="category_id"></input>
             <label class="category-label">Nazwa kategorii</label>
             <input name="category_name" id="category_name" ></input><br>
-            
-          
+            <button class="btn-save" type='submit' name='edit-submit'>ZAPISZ</button>
+          </form>
         </div>
         <div class="modal-footer">
-        <button class="btn-save" type='submit' name='edit-submit'>ZAPISZ</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-  <!-- ADD RECORD MODAL-->
-  <div class="modal fade" id="addMyModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">DODAWANIE</h4>
-        </div>
-        <div class="modal-body">
-            <form method="POST">
-            <h3 id="category_id"></h3>
-            <input type="hidden" id="id_category" name="category_id"></input>
-            <label class="category-label">Nazwa kategorii</label>
-            <input name="category_name" id="category_name" ></input><br>
-            
-          
-        </div>
-        <div class="modal-footer">
-        <button class="btn-save" type='submit' name='add-submit'>DODAJ</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-        </div>
-        </form>
       </div>
       
     </div>
@@ -280,6 +245,7 @@ foreach($get_categories as $row_categories)
           
         });
         $('#MyTable').dataTable( {
+          
         "searching": true,
         "info": false,
         "pageLength": 5,
@@ -297,12 +263,5 @@ foreach($get_categories as $row_categories)
       $edit_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
       $edit_stmt->execute();
       header("Refresh:0");
-  }
-  if(isset($_POST['add-submit'])){
-    $name = $_POST['category_name'];
-    $add_stmt = $pdo->prepare("INSERT INTO categories (category_name) values (:category_name)");
-    $add_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-    $add_stmt->execute();
-    header("Refresh:0");
   }
 ?>
