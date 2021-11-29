@@ -158,7 +158,11 @@ and open the template in the editor.
            
             <?php
             include('php/getSubpages.php');
+<<<<<<< HEAD
             ?>
+=======
+           ?> 
+>>>>>>> 90433c978dbe26eb9021b5b0003ae1d790907ef9
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 
