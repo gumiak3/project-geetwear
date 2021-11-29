@@ -221,13 +221,6 @@ ul li a, ul li a:hover{
 /*
 ZAWARTOŚĆ:
 */
-
-.select_size{
-
-}
-.select_sort{
-
-}
 .orange_line{
     border:3px solid #ee6621;
     width:70px;
@@ -235,8 +228,22 @@ ZAWARTOŚĆ:
     text-align: center;
     margin-bottom:100px;
 }
+.select_rozmiarow, .select_sortuj{
+    border:none;
+    width:200px;
+    height:30px;
+    outline:0;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
 
-
+@media(max-width:575px)
+{
+    .select_sortuj{
+        margin-top:10px;
+    }
+}
 
 .sortowanie_panel{
     margin-bottom:100px;  
@@ -273,12 +280,13 @@ ZAWARTOŚĆ:
 .panel_podstrony{
     text-align: center;
     padding-top:20px;
-    background:#f1f1f1;   
+    background:#f1f1f1;
+     
+    
 }
 .linia_podstrony{
     border-top:1px groove;
-    width:100%;
-    
+    width:80%;
 }
 .panel_podstrony_2{
     background:#f1f1f1;
@@ -313,7 +321,8 @@ ZAWARTOŚĆ:
     font-family: 'Akaya Telivigala', cursive;  
 }
 .title_of_product {
-    text-transform: uppercase;
+    margin:auto;
+    
     font-family: 'Milliard Book';
     font-weight: bold;
     
@@ -474,7 +483,7 @@ STOPKA :
 
 @media(min-width:1200px)
 {
-    .zawartosc{
+    .zawartosc, .title_of_product{
         width:1400px;       
     }
     

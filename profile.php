@@ -23,9 +23,6 @@ and open the template in the editor.
         <link href="css/profile.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <script src="newjavascript.js"></script>
     </head>
     <body>
         <?php
@@ -95,8 +92,7 @@ and open the template in the editor.
                     }
                     }
                 });
-                $(".toggle").on("click",function(){    
-                             
+                $(".toggle").on("click",function(){             
                     if($(".kategoria").hasClass("active")){
                         $(".kategoria").removeClass("active");
                         $(".menu_cale").removeClass("active");
@@ -138,13 +134,15 @@ and open the template in the editor.
                 
             </div>
            
-            <?php
-            include('php/getSubpages.php');
-<<<<<<< HEAD
-            ?>
-=======
-           ?> 
->>>>>>> 90433c978dbe26eb9021b5b0003ae1d790907ef9
+            <ul class="menu_cale">
+                <li class="kategoria"><a href="nowosc.php">NOWOŚCI</a></li>
+                <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
+                <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
+                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
+                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
+                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
+                <li class="kategoria"><a href="Inne.html">INNE</a></li>
+            </ul>
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 

@@ -150,6 +150,8 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
         <tr>
         <th scope="col">ID</th>
         <th scope="col">NAZWA</th>
+        <th scope="col">KATEGORIA</th>
+        <th scope="col">CENA</th>
         <th scope="col">EDYCJA</th>
         <th scope="col">USUWANIE</th>        
         </tr>
@@ -157,16 +159,24 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <tbody class="table-body">
 <?php
 include("../php/load_database.php");
-$get_categories = $pdo->query("SELECT * FROM categories");
-foreach($get_categories as $row_categories)
+$get_products = $pdo->query("SELECT DISTINCT id_product,product_name,id_category,price FROM products");
+
+foreach($get_products as $row_products)
 {
     echo"<tr>" ;
-    echo "<td>".$row_categories['id_category']."</td>";
-    echo "<td>".$row_categories['category_name']."</td>";
+    echo "<td>".$row_products['id_product']."</td>";
+    echo "<td>".$row_products['product_name']."</td>";
+    $id_category = $row_products['id_category'];
+    $get_categories = $pdo->query("SELECT category_name from categories where id_category=$id_category");
+    foreach($get_categories as $row_categories)
+    {
+        echo "<td>".$row_categories['category_name']."</td>";
+    }
+    echo "<td>".$row_products['price']." zł</td>";
     ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_categories['id_category']?>" value="<?=$row_categories['id_category']?>">EDYCJA</button></td>
+    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_products['id_product']?>" value="<?=$row_products['id_product']?>">EDYCJA</button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>">USUŃ</button></td>
+        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_products['id_product']?>">USUŃ</button></td>
         </form>
         
     <?php
@@ -184,8 +194,12 @@ foreach($get_categories as $row_categories)
     }
     if(isset($_POST['delete_send'])){
         $idToDelete = $_POST['delete_send'];
-        $stmt_to_delete = $pdo->prepare("DELETE FROM categories where id_category like :id_category");
-        $stmt_to_delete->bindValue(':id_category',$idToDelete,PDO::PARAM_STR);
+        echo $idToDelete;
+        $stmt_delete_gallery = $pdo->prepare("DELETE FROM gallery where id_product like :id_product");
+        $stmt_to_delete = $pdo->prepare("DELETE FROM products where id_product like :id_product");
+        $stmt_delete_gallery->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
+        $stmt_delete_gallery->execute();
+        $stmt_to_delete->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
         $stmt_to_delete->execute();
         unset($_POST);
         header("Refresh:0");
@@ -193,19 +207,19 @@ foreach($get_categories as $row_categories)
 ?>
 <!-- EDIT RECORD MODAL--->
     <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">EDYCJA</h4>
         </div>
-        <div class="modal-body">
+        <div id='modal-body'class="modal-body">
             <form method="POST">
-            <h3 id="category_id"></h3>
-            <input type="hidden" id="id_category" name="category_id"></input>
-            <label class="category-label">Nazwa kategorii</label>
-            <input name="category_name" id="category_name" ></input><br>
+            <h3 id="product_id"></h3>
+            <input type="hidden" id="id_product" name="id"></input>
+            <label class="category-label">Nazwa produktu</label>
+            <input name="product_name" id="product_name" ></input><br>
             
           
         </div>
@@ -265,16 +279,13 @@ foreach($get_categories as $row_categories)
 <script>
     $(document).ready(function() {
         $(".edit_data").click(function(){
-          var category = $(this).attr("id");
+          var product = $(this).attr("id");
           $.ajax({
             type: "POST",
-            url: "edit_category.php",
-            data: {id: category},
-            dataType:'JSON', 
+            url:"edit_product.php",
+            data: {id: product},
             success: function(data) {
-                document.getElementById("category_id").innerHTML=data.id_category;
-                $("#category_name").val(data.category_name);
-                $("#id_category").val(data.id_category);
+                document.getElementById("modal-body").innerHTML=data;
             }
           })
           
@@ -282,7 +293,7 @@ foreach($get_categories as $row_categories)
         $('#MyTable').dataTable( {
         "searching": true,
         "info": false,
-        "pageLength": 5,
+        "pageLength": 10,
         "bLengthChange": false
     } );
 } );
@@ -291,18 +302,11 @@ foreach($get_categories as $row_categories)
 
 <?php
   if(isset($_POST['edit-submit'])){
-      $id = $_POST['category_id'];
-      $name = $_POST['category_name'];
-      $edit_stmt = $pdo->prepare("UPDATE categories set category_name=:category_name where id_category=$id");
-      $edit_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-      $edit_stmt->execute();
+      
       header("Refresh:0");
   }
   if(isset($_POST['add-submit'])){
-    $name = $_POST['category_name'];
-    $add_stmt = $pdo->prepare("INSERT INTO categories (category_name) values (:category_name)");
-    $add_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-    $add_stmt->execute();
+    
     header("Refresh:0");
   }
 ?>
