@@ -213,8 +213,9 @@ foreach($get_products as $row_products)
         <div class="modal-header">
           <h4 class="modal-title">EDYCJA</h4>
         </div>
+        <form method="POST">
         <div id='modal-body'class="modal-body">
-            <form method="POST">
+            
             <h3 id="product_id"></h3>
             <input type="hidden" id="id_product" name="id"></input>
             <label class="category-label">Nazwa produktu</label>
@@ -241,13 +242,35 @@ foreach($get_products as $row_products)
           <h4 class="modal-title">DODAWANIE</h4>
         </div>
         <div class="modal-body">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
             <h3 id="category_id"></h3>
-            <input type="hidden" id="id_category" name="category_id"></input>
-            <label class="category-label">Nazwa kategorii</label>
-            <input name="category_name" id="category_name" ></input><br>
-            
-          
+            <label>Główne zdjęcie</label><br>
+            <input required type="file" name="fileToUploadMain" id="fileToUpload">
+            <label>Dodatkowe zdjęcia</label><br>
+            <input required class='under-file'type="file" name="fileToUpload2" id="fileToUpload">
+            <input required class='under-file'type="file" name="fileToUpload3" id="fileToUpload">
+            <label class="category-label">Nazwa produktu</label>
+            <input required name="product_name" id="product_name" ></input><br>
+            <label>Kategoria</label>
+            <select required name='category' class='select-category'>
+            <?php
+                $get_categories = $pdo->query("SELECT * from categories");
+                foreach($get_categories as $row_categories)
+                {
+                    echo "<option value='".$row_categories['id_category']."'>".$row_categories['category_name']."</option>";
+                }
+            ?>
+            </select><br>
+            <label>Cena</label>
+            <input required type='text' name='price'></input>  
+            <label>Rozmiar</label>
+            <select id='sizes'>
+              <option id='1'>Ubranie</option>
+              <option id='2'>Obuwie</option>
+            </select>
+            <div class='sizes'>
+                <input class='xd'></input>
+            </div>
         </div>
         <div class="modal-footer">
         <button class="btn-save" type='submit' name='add-submit'>DODAJ</button>
@@ -259,9 +282,7 @@ foreach($get_products as $row_products)
     </div>
   </div>
     </main>
-    
-    
-    
+
    <script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="./js_bootstrap/jquery-3.5.1.js"></script>
@@ -274,6 +295,14 @@ foreach($get_products as $row_products)
     <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
   </body>
 </html>
+<script>
+// showing sizes
+  $("#sizes").change(function(){
+    if($("#sizes").val()=="Obuwie"){
+      $(".xd").fadeOut();
+    }
+  });        
+</script>
 
 <script>
     $(document).ready(function() {
@@ -300,12 +329,47 @@ foreach($get_products as $row_products)
 
 
 <?php
-  if(isset($_POST['edit-submit'])){
-      
+  if(isset($_POST['edit-submit'])){ // EDIT
+      $id = $_POST['product_id'];
+      $product_name = $_POST['product_name'];
+      $product_category = $_POST['product_category'];
+      $price = $_POST['price'];
+      $stmt_edit = $pdo->exec("UPDATE products set product_name='$product_name', id_category=$product_category,price=$price where id_product=$id");    
       header("Refresh:0");
   }
-  if(isset($_POST['add-submit'])){
-    
+  if(isset($_POST['add-submit'])){ // ADD
+    // to save
+    $target_dir = "../photos/produkty/";
+    $target_file_main_save = $target_file = $target_dir . basename($_FILES["fileToUploadMain"]["name"]);
+    $target_file_2_save = $target_file = $target_dir . basename($_FILES["fileToUpload2"]["name"]);
+    $target_file_3_save = $target_file = $target_dir . basename($_FILES["fileToUpload3"]["name"]);
+
+    // to get path
+    $target_dir_to_get_path= "photos/produkty/";
+    $target_file_main_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUploadMain"]["name"]);
+    $target_file_2_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUpload2"]["name"]);
+    $target_file_3_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUpload3"]["name"]);
+    // end path
+
+    // saving images into specific folder
+    move_uploaded_file($_FILES["fileToUploadMain"]["tmp_name"], $target_file_main_save);
+    move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file_2_save);
+    move_uploaded_file($_FILES["fileToUpload3"]["tmp_name"], $target_file_3_save);
+    $stmt_get_last_id = $pdo->query("SELECT * from products");
+    foreach($stmt_get_last_id as $row_last_id)
+    {
+      $id_product = $row_last_id['id_product'];
+    }
+    $id_product+=1;
+    $product_name = $_POST['product_name'];
+    $category = $_POST['category'];
+    $price = $_POST['price'];
+    $amount = '';
+    $size = '';
+    $stmt_add_product = $pdo->exec("INSERT INTO products (id_product,product_name,id_category,price) values ($id_product,'$product_name',$category,$price)");
+    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
+    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',0)");
+    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_3_path',0)");
     header("Refresh:0");
   }
 ?>

@@ -10,11 +10,13 @@
     {
         $product_name = $row['product_name'];
         $id_category=$row['id_category'];
+        $price = $row['price'];
     }
+    echo "<input type='hidden' name='product_id' value='$id'></input><br>";
     echo "<input name='product_name' value='$product_name'></input><br>";
-    echo "<label>Kategoria</label>";
+    echo "<label>Kategoria</label><br>";
     ?>
-    <select name='product_category'>
+    <select class='select-category' name='product_category'>
     <?php
     $get_categories = $pdo->query("SELECT * from categories");
     foreach($get_categories as $row_categories)
@@ -24,7 +26,9 @@
         echo ">".$row_categories['category_name']."</option>";
     }
     ?> 
-    </select>
+    </select><br>
+    <label>Cena</label>
+    <input name='price' value=<?=$price?> ></input>
     <h3>ROZMIARY</h3>
     <?php
         $stmt_get_sizes = $pdo->query("SELECT * from products where id_product=$id");
