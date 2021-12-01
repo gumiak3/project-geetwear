@@ -28,7 +28,7 @@ ob_start();
             <div class="rightsite">
                 <div class="logowanie">
                 <?php
-                    if($_SESSION && isset($_SESSION['login'])){
+                    if(isset($_SESSION['login'])){
                         ?>
                         <div class="dropdown show">
                         <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -109,7 +109,7 @@ ob_start();
                 </div>
                 <div class="logowanie_w_menu col-4">
                 <?php
-                    if($_SESSION && isset($_SESSION['login'])){
+                    if(isset($_SESSION['login'])){
                         ?>
                         <div class="dropdown show">
                         <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

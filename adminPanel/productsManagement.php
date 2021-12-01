@@ -244,11 +244,8 @@ foreach($get_products as $row_products)
         <div class="modal-body">
             <form method="POST" enctype="multipart/form-data">
             <h3 id="category_id"></h3>
-            <div class='div-main-img row'>
             <label class='col-12'>Główne zdjęcie</label><br>
-            <img class='main_img col-12'id="main_img" src="#" alt=""/>
-            </div>
-            
+            <img class='main_img col-12'id="main_img" src="#" alt=""/>   
             <input class='main-file' required type="file" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
             <label>Dodatkowe zdjęcia</label><br>
             <div class='row'>

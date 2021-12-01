@@ -44,6 +44,7 @@ if(isset($_POST['try-login'])){
     if($error){
         echo "<div class=error-div>Błędne dane logowania</div>";
         $_SESSION['login'] = false;
+        session_destroy();
     }else{
         $_SESSION['login'] = true;
         $_SESSION['user-type'] = $type;
