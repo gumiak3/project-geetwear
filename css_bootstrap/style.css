@@ -181,6 +181,16 @@ input{
   height:50px;
   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
 }
-.under-file{
-  width:49%;
+
+.sizes{
+  text-align: center;
+}
+.shoes-sizes{
+  display:none;
+}
+input{
+  margin-bottom:10px;
+}
+.main_img{
+  text-align: center;
 }
