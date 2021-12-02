@@ -88,28 +88,28 @@ CREATE TABLE `gallery` (
 
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (1, 1, 'photos/produkty/koszulka_1.jpg', 1),
-(2, 1, 'photos/produkty/koszulka_2.jpg', 0),
-(3, 1, 'photos/produkty/koszulka_3.jpg', 0),
+(2, 1, 'photos/produkty/koszulka_2.jpg', 2),
+(3, 1, 'photos/produkty/koszulka_3.jpg', 3),
 
 (4, 2, 'photos/produkty/bluza_UFO_1.jpg', 1),
-(5, 2, 'photos/produkty/bluza_UFO_2.jpg', 0),
-(6, 2, 'photos/produkty/bluza_UFO_3.jpg', 0),
+(5, 2, 'photos/produkty/bluza_UFO_2.jpg', 2),
+(6, 2, 'photos/produkty/bluza_UFO_3.jpg', 3),
 
 (8, 3, 'photos/produkty/bluza_sz_1.jpg', 1),
-(9, 3, 'photos/produkty/bluza_sz_2.jpg', 0),
-(10, 3, 'photos/produkty/bluza_sz_3.jpg', 0),
+(9, 3, 'photos/produkty/bluza_sz_2.jpg', 2),
+(10, 3, 'photos/produkty/bluza_sz_3.jpg', 3),
 
 (11, 4, 'photos/produkty/bluza_Adid_1.jpg', 1),
-(12, 4, 'photos/produkty/bluza_Adid_2.jpg', 0),
-(13, 4, 'photos/produkty/bluza_Adid_3.jpg', 0),
+(12, 4, 'photos/produkty/bluza_Adid_2.jpg', 2),
+(13, 4, 'photos/produkty/bluza_Adid_3.jpg', 3),
 
 (14, 5, 'photos/produkty/bluza_cz_1.jpg', 1),
-(15, 5, 'photos/produkty/bluza_cz_2.jpg', 0),
-(16, 5, 'photos/produkty/bluza_cz_3.jpg', 0),
+(15, 5, 'photos/produkty/bluza_cz_2.jpg', 2),
+(16, 5, 'photos/produkty/bluza_cz_3.jpg', 3),
 
 (17, 6, 'photos/produkty/skieta_1.jpg', 1),
-(18, 6, 'photos/produkty/skieta_2.jpg', 0),
-(19, 6, 'photos/produkty/skieta_3.jpg', 0);
+(18, 6, 'photos/produkty/skieta_2.jpg', 2),
+(19, 6, 'photos/produkty/skieta_3.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -309,8 +309,6 @@ ALTER TABLE `basket`
 --
 -- Ograniczenia dla tabeli `gallery`
 --
-ALTER TABLE `gallery`
-  ADD CONSTRAINT `gallery_ibfk_1` FOREIGN KEY (`id_product`) REFERENCES `products` (`id_product`) ON DELETE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `products`

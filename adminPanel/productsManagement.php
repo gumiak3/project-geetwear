@@ -187,19 +187,14 @@ foreach($get_products as $row_products)
 
 
 <?php
-    if(isset($_POST['edit_send'])){
-      $idToEdit = $_POST['edit_send'];
-      
-    }
     if(isset($_POST['delete_send'])){
         $idToDelete = $_POST['delete_send'];
-        echo $idToDelete;
-        $stmt_delete_gallery = $pdo->prepare("DELETE FROM gallery where id_product like :id_product");
         $stmt_to_delete = $pdo->prepare("DELETE FROM products where id_product like :id_product");
-        $stmt_delete_gallery->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
-        $stmt_delete_gallery->execute();
         $stmt_to_delete->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
         $stmt_to_delete->execute();
+        $stmt_to_delete_fotos = $pdo->prepare("DELETE FROM gallery where id_product like :id_product");
+        $stmt_to_delete_fotos->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
+        $stmt_to_delete_fotos->execute();
         unset($_POST);
         header("Refresh:0");
     }
@@ -213,7 +208,7 @@ foreach($get_products as $row_products)
         <div class="modal-header">
           <h4 class="modal-title">EDYCJA</h4>
         </div>
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
         <div id='modal-body'class="modal-body">
             
             <h3 id="product_id"></h3>
@@ -244,15 +239,17 @@ foreach($get_products as $row_products)
         <div class="modal-body">
             <form method="POST" enctype="multipart/form-data">
             <h3 id="category_id"></h3>
-            <label class='col-12'>Główne zdjęcie</label><br>
-            <img class='main_img col-12'id="main_img" src="#" alt=""/>   
-            <input class='main-file' required type="file" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
+            <label class=''>Główne zdjęcie</label><br>
+            <div class='row'>
+            <img class='main_img col-12'id="main_img" src="../photos/produkty/empty.jpg" alt=""/>   
+            <div>
+            <input class='main-file' style='display:none'required type="file" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
             <label>Dodatkowe zdjęcia</label><br>
             <div class='row'>
-            <img class='col-6' id="under_img1" src="#" alt="" />
-            <img class='col-6' id="under_img2" src="#" alt="" />
-            <input required class='under-file col-6' type="file" onchange="readURL2(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id="fileToUpload">
-            <input required class='under-file col-6'type="file" onchange="readURL3(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id="fileToUpload">
+            <img class='under_img col-6' id='under_img1'src="../photos/produkty/empty.jpg" alt="" />
+            <img class='under_img col-6' id="under_img2" src="../photos/produkty/empty.jpg" alt="" />
+            <input required class='under-file col-6' type="file" style='display:none'onchange="readURL2(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id='fileToUpload2'>
+            <input required class='under-file col-6'type="file" style='display:none'onchange="readURL3(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id='fileToUpload3' >
             </div>
             <label class="category-label">Nazwa produktu</label>
             <input required name="product_name" id="product_name" ></input><br>
@@ -268,38 +265,47 @@ foreach($get_products as $row_products)
             </select><br>
             <label>Cena</label>
             <input required type='text' name='price'></input>  
-            <label>Rodzaj produktu</label><br>
-            <select class='select-category' id='sizes'>
-              <option id='1'>Ubranie</option>
-              <option id='2'>Obuwie</option>
-            </select>
             <div class='sizes row'>
               <label class='size-label col-6'>Rozmiar</label>
-              <label class='size-amount col-2'>Ilość</label><br>  
-                <div class='shoes-sizes row col-12'>          
-                  <input name='shoes-size1' class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount1' class='shoes-size-amount col-4'></input>
-                  <input name='shoes-size2'class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount2' class='shoes-size-amount col-4'></input>
-                  <input name='shoes-size3' class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount3' class='shoes-size-amount col-4'></input>
-                  <input name='shoes-size4' class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount4' class='shoes-size-amount col-4'></input>
-                  <input name='shoes-size5'class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount5' class='shoes-size-amount col-4'></input>
-                  <input name='shoes-size6'class='shoes-size col-4'></input>
-                  <input name='shoes-size-amount6' class='shoes-size-amount col-4'></input>
+              <label class='size-amount col-6'>Ilość</label><br>  
+                <div class='shoes-sizes row'>   
+                  <div class='col-6'>
+                    <input name='size1' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount1' class='shoes-size-amount col-12'></input>
+                  </div>
+                  <div class='col-6'>
+                    <input name='size2' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount2' class='shoes-size-amount col-12'></input>
+                  </div>
+                  <div class='col-6'>
+                    <input name='size3' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount3' class='shoes-size-amount col-12'></input>
+                  </div>
+                  <div class='col-6'>
+                    <input name='size4' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount4' class='shoes-size-amount col-12'></input>
+                  </div>
+                  <div class='col-6'>
+                    <input name='size5' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount5' class='shoes-size-amount col-12'></input>
+                  </div>
+                  <div class='col-6'>
+                    <input name='size6' class='shoes-size col-12'></input>
+                  </div>       
+                  <div class='col-6'>
+                    <input name='size-amount6' class='shoes-size-amount col-12'></input>
+                  </div>
               </div>
-                <div class='clothes-sizes'>
-                  <input name='clothes-size1' class='shoes-size col-4'></input>
-                  <input name='clothes-size-amount1' class='shoes-size-amount col-4'></input>
-                  <input name='clothes-size2' class='shoes-size col-4'></input>
-                  <input name='clothes-size-amount2' class='shoes-size-amount col-4'></input>
-                  <input name='clothes-size3' class='shoes-size col-4'></input>
-                  <input name='clothes-size-amount3' class='shoes-size-amount col-4'></input>
-                  <input name='clothes-size4' class='shoes-size col-4'></input>
-                  <input name='clothes-size-amount4' class='shoes-size-amount col-4'></input>
-                </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -331,7 +337,7 @@ function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $('#main_img').attr('src', e.target.result).width(150).height(150);
+      $('#main_img').attr('src', e.target.result);
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -340,7 +346,7 @@ function readURL3(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $('#under_img2').attr('src', e.target.result).width(150).height(150);
+      $('#under_img2').attr('src', e.target.result);
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -349,36 +355,34 @@ function readURL2(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $('#under_img1').attr('src', e.target.result).width(150).height(150);
+      $('#under_img1').attr('src', e.target.result);
     };
     reader.readAsDataURL(input.files[0]);
   }
 }
-</script>
-<script>
-// showing sizes
-  $("#sizes").change(function(){
-    if($("#sizes").val()=="Obuwie"){
-      $(".shoes-sizes").fadeIn();
-      $(".clothes-sizes").fadeOut();
-    }
-    else if($("#sizes").val()=="Ubranie"){
-      $(".clothes-sizes").fadeIn();
-      $(".shoes-sizes").fadeOut();
-    }
-  });        
-</script>
 
+</script>
 <script>
     $(document).ready(function() {
         $(".edit_data").click(function(){
           var product = $(this).attr("id");
+          // tablica z indexami petelka
           $.ajax({
             type: "POST",
             url:"edit_product.php",
             data: {id: product},
             success: function(data) {
                 document.getElementById("modal-body").innerHTML=data;
+                $("#main_img_edit").click(function(){
+                  $("#fileToUpload_edit1").trigger('click');
+                });
+                $("#under_img_edit2").click(function(){
+                  $("#fileToUpload_edit2").trigger('click');
+                });
+                $("#under_img_edit3").click(function(){
+                  $("#fileToUpload_edit3").trigger('click');
+                });
+                
             }
           })
           
@@ -393,14 +397,42 @@ function readURL2(input) {
     </script>
 
 
+
 <?php
   if(isset($_POST['edit-submit'])){ // EDIT
-      $id = $_POST['product_id'];
-      $product_name = $_POST['product_name'];
-      $product_category = $_POST['product_category'];
-      $price = $_POST['price'];
-      $stmt_edit = $pdo->exec("UPDATE products set product_name='$product_name', id_category=$product_category,price=$price where id_product=$id");    
-      header("Refresh:0");
+    $id = $_POST['product_id'];
+    $product_name = $_POST['product_name'];
+    $product_category = $_POST['product_category'];
+    $price = $_POST['price'];
+    $stmt_edit = $pdo->exec("UPDATE products set product_name='$product_name', id_category=$product_category,price=$price where id_product=$id");  
+
+    $target_dir = "../photos/produkty/";
+    $target_file_main_save = $target_file = $target_dir . basename($_FILES["fileToUploadMain"]["name"]);
+    $target_file_2_save = $target_file = $target_dir . basename($_FILES["fileToUpload2"]["name"]);
+    $target_file_3_save = $target_file = $target_dir . basename($_FILES["fileToUpload3"]["name"]);
+
+    // to get path
+    $target_dir_to_get_path= "photos/produkty/";
+    $target_file_main_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUploadMain"]["name"]);
+    $target_file_2_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUpload2"]["name"]);
+    $target_file_3_path = $target_file = $target_dir_to_get_path . basename($_FILES["fileToUpload3"]["name"]);
+    // end path
+    // saving images into specific folder
+    move_uploaded_file($_FILES["fileToUploadMain"]["tmp_name"], $target_file_main_save);
+    move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file_2_save);
+    move_uploaded_file($_FILES["fileToUpload3"]["tmp_name"], $target_file_3_save);
+    if(basename($_FILES["fileToUploadMain"]["name"])!='')
+    {
+      $stmt_add_to_gallery_main = $pdo->exec("UPDATE  gallery set foto='$target_file_main_path' where id_product=$id and main=1");
+    }
+    if(basename($_FILES["fileToUpload2"]["name"])!=''){
+      $stmt_add_to_gallery_main2 = $pdo->exec("UPDATE  gallery set foto='$target_file_2_path' where id_product=$id and main=2");
+    }
+    if(basename($_FILES["fileToUpload3"]["name"])!=''){
+      $stmt_add_to_gallery_main3 = $pdo->exec("UPDATE  gallery set foto='$target_file_3_path' where id_product=$id and main=3");
+    }
+    
+    // header("REFRESH:0");
   }
   if(isset($_POST['add-submit'])){ // ADD
     // to save
@@ -421,6 +453,7 @@ function readURL2(input) {
     move_uploaded_file($_FILES["fileToUpload2"]["tmp_name"], $target_file_2_save);
     move_uploaded_file($_FILES["fileToUpload3"]["tmp_name"], $target_file_3_save);
     
+    
     $stmt_get_last_id = $pdo->query("SELECT * from products");
     foreach($stmt_get_last_id as $row_last_id)
     {
@@ -434,107 +467,69 @@ function readURL2(input) {
     $size = '';
     
     // get sizes and their amount
-    // shoes
-    $shoe_size1 = $_POST['shoes-size1'];
-    $shoe_amount1 = $_POST['shoes-size-amount1'];
-    if($shoe_amount1=='')
-    {
-      $shoe_amount1=0;
-    }
-    if(if_null($shoe_size1,$shoe_amount1)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size1',$id_category,$price,$shoe_amount1)");
-    }
-    $shoe_size2 = $_POST['shoes-size2'];
-    $shoe_amount2 = $_POST['shoes-size-amount2'];
-    if($shoe_amount2=='')
-    {
-      $shoe_amount2=0;
-    }
-    if(if_null($shoe_size2,$shoe_amount2)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size2',$id_category,$price,$shoe_amount2)");
-    }
-    $shoe_size3 = $_POST['shoes-size3'];
-    $shoe_amount3 = $_POST['shoes-size-amount3'];
-    if($shoe_amount3=='')
-    {
-      $shoe_amount3=0;
-    }
-    if(if_null($shoe_size3,$shoe_amount3)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size3',$id_category,$price,$shoe_amount3)");
-    }
-    $shoe_size4 = $_POST['shoes-size4'];
-    $shoe_amount4 = $_POST['shoes-size-amount4'];
-    if($shoe_amount4=='')
-    {
-      $shoe_amount4=0;
-    }
-    if(if_null($shoe_size4,$shoe_amount4)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size4',$id_category,$price,$shoe_amount4)");
-    }
-    $shoe_size5 = $_POST['shoes-size5'];
-    $shoe_amount5 = $_POST['shoes-size-amount5'];
-    if($shoe_amount5=='')
-    {
-      $shoe_amount5=0;
-    }
-    if(if_null($shoe_size5,$shoe_amount5)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size5',$id_category,$price,$shoe_amount5)");
-    }
-    $shoe_size6 = $_POST['shoes-size6'];
-    $shoe_amount6 = $_POST['shoes-size-amount6'];
-    if($shoe_amount6=='')
-    {
-      $shoe_amount6=0;
-    }
-    if(if_null($shoe_size6,$shoe_amount6)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$shoe_size6',$id_category,$price,$shoe_amount6)");
-    }
     
-    // clothes
     
-    $clothes_size1 = $_POST['clothes-size1'];
-    $clothes_amount1 = $_POST['clothes-size-amount1'];
-    if($clothes_amount1=='')
+    $size1 = $_POST['size1'];
+    $amount1 = $_POST['size-amount1'];
+    if($amount1=='')
     {
-      $clothes_amount1=0;
+      $amount1=0;
     }
-    if(if_null($clothes_size1,$clothes_amount1)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$clothes_size1',$id_category,$price,$clothes_amount1)");
+    if(if_null($size1,$amount1)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size1',$id_category,$price,$amount1)");
     }
-    $clothes_size2 = $_POST['clothes-size2'];
-    $clothes_amount2 = $_POST['clothes-size-amount2'];
-    if($clothes_amount2=='')
+    $size2 = $_POST['size2'];
+    $amount2 = $_POST['size-amount2'];
+    if($amount2=='')
     {
-      $clothes_amount2=0;
+      $amount2=0;
     }
-    if(if_null($clothes_size2,$clothes_amount2)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$clothes_size2',$id_category,$price,$clothes_amount2)");
+    if(if_null($size2,$amount2)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size2',$id_category,$price,$amount2)");
     }
-    $clothes_size3 = $_POST['clothes-size3'];
-    $clothes_amount3 = $_POST['clothes-size-amount3'];
-    if($clothes_amount3=='')
+    $size3 = $_POST['size3'];
+    $amount3 = $_POST['size-amount3'];
+    if($amount3=='')
     {
-      $clothes_amount3=0;
+      $amount3=0;
     }
-    if(if_null($clothes_size3,$clothes_amount3)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$clothes_size3',$id_category,$price,$clothes_amount3)");
+    if(if_null($size3,$amount3)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size3',$id_category,$price,$amount3)");
     }
-    
-    $clothes_size4 = $_POST['clothes-size4'];
-    $clothes_amount4 = $_POST['clothes-size-amount4'];
-    if($clothes_amount4=='')
+    $size4 = $_POST['size4'];
+    $amount4 = $_POST['size-amount4'];
+    if($amount4=='')
     {
-      $clothes_amount4=0;
+      $amount4=0;
     }
-    if(if_null($clothes_size4,$clothes_amount4)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$clothes_size4',$id_category,$price,$clothes_amount4)");
+    if(if_null($size4,$amount4)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size4',$id_category,$price,$amount4)");
+    }
+    $size5 = $_POST['size5'];
+    $amount5 = $_POST['size-amount5'];
+    if($amount5=='')
+    {
+      $amount5=0;
+    }
+    if(if_null($size5,$amount5)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size5',$id_category,$price,$amount5)");
+    }
+    $size6 = $_POST['size6'];
+    $amount6 = $_POST['size-amount6'];
+    if($amount6=='')
+    {
+      $amount6=0;
+    }
+    if(if_null($size6,$amount6)){
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size6',$id_category,$price,$amount6)");
     }
     
     
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
-    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',0)");
-    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_3_path',0)");
+    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',2)");
+    $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_3_path',3)");
     header("REFRESH:0");
+    
   }
   function if_null($size,$amount){
     if($size=='')
@@ -547,12 +542,6 @@ function readURL2(input) {
   }
 ?>
 
-<?php if(isset($_POST['edit-size-send'])){ ?>
-<script>
-
-  </script>
-<?php } ?>
-
 <?php
     if(isset($_POST['edit-size-send'])){
         $size = $_POST['input-size'];
@@ -561,12 +550,14 @@ function readURL2(input) {
         $stmt_edit_size = $pdo->prepare("UPDATE products set size=:size, amount=:amount where id=$id");
         $stmt_edit_size->bindValue(':size',$size,PDO::PARAM_STR);
         $stmt_edit_size->bindValue(':amount',$amount,PDO::PARAM_STR);
-        $stmt_edit_size->execute();    
+        $stmt_edit_size->execute();  
+        header("REFRESH:0");  
     }
     if(isset($_POST['delete-size-send']))
     {
       $id = $_POST['delete-size-send'];
       $stmt_del = $pdo->exec("DELETE from products where id=$id");
+      header("REFRESH:0"); 
     }
     if(isset($_POST['add-size-send'])){
       $id = $_POST['add-size-send'];
@@ -584,3 +575,19 @@ function readURL2(input) {
     }
 
 ?>
+
+    <script>
+    $("#under_img1").click(function(){
+  $("#fileToUpload2").trigger('click');
+  
+});
+$("#under_img2").click(function(){
+  $("#fileToUpload3").trigger('click');
+});
+$("#main_img").click(function(){
+  $("#fileToUpload").trigger('click');
+});
+
+
+  </script>
+  

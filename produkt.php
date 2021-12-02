@@ -47,7 +47,7 @@ and open the template in the editor.
         <div class="rightsite">
             <div class="logowanie">
                 <?php
-                if ($_SESSION && $_SESSION['login']) {
+                if ($_SESSION && isset($_SESSION['login'])) {
                 ?>
                     <div class="dropdown show">
                         <a href="logowanie.php" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -194,7 +194,7 @@ and open the template in the editor.
             <div class="zdjecia_pod col-xs-12 col-sm-12 col-lg-6" id="zdjecia_pod">
                 <?php
                 echo '<img src="' . $row3['foto'] . '" alt="product" class="zdjecie_produktu_small">';
-                $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main = 0 AND id_product=' . $row['id_product']);
+                $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main IN (2,3) AND id_product=' . $row['id_product']);
                 foreach ($stmt4 as $row4) {
                     echo '<img src="' . $row4['foto'] . '" alt="product" class="zdjecie_produktu_small">';
                 }

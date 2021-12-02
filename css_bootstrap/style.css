@@ -78,7 +78,7 @@ h2{
 
 /* functional buttons */
 
-.edit_record{
+.edit_record, .edit_size{
   background:rgb(136, 82, 199);
   height:50px;
   border:none;
@@ -185,12 +185,23 @@ input{
 .sizes{
   text-align: center;
 }
-.shoes-sizes{
-  display:none;
-}
+
 input{
   margin-bottom:10px;
 }
 .main_img{
-  text-align: center;
+  height:400px;
+  margin:0;
+  padding:0;
+  border:1px solid black;
+}
+.under_img{
+  height:200px;
+  border:1px solid black;
+  margin:0;
+  padding:0;
+}
+.extra_img{
+  width:auto;
+  height:100px;
 }

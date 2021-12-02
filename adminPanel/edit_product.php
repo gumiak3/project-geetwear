@@ -5,6 +5,34 @@
     include("../php/load_database.php");
     $stmt = $pdo->prepare("SELECT * FROM products where id_product=$id");
     $stmt->execute();
+    $get_main_img = $pdo->prepare("SELECT * FROM gallery where id_product=$id and main=1");
+    $get_main_img->execute();
+    foreach($get_main_img as $row_gallery)
+    {
+        $main_path = $row_gallery['foto'];
+    }
+    $get_extra_img = $pdo->prepare("SELECT foto FROM gallery where id_product=$id and main IN (2,3)");
+    $get_extra_img->execute();  
+    $extra_img_path = $get_extra_img->fetchALL(PDO::FETCH_COLUMN, 0);
+    ?>
+    <div class='images'>
+        <div class='main-image'>
+            <label class='col-12'>Główne zdjęcie</label>
+            <img class='main_img col-12' id="main_img_edit" src='../<?=$main_path?>'></img>
+            <input style='display:none' onchange="readURL(this);" class='main-file col-12' type="file" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload_edit1">
+        </div>
+        <div class='extra-images row'>
+            <label class='col-12'>Dodatkowe zdjęcia</label>
+            <img class='under_img col-6' id="under_img_edit2" src="../<?=$extra_img_path[0]?>" alt="" />
+            <img class='under_img col-6' id="under_img_edit3"  src="../<?=$extra_img_path[1]?>" alt="" />
+            <input style='display:none' class='under-file col-6' type="file" onchange="readURL2(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id="fileToUpload_edit2">
+            <input style='display:none' class='under-file col-6'type="file" onchange="readURL3(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id="fileToUpload_edit3">
+        </div>
+    </div>
+
+
+
+    <?php
     echo "<label>Nazwa produktu</label>";
     foreach($stmt as $row)
     {
@@ -58,4 +86,17 @@
     <?php
 }
 ?>
+<script>
+// show selected image
+function readURL(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $('#main_img_edit').attr('src', e.target.result);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
+
+</script>

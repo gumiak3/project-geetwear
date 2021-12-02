@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION && $_SESSION['login']){
+    if($_SESSION && isset($_SESSION['login'])){
         header("location:profile.php");
     }
     ob_start();
