@@ -209,15 +209,43 @@ foreach($get_products as $row_products)
           <h4 class="modal-title">EDYCJA</h4>
         </div>
         <form method="POST" enctype="multipart/form-data">
-        <div id='modal-body'class="modal-body">
-            
-            <h3 id="product_id"></h3>
-            <input type="hidden" id="id_product" name="id"></input>
-            <label class="category-label">Nazwa produktu</label>
-            <input name="product_name" id="product_name" ></input><br>
-            
-          
-        </div>
+        <div id='modal-body'class="modal-body row">
+            <input type="hidden" id="id_product" name="product_id"></input>
+            <div class='images'>
+              <div class='main-image row'>
+                  <label class='col-12'>Główne zdjęcie</label>
+                  <img class='main_img col-12' id="main_img_edit"></img>
+                  <input style='display:none' onchange="readURL(this,'#main_img_edit');" class='main-file col-12' type="file" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload_edit1">
+              </div>
+              <div class='extra-images row'>
+                  <label class='col-12'>Dodatkowe zdjęcia</label>
+                  <img class='under_img col-6' id="under_img_edit2" alt="" />
+                  <img class='under_img col-6' id="under_img_edit3"  alt="" />
+                  <input style='display:none' class='under-file col-6' type="file" onchange="readURL(this,'#under_img_edit2');" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id="fileToUpload_edit2">
+                  <input style='display:none' class='under-file col-6'type="file" onchange="readURL(this,'#under_img_edit3');" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id="fileToUpload_edit3">
+              </div>
+          </div>
+            <label class="category-label col-12">Nazwa produktu</label>
+            <input name="product_name" class='col-12' id="product_name"></input><br>
+            <label>Kategoria</label>
+            <select required name='product_category' class='select-category' id='edit_category'>
+            <?php
+                $get_categories = $pdo->query("SELECT * from categories");
+                foreach($get_categories as $row_categories)
+                {
+                    echo "<option value='".$row_categories['id_category']."'>".$row_categories['category_name']."</option>";
+                }
+            ?>
+            </select><br>
+            <label>Cena</label>
+            <input id='edit_price'name='price'></input>
+            <h3>ROZMIARY</h3>
+            <div class='row'>
+                <div id='edit_sizes'class='sizes col-12'>
+
+                </div>
+            </div>
+          </div>
         <div class="modal-footer">
         <button class="btn-save" type='submit' name='edit-submit'>ZAPISZ</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
@@ -227,6 +255,53 @@ foreach($get_products as $row_products)
       
     </div>
   </div>
+  <script>
+    // ajax of edit modal
+    $(document).ready(function() {
+        $(".edit_data").click(function(){
+          var product = $(this).attr("id");
+          $.ajax({ 
+            type: "POST",
+            url:"edit_product2.php",
+            data: {id: product},
+            dataType:'JSON',
+            success: function(data) {
+              $('#product_name').val(data[0].product_name);
+              $("#edit_category").val(data[0].id_category);
+              $("#edit_price").val(data[0].price);
+              $("#id_product").val(data[0].id_product);
+            }
+          });
+          $.ajax({ // sizes
+            type: "POST",
+            url:"edit_sizes.php",
+            data: {id: product},
+            success: function(data) {
+              document.getElementById("edit_sizes").innerHTML=data;
+            }
+          });
+          $.ajax({ // get main image
+            type: "POST",
+            url:"edit_getImgs.php",
+            data: {id: product},
+            dataType:'JSON',
+            success: function(data) {
+              $("#main_img_edit").prop("src","../"+data[0].foto);
+              $("#under_img_edit2").prop("src","../"+data[1].foto);
+              $("#under_img_edit3").prop("src","../"+data[2].foto);       
+            }
+          });
+          
+          
+        });
+        $('#MyTable').dataTable( {
+        "searching": true,
+        "info": false,
+        "pageLength": 10,
+        "bLengthChange": false
+    } );
+} );
+    </script>
   <!-- ADD RECORD MODAL-->
   <div class="modal fade" id="addMyModal" role="dialog">
     <div class="modal-dialog">
@@ -243,13 +318,13 @@ foreach($get_products as $row_products)
             <div class='row'>
             <img class='main_img col-12'id="main_img" src="../photos/produkty/empty.jpg" alt=""/>   
             <div>
-            <input class='main-file' style='display:none'required type="file" onchange="readURL(this);" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
+            <input class='main-file' style='display:none'required type="file" onchange="readURL(this,'#main_img');" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
             <label>Dodatkowe zdjęcia</label><br>
             <div class='row'>
             <img class='under_img col-6' id='under_img1'src="../photos/produkty/empty.jpg" alt="" />
             <img class='under_img col-6' id="under_img2" src="../photos/produkty/empty.jpg" alt="" />
-            <input required class='under-file col-6' type="file" style='display:none'onchange="readURL2(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id='fileToUpload2'>
-            <input required class='under-file col-6'type="file" style='display:none'onchange="readURL3(this);" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id='fileToUpload3' >
+            <input required class='under-file col-6' type="file" style='display:none'onchange="readURL(this,'#under_img1');" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id='fileToUpload2'>
+            <input required class='under-file col-6'type="file" style='display:none'onchange="readURL(this,'#under_img2');" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id='fileToUpload3' >
             </div>
             <label class="category-label">Nazwa produktu</label>
             <input required name="product_name" id="product_name" ></input><br>
@@ -312,75 +387,19 @@ foreach($get_products as $row_products)
     }
     
 // show selected image
-function readURL(input) {
+function readURL(input,imgId) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
     reader.onload = function (e) {
-      $('#main_img').attr('src', e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-function readURL3(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#under_img2').attr('src', e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-function readURL2(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#under_img1').attr('src', e.target.result);
+      $(imgId).attr('src', e.target.result);
     };
     reader.readAsDataURL(input.files[0]);
   }
 }
 
+
 </script>
-<script>
-    $(document).ready(function() {
-        $(".edit_data").click(function(){
-          var product = $(this).attr("id");
-          // tablica z indexami petelka
-          $.ajax({
-            type: "POST",
-            url:"edit_product.php",
-            data: {id: product},
-            success: function(data) {
-                document.getElementById("modal-body").innerHTML=data;
-                $("#main_img_edit").click(function(){
-                  $("#fileToUpload_edit1").trigger('click');
-                });
-                $("#under_img_edit2").click(function(){
-                  $("#fileToUpload_edit2").trigger('click');
-                });
-                $("#under_img_edit3").click(function(){
-                  $("#fileToUpload_edit3").trigger('click');
-                });
-                $("#add_input").click(function(){
-                  var new_input_size="<div class='col-5'><input required class='col-12' type='text' name='size[]'></div>";
-                  var new_input_amount = "<div  class='col-5'><input required class='col-12' type='text' name='amount[]'></div>";
-                  $('.div-of-extra-size').append(new_input_size);
-                  $('.div-of-extra-size').append(new_input_amount);
-                });
-                
-            }
-          });
-          
-          
-        });
-        $('#MyTable').dataTable( {
-        "searching": true,
-        "info": false,
-        "pageLength": 10,
-        "bLengthChange": false
-    } );
-} );
-    </script>
+
 
 
 
@@ -426,7 +445,7 @@ function readURL2(input) {
       $stmt_add_to_gallery_main3 = $pdo->exec("UPDATE  gallery set foto='$target_file_3_path' where id_product=$id and main=3");
     }
     
-    //  header("REFRESH:0");
+    header("REFRESH:0");
   }
   if(isset($_POST['add-submit'])){ // ADD
     // to save
@@ -505,10 +524,11 @@ function readURL2(input) {
 
 ?>
 
-    <script>
-    $("#under_img1").click(function(){
-  $("#fileToUpload2").trigger('click');
-  
+<script> // script which making imgs go for selecting file
+
+//ADD PRODUCTS
+$("#under_img1").click(function(){
+$("#fileToUpload2").trigger('click');
 });
 $("#under_img2").click(function(){
   $("#fileToUpload3").trigger('click');
@@ -516,7 +536,16 @@ $("#under_img2").click(function(){
 $("#main_img").click(function(){
   $("#fileToUpload").trigger('click');
 });
+// EDIT PRODUCTS
+$("#main_img_edit").click(function(){
+  $("#fileToUpload_edit1").trigger('click');
+});
+$("#under_img_edit2").click(function(){
+  $("#fileToUpload_edit2").trigger('click');
+});
+$("#under_img_edit3").click(function(){
+  $("#fileToUpload_edit3").trigger('click');
+});
 
-
-  </script>
+</script>
   
