@@ -164,7 +164,8 @@ input{
   margin-right:20px;
 }
 .delete-size{
-  margin-left:20px;
+  margin:0;
+  padding:0;
   display:inline;
 }
 .edit-size{

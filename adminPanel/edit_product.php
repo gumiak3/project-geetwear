@@ -58,45 +58,32 @@
     <label>Cena</label>
     <input name='price' value=<?=$price?> ></input>
     <h3>ROZMIARY</h3>
+    <div class='row'>
     <?php
         $stmt_get_sizes = $pdo->query("SELECT * from products where id_product=$id");
         foreach($stmt_get_sizes as $row_sizes)
         {
-            echo "<div class='div-of-size'><form class='edit-size'method='POST'>";
-            echo "<input class='input-size' name='input-size' type='text' value='".$row_sizes['size']."'></input>";
+            echo "<div class='div-of-size col-12'>";
+            echo "<input required class='input-size col-5' name='size[]' type='text' value='".$row_sizes['size']."'></input>";
             $size = $row_sizes['size'];
-            echo "<input class='input-size' name='input-amount' type='number' value='".$row_sizes['amount']."'>";
+            echo "<input required class='input-size col-5' name='amount[]' type='number' value='".$row_sizes['amount']."'>";
             $stmt_id = $pdo->query("SELECT * from products where id_product=$id and size='$size'"); // ID OF ACTUALL PRODUCT IT WILL BE HELPFUL FOR DELETE OR IN EDITTING OF SIZE
             foreach($stmt_id as $row_id)
             {
                 $primary_id = $row_id['id'];
             }
             ?> 
-            <button name='edit-size-send' type='submit' class='edit_record' value="<?=$primary_id?>">ZAPISZ</button></form> 
             <form method="POST" class='delete-size'onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-        <td><button type='submit' name='delete-size-send' class='delete_record' value="<?=$primary_id?>">USUŃ</button></td>
+        <td><button type='submit' name='delete-size-send' class='delete_record col-2' value="<?=$primary_id?>">USUŃ</button></td>
         </form>      
             <?php
         }
-        echo "<div class='div-of-size'><form class='add-size'method='POST'>";
-        echo "<input class='input-size' name='input-size' type='text'></input>";
-        echo "<input class='input-size' name='input-amount' type='text'></input>";
-        echo "<button name='add-size-send' type='submit' value=$id class='edit_record'>DODAJ</button></form>";
+        echo "</div>";
+        echo "<div class='div-of-extra-size row'>";
+        
+        echo "</div>";
+        echo "<button id='add_input'>Add</button>";
     ?>
     <?php
 }
 ?>
-<script>
-// show selected image
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      $('#main_img_edit').attr('src', e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-
-</script>

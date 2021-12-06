@@ -270,46 +270,18 @@ foreach($get_products as $row_products)
               <label class='size-amount col-6'>Ilość</label><br>  
                 <div class='shoes-sizes row'>   
                   <div class='col-6'>
-                    <input name='size1' class='shoes-size col-12'></input>
+                    <input required name='size[]' type='text' class='shoes-size col-12'></input>
                   </div>       
                   <div class='col-6'>
-                    <input name='size-amount1' class='shoes-size-amount col-12'></input>
+                    <input required name='size_amount[]' min=0 class='shoes-size-amount col-12'></input>
                   </div>
-                  <div class='col-6'>
-                    <input name='size2' class='shoes-size col-12'></input>
-                  </div>       
-                  <div class='col-6'>
-                    <input name='size-amount2' class='shoes-size-amount col-12'></input>
-                  </div>
-                  <div class='col-6'>
-                    <input name='size3' class='shoes-size col-12'></input>
-                  </div>       
-                  <div class='col-6'>
-                    <input name='size-amount3' class='shoes-size-amount col-12'></input>
-                  </div>
-                  <div class='col-6'>
-                    <input name='size4' class='shoes-size col-12'></input>
-                  </div>       
-                  <div class='col-6'>
-                    <input name='size-amount4' class='shoes-size-amount col-12'></input>
-                  </div>
-                  <div class='col-6'>
-                    <input name='size5' class='shoes-size col-12'></input>
-                  </div>       
-                  <div class='col-6'>
-                    <input name='size-amount5' class='shoes-size-amount col-12'></input>
-                  </div>
-                  <div class='col-6'>
-                    <input name='size6' class='shoes-size col-12'></input>
-                  </div>       
-                  <div class='col-6'>
-                    <input name='size-amount6' class='shoes-size-amount col-12'></input>
-                  </div>
+                  
               </div>
+              <button onclick="add()">Add</button>
             </div>
         </div>
         <div class="modal-footer">
-        <button class="btn-save" type='submit' name='add-submit'>DODAJ</button>
+          <button class="btn-save" type='submit' name='add-submit'>DODAJ</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
         </form>
@@ -332,6 +304,13 @@ foreach($get_products as $row_products)
   </body>
 </html>
 <script>
+  function add(){
+      var new_input_size="<div class='col-6'><input required class='col-12' type='text' name='size[]'></div>";
+      var new_input_amount = "<div  class='col-6'><input required class='col-12' type='text' name='size_amount[]'></div>";
+      $('.shoes-sizes').append(new_input_size);
+      $('.shoes-sizes').append(new_input_amount);
+    }
+    
 // show selected image
 function readURL(input) {
   if (input.files && input.files[0]) {
@@ -382,9 +361,16 @@ function readURL2(input) {
                 $("#under_img_edit3").click(function(){
                   $("#fileToUpload_edit3").trigger('click');
                 });
+                $("#add_input").click(function(){
+                  var new_input_size="<div class='col-5'><input required class='col-12' type='text' name='size[]'></div>";
+                  var new_input_amount = "<div  class='col-5'><input required class='col-12' type='text' name='amount[]'></div>";
+                  $('.div-of-extra-size').append(new_input_size);
+                  $('.div-of-extra-size').append(new_input_amount);
+                });
                 
             }
-          })
+          });
+          
           
         });
         $('#MyTable').dataTable( {
@@ -404,7 +390,15 @@ function readURL2(input) {
     $product_name = $_POST['product_name'];
     $product_category = $_POST['product_category'];
     $price = $_POST['price'];
-    $stmt_edit = $pdo->exec("UPDATE products set product_name='$product_name', id_category=$product_category,price=$price where id_product=$id");  
+    $size = $_POST['size'];
+    $amount = $_POST['amount'];
+    $count = count($size);
+    $stmt_get_all_sizes = $pdo->exec("DELETE FROM products where id_product=$id");
+    for($i=0;$i<$count;$i++)
+    {
+      $edit_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id,'$product_name','$size[$i]',$product_category,$price,$amount[$i])");
+    }
+    
 
     $target_dir = "../photos/produkty/";
     $target_file_main_save = $target_file = $target_dir . basename($_FILES["fileToUploadMain"]["name"]);
@@ -432,7 +426,7 @@ function readURL2(input) {
       $stmt_add_to_gallery_main3 = $pdo->exec("UPDATE  gallery set foto='$target_file_3_path' where id_product=$id and main=3");
     }
     
-    // header("REFRESH:0");
+    //  header("REFRESH:0");
   }
   if(isset($_POST['add-submit'])){ // ADD
     // to save
@@ -463,73 +457,18 @@ function readURL2(input) {
     $product_name = $_POST['product_name'];
     $category = $_POST['category'];
     $price = $_POST['price'];
-    $amount = '';
-    $size = '';
-    
-    // get sizes and their amount
-    
-    
-    $size1 = $_POST['size1'];
-    $amount1 = $_POST['size-amount1'];
-    if($amount1=='')
+    $size = $_POST['size'];
+    $amount = $_POST['size_amount'];
+    $count = count($size);
+    for($i=0;$i<$count;$i++)
     {
-      $amount1=0;
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size[$i]',$id_category,$price,$amount[$i])");
     }
-    if(if_null($size1,$amount1)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size1',$id_category,$price,$amount1)");
-    }
-    $size2 = $_POST['size2'];
-    $amount2 = $_POST['size-amount2'];
-    if($amount2=='')
-    {
-      $amount2=0;
-    }
-    if(if_null($size2,$amount2)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size2',$id_category,$price,$amount2)");
-    }
-    $size3 = $_POST['size3'];
-    $amount3 = $_POST['size-amount3'];
-    if($amount3=='')
-    {
-      $amount3=0;
-    }
-    if(if_null($size3,$amount3)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size3',$id_category,$price,$amount3)");
-    }
-    $size4 = $_POST['size4'];
-    $amount4 = $_POST['size-amount4'];
-    if($amount4=='')
-    {
-      $amount4=0;
-    }
-    if(if_null($size4,$amount4)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size4',$id_category,$price,$amount4)");
-    }
-    $size5 = $_POST['size5'];
-    $amount5 = $_POST['size-amount5'];
-    if($amount5=='')
-    {
-      $amount5=0;
-    }
-    if(if_null($size5,$amount5)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size5',$id_category,$price,$amount5)");
-    }
-    $size6 = $_POST['size6'];
-    $amount6 = $_POST['size-amount6'];
-    if($amount6=='')
-    {
-      $amount6=0;
-    }
-    if(if_null($size6,$amount6)){
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size6',$id_category,$price,$amount6)");
-    }
-    
-    
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',2)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_3_path',3)");
-    header("REFRESH:0");
-    
+   
+    header("REFRESH:0"); 
   }
   function if_null($size,$amount){
     if($size=='')
@@ -543,16 +482,6 @@ function readURL2(input) {
 ?>
 
 <?php
-    if(isset($_POST['edit-size-send'])){
-        $size = $_POST['input-size'];
-        $amount = $_POST['input-amount'];
-        $id = $_POST['edit-size-send'];
-        $stmt_edit_size = $pdo->prepare("UPDATE products set size=:size, amount=:amount where id=$id");
-        $stmt_edit_size->bindValue(':size',$size,PDO::PARAM_STR);
-        $stmt_edit_size->bindValue(':amount',$amount,PDO::PARAM_STR);
-        $stmt_edit_size->execute();  
-        header("REFRESH:0");  
-    }
     if(isset($_POST['delete-size-send']))
     {
       $id = $_POST['delete-size-send'];
