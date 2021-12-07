@@ -17,9 +17,9 @@
             echo "<input required class='input-size col-4' name='amount[]' id=".$primary_id." type='number' value='".$row_sizes['amount']."'>";
             
             ?> 
-            <form method="POST" class='delete-size'onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-        <td><button type='button' name='delete-size-send' class='delete_record col-4' id="<?=$primary_id?>" value="<?=$primary_id?>">USUŃ</button></td>
-        </form>  
+            
+        <td><button type='button' name='delete-size-send' onclick="return confirm('Czy na pewno chcesz usunąć ten rekord??');" class='delete_record col-4' id="<?=$primary_id?>" value="<?=$primary_id?>">USUŃ</button></td>
+ 
         </div>    
             <?php
         }
