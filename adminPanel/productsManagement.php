@@ -299,6 +299,17 @@ foreach($get_products as $row_products)
             data: {id: product},
             success: function(data) {
               document.getElementById("edit_sizes").innerHTML=data;
+              $(".delete_record").click(function(){
+                let id =  $(this).val();
+                $.ajax({ 
+                  type: "POST",
+                  url:"delSize.php",
+                  data: {id: id},
+                  success: function(data) {
+                    $("[id="+id+"]").remove(); 
+                  }
+                });
+              });
             }
           });
           $.ajax({ // get main image
