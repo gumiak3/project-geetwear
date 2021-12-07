@@ -10,6 +10,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <link rel="shortcut icon" href="#">
     <title>GEETWEAR ADMIN PANEL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -239,11 +240,30 @@ foreach($get_products as $row_products)
             </select><br>
             <label>Cena</label>
             <input id='edit_price'name='price'></input>
+              <label for="exampleFormControlTextarea1">Opis produktu</label>
+              <textarea class="form-control col-12  " name="description" id="id-description" rows="3"></textarea>
             <h3>ROZMIARY</h3>
-            <div class='row'>
-                <div id='edit_sizes'class='sizes col-12'>
+            <div class='sizes'>
+              <div class='col-12 row'>
+                <label class='col-4'>Rozmiar</label>
+                <label class='col-4'>Ilość</label>
+                <label class='col-4'>Usuwanie</label>
+              </div>
+              <div id='edit_sizes'class='shoes-sizes row'>
 
-                </div>
+              </div>
+              <h3>NOWE ROZMIARY</h3>
+              <div class='col-12 row'>
+                <label class='col-6'>Rozmiar</label>
+                <label class='col-6'>Ilość</label>
+              </div>
+              <div class='new-sizes row'>
+                
+              </div>
+              <div class='div-addInput'>
+              <button class='add-input' id='add_input' onclick="add('.new-sizes')"><i class="add-square bi bi-plus-square bi-5x"></i></button>  
+              </div>
+              
             </div>
           </div>
         <div class="modal-footer">
@@ -270,6 +290,7 @@ foreach($get_products as $row_products)
               $("#edit_category").val(data[0].id_category);
               $("#edit_price").val(data[0].price);
               $("#id_product").val(data[0].id_product);
+              $("#id-description").val(data[0].description);
             }
           });
           $.ajax({ // sizes
@@ -338,6 +359,10 @@ foreach($get_products as $row_products)
                 }
             ?>
             </select><br>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Opis produktu</label>
+              <textarea class="form-control" name="description" id="id-description" rows="3"></textarea>
+            </div>
             <label>Cena</label>
             <input required type='text' name='price'></input>  
             <div class='sizes row'>
@@ -348,11 +373,13 @@ foreach($get_products as $row_products)
                     <input required name='size[]' type='text' class='shoes-size col-12'></input>
                   </div>       
                   <div class='col-6'>
-                    <input required name='size_amount[]' min=0 class='shoes-size-amount col-12'></input>
+                    <input required name='amount[]' min=0 class='shoes-size-amount col-12'></input>
                   </div>
                   
               </div>
-              <button onclick="add()">Add</button>
+              <div class='div-addInput'>
+              <button class='add-input' id='add_input' onclick="add('.shoes-sizes')"><i class="add-square bi bi-plus-square bi-5x"></i></button>  
+              </div>
             </div>
         </div>
         <div class="modal-footer">
@@ -366,25 +393,16 @@ foreach($get_products as $row_products)
   </div>
     </main>
 
-   <script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-    <script src="./js_bootstrap/jquery-3.5.1.js"></script>
-    <script src="./js_bootstrap/jquery.dataTables.min.js"></script>
-    <script src="./js_bootstrap/dataTables.bootstrap5.min.js"></script>
-    <script src="./js_bootstrap/script.js"></script>
-    <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
-    <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
-    <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
-    <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+   
   </body>
 </html>
 <script>
-  function add(){
-      var new_input_size="<div class='col-6'><input required class='col-12' type='text' name='size[]'></div>";
-      var new_input_amount = "<div  class='col-6'><input required class='col-12' type='text' name='size_amount[]'></div>";
-      $('.shoes-sizes').append(new_input_size);
-      $('.shoes-sizes').append(new_input_amount);
-    }
+  function add(div_class){
+      var new_input_size="<div class='extra-sizes col-6'><input required class='col-12' type='text' name='size[]'></div>";
+      var new_input_amount = "<div class='extra-sizes col-6'><input required class='col-12' type='text' name='amount[]'></div>";
+      $(div_class).append(new_input_size);
+      $(div_class).append(new_input_amount);
+    }  
     
 // show selected image
 function readURL(input,imgId) {
@@ -411,11 +429,12 @@ function readURL(input,imgId) {
     $price = $_POST['price'];
     $size = $_POST['size'];
     $amount = $_POST['amount'];
+    $description = $_POST['description'];
     $count = count($size);
     $stmt_get_all_sizes = $pdo->exec("DELETE FROM products where id_product=$id");
     for($i=0;$i<$count;$i++)
     {
-      $edit_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id,'$product_name','$size[$i]',$product_category,$price,$amount[$i])");
+      $edit_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount,description) values ($id,'$product_name','$size[$i]',$product_category,$price,$amount[$i],'$description')");
     }
     
 
@@ -477,11 +496,12 @@ function readURL(input,imgId) {
     $category = $_POST['category'];
     $price = $_POST['price'];
     $size = $_POST['size'];
-    $amount = $_POST['size_amount'];
+    $amount = $_POST['amount'];
+    $description = $_POST['description'];
     $count = count($size);
     for($i=0;$i<$count;$i++)
     {
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount) values ($id_product,'$product_name','$size[$i]',$id_category,$price,$amount[$i])");
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount,description) values ($id_product,'$product_name','$size[$i]',$id_category,$price,$amount[$i],'$description')");
     }
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',2)");
@@ -546,6 +566,18 @@ $("#under_img_edit2").click(function(){
 $("#under_img_edit3").click(function(){
   $("#fileToUpload_edit3").trigger('click');
 });
+$('#myModal').on('hidden.bs.modal', function () {
+  $(".extra-sizes").remove();
+});
+$('#addMyModal').on('hidden.bs.modal', function () {
+  $(".extra-sizes").remove();
+});
 
 </script>
-  
+
+<!-- bootstrap links -->
+<script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+<script src='https://code.jquery.com/jquery-3.5.1.js'></script>
+<script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>

@@ -206,3 +206,17 @@ input{
   width:auto;
   height:100px;
 }
+.div-addInput{
+  text-align: center;
+}
+.sizes{
+  text-align: center;
+}
+.add-input{
+  border:none;
+
+  background:none;
+}
+.add-square{
+  font-size:30px;
+}
