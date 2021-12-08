@@ -14,13 +14,13 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <title>GEETWEAR ADMIN PANEL</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="../css_bootstrap/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="../css_bootstrap/style.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/style.css" />
     
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -100,7 +100,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
               </div>
             </li>
             <li>
-              <a href="DashBoard.php" class="dashboard nav-link px-3 active">
+              <a href="../DashBoard.php" class="dashboard nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>
@@ -111,7 +111,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 ZARZĄDZANIE
               </div>
             </li>
-              <a href="categoriesManagement.php" class="categories nav-link px-3">
+              <a href="../categories/categoriesManagement.php" class="categories nav-link px-3">
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
@@ -119,15 +119,15 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
-              <a href="" class="pages nav-link px-3">
+              <a href="../pages/pageManagement.php" class="pages nav-link px-3">
                 <span class="me-2"><i class="bi bi-book-fill"></i></span>
                 <span>Strony</span>
               </a>
-              <a href="#" class="users nav-link px-3">
+              <a href="../users/" class="users nav-link px-3">
                 <span class="me-2"><i class="bi bi-people"></i></span>
                 <span>Użytkownicy</span>
               </a>
-              <a href="#" class="orders nav-link px-3">
+              <a href="../orders/" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>
               </a>
@@ -158,7 +158,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     </thead>
     <tbody class="table-body">
 <?php
-include("../php/load_database.php");
+include("../../php/load_database.php");
 $get_products = $pdo->query("SELECT DISTINCT id_product,product_name,id_category,price FROM products");
 
 foreach($get_products as $row_products)
@@ -318,9 +318,9 @@ foreach($get_products as $row_products)
             data: {id: product},
             dataType:'JSON',
             success: function(data) {
-              $("#main_img_edit").prop("src","../"+data[0].foto);
-              $("#under_img_edit2").prop("src","../"+data[1].foto);
-              $("#under_img_edit3").prop("src","../"+data[2].foto);       
+              $("#main_img_edit").prop("src","../../"+data[0].foto);
+              $("#under_img_edit2").prop("src","../../"+data[1].foto);
+              $("#under_img_edit3").prop("src","../../"+data[2].foto);       
             }
           });
           
@@ -348,13 +348,13 @@ foreach($get_products as $row_products)
             <h3 id="category_id"></h3>
             <label class=''>Główne zdjęcie</label><br>
             <div class='row'>
-            <img class='main_img col-12'id="main_img" src="../photos/produkty/empty.jpg" alt=""/>   
+            <img class='main_img col-12'id="main_img" src="../../photos/produkty/empty.jpg" alt=""/>   
             <div>
             <input class='main-file' style='display:none'required type="file" onchange="readURL(this,'#main_img');" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload">
             <label>Dodatkowe zdjęcia</label><br>
             <div class='row'>
-            <img class='under_img col-6' id='under_img1'src="../photos/produkty/empty.jpg" alt="" />
-            <img class='under_img col-6' id="under_img2" src="../photos/produkty/empty.jpg" alt="" />
+            <img class='under_img col-6' id='under_img1'src="../../photos/produkty/empty.jpg" alt="" />
+            <img class='under_img col-6' id="under_img2" src="../../photos/produkty/empty.jpg" alt="" />
             <input required class='under-file col-6' type="file" style='display:none'onchange="readURL(this,'#under_img1');" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id='fileToUpload2'>
             <input required class='under-file col-6'type="file" style='display:none'onchange="readURL(this,'#under_img2');" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id='fileToUpload3' >
             </div>
@@ -449,7 +449,7 @@ function readURL(input,imgId) {
     }
     
 
-    $target_dir = "../photos/produkty/";
+    $target_dir = "../../photos/produkty/";
     $target_file_main_save = $target_file = $target_dir . basename($_FILES["fileToUploadMain"]["name"]);
     $target_file_2_save = $target_file = $target_dir . basename($_FILES["fileToUpload2"]["name"]);
     $target_file_3_save = $target_file = $target_dir . basename($_FILES["fileToUpload3"]["name"]);
@@ -479,7 +479,7 @@ function readURL(input,imgId) {
   }
   if(isset($_POST['add-submit'])){ // ADD
     // to save
-    $target_dir = "../photos/produkty/";
+    $target_dir = "../../photos/produkty/";
     $target_file_main_save = $target_file = $target_dir . basename($_FILES["fileToUploadMain"]["name"]);
     $target_file_2_save = $target_file = $target_dir . basename($_FILES["fileToUpload2"]["name"]);
     $target_file_3_save = $target_file = $target_dir . basename($_FILES["fileToUpload3"]["name"]);
@@ -587,7 +587,7 @@ $('#addMyModal').on('hidden.bs.modal', function () {
 </script>
 
 <!-- bootstrap links -->
-<script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
+<script src="../../js_bootstrap/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>

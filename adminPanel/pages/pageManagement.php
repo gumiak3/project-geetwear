@@ -14,13 +14,13 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <link rel="stylesheet" href="../css_bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="..//css_bootstrap/dataTables.bootstrap5.min.css" />
-    <link rel="stylesheet" href="..//css_bootstrap/style.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="../../css_bootstrap/style.css" />
     
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -100,7 +100,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
               </div>
             </li>
             <li>
-              <a href="DashBoard.php" class="dashboard nav-link px-3 active">
+              <a href="../DashBoard.php" class="dashboard nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>
@@ -111,19 +111,19 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 ZARZĄDZANIE
               </div>
             </li>
-              <a href="./categories/categoriesManagement.php" class="categories nav-link px-3">
+              <a href="../categories/categoriesManagement.php" class="categories nav-link px-3">
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
-              <a href="./products/productsManagement.php" class="orders nav-link px-3">
+              <a href="../products/productsManagement.php" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
-              <a href="./pages/pageManagement.php" class="pages nav-link px-3">
+              <a href="pageManagement.php" class="pages nav-link px-3">
                 <span class="me-2"><i class="bi bi-book-fill"></i></span>
                 <span>Strony</span>
               </a>
-              <a href="./users/userManagement.php" class="users nav-link px-3">
+              <a href="#" class="users nav-link px-3">
                 <span class="me-2"><i class="bi bi-people"></i></span>
                 <span>Użytkownicy</span>
               </a>
@@ -156,7 +156,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     </thead>
     <tbody class="table-body">
 <?php
-include("../php/load_database.php");
+include("../../php/load_database.php");
 $get_categories = $pdo->query("SELECT * FROM categories");
 foreach($get_categories as $row_categories)
 {
@@ -249,12 +249,8 @@ foreach($get_categories as $row_categories)
     
     
     
-   <script src="../js_bootstrap/bootstrap.bundle.min.js"></script>
+   <script src="../../js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-    <script src="./js_bootstrap/jquery-3.5.1.js"></script>
-    <script src="./js_bootstrap/jquery.dataTables.min.js"></script>
-    <script src="./js_bootstrap/dataTables.bootstrap5.min.js"></script>
-    <script src="./js_bootstrap/script.js"></script>
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
@@ -264,21 +260,7 @@ foreach($get_categories as $row_categories)
 
 <script>
     $(document).ready(function() {
-        $(".edit_data").click(function(){
-          var category = $(this).attr("id");
-          $.ajax({
-            type: "POST",
-            url: "edit_category.php",
-            data: {id: category},
-            dataType:'JSON', 
-            success: function(data) {
-                document.getElementById("category_id").innerHTML=data.id_category;
-                $("#category_name").val(data.category_name);
-                $("#id_category").val(data.id_category);
-            }
-          })
-          
-        });
+        
         $('#MyTable').dataTable( {
         "searching": true,
         "info": false,
@@ -291,18 +273,11 @@ foreach($get_categories as $row_categories)
 
 <?php
   if(isset($_POST['edit-submit'])){
-      $id = $_POST['category_id'];
-      $name = $_POST['category_name'];
-      $edit_stmt = $pdo->prepare("UPDATE categories set category_name=:category_name where id_category=$id");
-      $edit_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-      $edit_stmt->execute();
+      
       header("Refresh:0");
   }
   if(isset($_POST['add-submit'])){
-    $name = $_POST['category_name'];
-    $add_stmt = $pdo->prepare("INSERT INTO categories (category_name) values (:category_name)");
-    $add_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-    $add_stmt->execute();
+    
     header("Refresh:0");
   }
 ?>

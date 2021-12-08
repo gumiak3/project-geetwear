@@ -1,7 +1,7 @@
 <?php
     if(isset($_POST['id']) && !empty($_POST['id'])) {
         $id = $_POST['id'];
-        include("../php/load_database.php");
+        include("../../php/load_database.php");
         $stmt_get_sizes = $pdo->query("SELECT * from products where id_product=$id");
         foreach($stmt_get_sizes as $row_sizes)
         {

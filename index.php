@@ -38,7 +38,7 @@ ob_start();
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
                             if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
@@ -119,7 +119,7 @@ ob_start();
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
                             if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
