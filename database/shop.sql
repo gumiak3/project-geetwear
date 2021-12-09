@@ -295,6 +295,8 @@ ALTER TABLE `products`
 ALTER TABLE `users`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
+ALTER TABLE `subpages`
+  MODIFY `id_subpage` int NOT NULL AUTO_INCREMENT;
 --
 -- Ograniczenia dla zrzutów tabel
 --

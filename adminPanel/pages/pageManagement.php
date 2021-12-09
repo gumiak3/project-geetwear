@@ -115,7 +115,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-tag"></i></span>
                 <span>Kategorie</span>
               </a>
-              <a href="productsManagement.php" class="orders nav-link px-3">
+              <a href="../products/productsManagement.php" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
@@ -173,7 +173,7 @@ foreach($get_subpages as $row_subpages)
       echo "<td>nieaktywne</td>";
     }
     ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id=" value="<?=$row_subpages['id_subpage']?>">EDYCJA</button></td>
+    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_subpages['id_subpage']?>" value="<?=$row_subpages['id_subpage']?>">EDYCJA</button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
       <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_subpages['id_subpage']?>">USUŃ</button></td>
     </form>
@@ -187,14 +187,24 @@ foreach($get_subpages as $row_subpages)
 
 
 <?php
-    if(isset($_POST['delete_send'])){
-        $idToDelete = $_POST['delete_send'];
-        $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
-        $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
-        $stmt_to_delete->execute();
-        unset($_POST);
-        header("Refresh:0");
-    }
+  if(isset($_POST['edit-submit']))
+  {
+    $id = $_POST['subpage_id'];
+    $subpage_name = $_POST['subpage_name'];
+    $content = $_POST['content'];
+    $status = $_POST['status'];
+    $edit_stmt = $pdo->prepare("UPDATE subpages set subpage_name='$subpage_name',additional_info=$content,status=$status where id_subpage=$id");
+    $edit_stmt->execute();
+    header("REFRESH:0");
+  }
+  if(isset($_POST['delete_send'])){
+      $idToDelete = $_POST['delete_send'];
+      $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
+      $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
+      $stmt_to_delete->execute();
+      unset($_POST);
+      header("Refresh:0");
+  }
 ?>
 <!-- EDIT RECORD MODAL--->
     <div class="modal fade" id="myModal" role="dialog">
@@ -207,61 +217,29 @@ foreach($get_subpages as $row_subpages)
         </div>
         <form method="POST" enctype="multipart/form-data">
         <div id='modal-body'class="modal-body row">
-            <input type="hidden" id="id_product" name="product_id"></input>
-            <div class='images'>
-              <div class='main-image row'>
-                  <label class='col-12'>Główne zdjęcie</label>
-                  <img class='main_img col-12' id="main_img_edit"></img>
-                  <input style='display:none' onchange="readURL(this,'#main_img_edit');" class='main-file col-12' type="file" accept="image/gif, image/jpeg, image/png" name="fileToUploadMain" id="fileToUpload_edit1">
+            <div class='cotainer-row'>
+              <input type='hidden' id='subpage_id'name='subpage_id'></input>
+              <label class='col-12'>Nazwa podstrony</label>
+              <input class='col-12' id='subpage_name'name='subpage_name' required></input>
+              <label class='col-12'>Zawartość</label>
+              <select name='content' id='subpage_content' required class='select-category'>
+                <?php
+                  $get_content = $pdo->query("SELECT * FROM categories");
+                  foreach($get_content as $row_content)
+                  {
+                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
+                  }
+                ?>
+              </select>
+              <label class='col-12'>Status</label>
+              <div class='div-status'>
+                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
+                <label for='active'>aktywna</label><br>
+                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
+                <label for='inactive'>nieaktywna</label>
               </div>
-              <div class='extra-images row'>
-                  <label class='col-12'>Dodatkowe zdjęcia</label>
-                  <img class='under_img col-6' id="under_img_edit2" alt="" />
-                  <img class='under_img col-6' id="under_img_edit3"  alt="" />
-                  <input style='display:none' class='under-file col-6' type="file" onchange="readURL(this,'#under_img_edit2');" accept="image/gif, image/jpeg, image/png" name="fileToUpload2" id="fileToUpload_edit2">
-                  <input style='display:none' class='under-file col-6'type="file" onchange="readURL(this,'#under_img_edit3');" accept="image/gif, image/jpeg, image/png" name="fileToUpload3" id="fileToUpload_edit3">
-              </div>
-          </div>
-            <label class="category-label col-12">Nazwa produktu</label>
-            <input name="product_name" class='col-12' id="product_name"></input><br>
-            <label>Kategoria</label>
-            <select required name='product_category' class='select-category' id='edit_category'>
-            <?php
-                $get_categories = $pdo->query("SELECT * from categories");
-                foreach($get_categories as $row_categories)
-                {
-                    echo "<option value='".$row_categories['id_category']."'>".$row_categories['category_name']."</option>";
-                }
-            ?>
-            </select><br>
-            <label>Cena</label>
-            <input id='edit_price'name='price'></input>
-              <label for="exampleFormControlTextarea1">Opis produktu</label>
-              <textarea class="form-control col-12  " name="description" id="id-description" rows="3"></textarea>
-            <h3>ROZMIARY</h3>
-            <div class='sizes'>
-              <div class='col-12 row'>
-                <label class='col-4'>Rozmiar</label>
-                <label class='col-4'>Ilość</label>
-                <label class='col-4'>Usuwanie</label>
-              </div>
-              <div id='edit_sizes'class='shoes-sizes row'>
-
-              </div>
-              <h3>NOWE ROZMIARY</h3>
-              <div class='col-12 row'>
-                <label class='col-6'>Rozmiar</label>
-                <label class='col-6'>Ilość</label>
-              </div>
-              <div class='new-sizes row'>
-                
-              </div>
-              <div class='div-addInput'>
-              <button class='add-input' id='add_input' onclick="add('.new-sizes')"><i class="add-square bi bi-plus-square bi-5x"></i></button>  
-              </div>
-              
             </div>
-          </div>
+        </div>
         <div class="modal-footer">
         <button class="btn-save" type='submit' name='edit-submit'>ZAPISZ</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
@@ -345,3 +323,30 @@ foreach($get_subpages as $row_subpages)
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+
+<script>
+  $(document).ready(function(){
+    $(".edit_data").click(function(){
+        const subpage_id = $(this).attr("id");
+        console.log(subpage_id);
+        $.ajax({ 
+            type: "POST",
+            url:"edit_subpage.php",
+            data: {id: subpage_id},
+            dataType:'JSON',
+            success: function(data) {
+              $("#subpage_id").val(data[0].id_subpage);
+              $("#subpage_name").val(data[0].subpage_name);
+              $("#subpage_content").val(data[0].additional_info);
+              if(data[0].status==1)
+              {
+                document.getElementById("active").checked = true;
+              }else{
+                document.getElementById("inactive").checked = true;
+              }
+                
+            }
+          });
+    });
+  });
+</script>

@@ -210,7 +210,7 @@ foreach($get_products as $row_products)
           <h4 class="modal-title">EDYCJA</h4>
         </div>
         <form method="POST" enctype="multipart/form-data">
-        <div id='modal-body'class="modal-body row">
+        <div id='modal-body'class="modal-body container-row">
             <input type="hidden" id="id_product" name="product_id"></input>
             <div class='images'>
               <div class='main-image row'>
