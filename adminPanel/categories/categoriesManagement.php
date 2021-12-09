@@ -72,9 +72,9 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <i class="bi bi-person-fill"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../index.php">Sklep</a></li>
+                <li><a class="dropdown-item" href="../../index.php">Sklep</a></li>
                 <li>
-                  <a class="dropdown-item" href="#"><form method='POST' action='../php/logout.php'>
+                  <a class="dropdown-item" href="#"><form method='POST' action='../../php/logout.php'>
                             <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
                             </form></a>
                 </li>
@@ -119,7 +119,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
-              <a href="" class="pages nav-link px-3">
+              <a href="../pages/pageManagement.php" class="pages nav-link px-3">
                 <span class="me-2"><i class="bi bi-book-fill"></i></span>
                 <span>Strony</span>
               </a>
@@ -250,7 +250,7 @@ foreach($get_categories as $row_categories)
     
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-   
+    <script src="../../js_bootstrap/bootstrap.bundle.min.js"></script>
     <script src="//cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>

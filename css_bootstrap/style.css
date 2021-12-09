@@ -220,3 +220,13 @@ input{
 .add-square{
   font-size:30px;
 }
+.input-radio{
+  text-align: left;
+}
+.div-status label{
+  font-weight:lighter;
+}
+.div-status input{
+  width:30px;
+  text-align:left;
+}

@@ -72,9 +72,9 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <i class="bi bi-person-fill"></i>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../index.php">Sklep</a></li>
+                <li><a class="dropdown-item" href="../../index.php">Sklep</a></li>
                 <li>
-                  <a class="dropdown-item" href="#"><form method='POST' action='../php/logout.php'>
+                  <a class="dropdown-item" href="#"><form method='POST' action='../../php/logout.php'>
                             <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
                             </form></a>
                 </li>
