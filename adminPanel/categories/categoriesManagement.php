@@ -123,11 +123,11 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-book-fill"></i></span>
                 <span>Strony</span>
               </a>
-              <a href="#" class="users nav-link px-3">
+              <a href="../users/userManagement.php" class="users nav-link px-3">
                 <span class="me-2"><i class="bi bi-people"></i></span>
                 <span>Użytkownicy</span>
               </a>
-              <a href="#" class="orders nav-link px-3">
+              <a href="../orders/ordersManagement.php" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>
               </a>
@@ -164,9 +164,9 @@ foreach($get_categories as $row_categories)
     echo "<td>".$row_categories['id_category']."</td>";
     echo "<td>".$row_categories['category_name']."</td>";
     ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_categories['id_category']?>" value="<?=$row_categories['id_category']?>">EDYCJA</button></td>
+    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_categories['id_category']?>" value="<?=$row_categories['id_category']?>"><i class="bi bi-pencil"></i></button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>">USUŃ</button></td>
+        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>"><i class="bi bi-trash"></i></button></td>
         </form>
         
     <?php
