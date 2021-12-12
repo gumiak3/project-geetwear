@@ -2,32 +2,22 @@
 session_start();
 ob_start();
 include('load_database.php');
-
 class Product
 {
     public $id;
     public $amount;
-    public $price;
 }
-$html = '';
-$html .= '<div class="tabela_koszyka  col-xs-5 col-lg-9 row">';
-$html .= '<div class="napis_koszyk col-12">KOSZYK</div>';
-$html .= '<div class="srodek_koszyk">';
-$_SESSION['price']=0;
 if (count($_SESSION['basket'])>0) {
     $basket = $_SESSION['basket'];
+    $index=0;
     foreach ($basket as $product) {
-        $index=array_search($product,$basket);
         $id = $product->id;
         $amount = $product->amount;
-        
         $stmt300 = $pdo->prepare('SELECT * FROM products WHERE id = :id');
         $stmt300->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt300->execute();
         foreach ($stmt300 as $row300) {
-            $price=$row300['price'];
         }
-        
 
         $id_product = $row300['id_product'];
         $stmt301 = $pdo->prepare('SELECT * FROM gallery WHERE main = 1 AND id_product = :id_product');
@@ -35,11 +25,11 @@ if (count($_SESSION['basket'])>0) {
         $stmt301->execute();
         foreach ($stmt301 as $row301) {
         }
-        $_SESSION['price']+=(float)$price;
-        
-        $html .= '<div class="produkt_koszyk row" id="'.$index.'">';
+
+        $html = '';
+        $html .= '<div class="produkt_koszyk row" name="'.$index.'">';
         $html .= '<div class="usuwanko col-1">';
-        $html .= '<input type="hidden" id="index" value="'.$index.'"><button id="usuwanko" value="'.$index.'" class="przycisk_usuwania" name="usun"><img src="ikony/delete.png" class="ikona_delete" alt="alt"></button>';
+        $html .= '<button id="usuwanko" class="przycisk_usuwania" name="usun"><img src="ikony/delete.png" class="ikona_delete" alt="alt"></button>';
         $html .= '</div>';
         $html .= '<div class="zdjecie_produktu_koszyk col-xs-12 col-sm-3 col-lg-3 ">';
         $html .= '<img src="' . $row301['foto'] . '" id="zdjecie_w_koszyku" alt="alt" />';
@@ -61,31 +51,12 @@ if (count($_SESSION['basket'])>0) {
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
-        $html .= '</div>';
+        echo $html;
         $index++;
     }
 } else {
-
-    $html .='pusty elo';
-
+    echo "pusty elo";
 }
-$html .= '</div>';
-$html .= '</div>';
-$html .= '<div class="zestawienie_platnosci col-xs-12 col-lg-3 row">';
-    $html .='<div class="kwota col-6">KWOTA</div>';
-    $html .='<div class="kwota_zł col-6">'.$_SESSION['price'].' zł'.'</div>';
-    $html .='<div class="wysyłka col-6">WYSYŁKA</div>';
-    $html .='<div class="wysyłka_zł col-6">8,99 zł</div>';
-    $html .='<div class="linia "></div>';
-    $html .='<div class="razem col-6">RAZEM</div>';
-    $html .='<div class="razem_zł col-6">'.$_SESSION['price'] + 8.99 .' zł'.'</div>';
-    $html .='<div class="linia "></div>';
-    $html .='<div class="zakonczenie_platnosci_przycisk col-12">';
-    $html .='<button class="przycisk_zakonczenia" type="button" name="button">ZREALIZUJ ZAMÓWIENIE</button>';
-    $html .='</div>';
-
-$html .= '</div>';
-
-
-echo $html;
-?> 
+?>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="/jscript/BasketDelete.js"></script> 
