@@ -3,6 +3,7 @@ $('input[name="przycisk_koszyk"]').on('click',function(e){
     getProductToBasket();
 });
 function getProductToBasket(){
+    alert('Dodano Produkt do koszyka');
     $.ajax({
         url: "php/getProductToBasket.php",
         method: 'POST',
