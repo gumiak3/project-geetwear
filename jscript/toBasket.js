@@ -9,6 +9,7 @@ function getProductToBasket(){
         method: 'POST',
         data: {
             amount: $('.input_ilosci').val(),
+            price: $('.input_ceny').val(),
             id: $('.input_rozmiaru').val()
         }
     })

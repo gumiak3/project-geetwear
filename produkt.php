@@ -178,6 +178,7 @@ and open the template in the editor.
             <div class="nazwa_produktu col-xs-12 col-sm-12 col-lg-6">
                 <h1 id="nazwa_produktu_id"><?php echo $row['product_name'] ?></h1>
                 <div class="cena_produktu col-12">
+                    <intput type="hidden" class="input_ceny" value="<?php echo $row['price'] ?>">
                     <?php echo $row['price'] ?>
                 </div>
                 <div class="opis_produktu col-12">

@@ -8,11 +8,27 @@ function getProductsInBasket(){
     $.ajax({
         url: "php/Basket.php",
     }).done(function( data ) {
-        $('.srodek_koszyk').html(data);
-        $('#usuwanko').on('click',function(e){
-            alert("dupa");
-            //DeleteProductFromBasket();
-        
+        $('.caly_koszyk').html(data);
+        $('button[name="usun"]').on('click',function(e){
+            
+            var deleted_positionid = "#" + $(this).val();
+            var deleted_position = $(this).val();
+            
+            DeleteProductFromBasket(deleted_position, deleted_positionid);
+            
         });
+    })
+}
+function DeleteProductFromBasket(deleted_position_number, deleted_positionid){
+    alert(deleted_position_number);
+    $.ajax({
+        url: "php/DeleteFromBasket.php",
+        method: 'POST',
+        data: {
+            usun: true,
+            ProductPosition: deleted_position_number
+        }
+    }).done(function(){
+        $(deleted_positionid).remove();
     })
 }

@@ -1,6 +1,7 @@
 <?php
 session_start();
 ob_start();
+$_SESSION['price']=0;
 ?>
 <!DOCTYPE html>
 <!--
@@ -80,47 +81,7 @@ and open the template in the editor.
     </div>
     <div class="zawartosc">
         <div class="caly_koszyk ">
-            <div class="tabela_koszyka  col-xs-5 col-lg-9 row">
-                <div class="napis_koszyk col-12">
-                    KOSZYK
-                </div>
-
-                <div class="srodek_koszyk">
-
-                
-
-                </div>
-                
-
-            </div>
-            <div class="zestawienie_platnosci col-xs-12 col-lg-3 row">
-                <div class="kwota col-6">
-                    KWOTA
-                </div>
-                <div class="kwota_zł col-6">
-                    219,99 zł
-                </div>
-                <div class="wysyłka col-6">
-                    WYSYŁKA
-                </div>
-                <div class="wysyłka_zł col-6">
-                    8,99 zł
-                </div>
-                <div class="linia ">
-                </div>
-                <div class="razem col-6">
-                    RAZEM
-                </div>
-                <div class="razem_zł col-6">
-                    228,98zł
-                </div>
-                <div class="linia ">
-                </div>
-                <div class="zakonczenie_platnosci_przycisk col-12">
-                    <button class="przycisk_zakonczenia" type="button" name="button">ZREALIZUJ ZAMÓWIENIE</button>
-                </div>
-
-            </div>
+            
 
 
         </div>
@@ -179,7 +140,6 @@ and open the template in the editor.
     </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="jscript/Basket.js"></script> 
-    <script type="text/javascript" src="jscript/BasketDelete.js"></script> 
 </body>
 
 </html>
