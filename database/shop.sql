@@ -151,7 +151,7 @@ CREATE TABLE `products` (
 --
 
 
-INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category`, `price`, `amount`) VALUES
+INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category`, `price`, `amount`,`description`) VALUES
 (13, 4, 'Bluza Adidas', 'S', 2, 129.99, 20, NULL),
 (14, 4, 'Bluza Adidas', 'M', 2, 129.99, 20, NULL),
 (15, 4, 'Bluza Adidas', 'L', 2, 129.99, 20, NULL),

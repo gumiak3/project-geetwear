@@ -31,9 +31,31 @@ and open the template in the editor.
         </div>
         <div class="rightsite">
             <div class="logowanie">
-                <a href="logowanie.php">
-                    <p class="loguj"> ZALOGUJ SIĘ </p>
-                </a>
+            <?php
+                if(isset($_SESSION['login'])){
+                    ?>
+                    <div class="dropdown show">
+                    <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="./profile.php">Profil</a>
+                        <?php
+                        if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                            echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
+                        }
+                        ?>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                        <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                        </form></a>
+                    </div>
+                    </div>
+                    <?php
+                }else{
+                    echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                }
+            ?>
             </div>
             <div class="wyszukiwanie">
                 <a href="wyszukiwarka.html"><img class="lupa" src="ikony/lupa.png" alt="alt" /></a>
@@ -62,9 +84,31 @@ and open the template in the editor.
                 <span class="bars"></span>
             </div>
             <div class="logowanie_w_menu col-4">
-                <a href="logowanie.php">
-                    <p class="loguj"> ZALOGUJ SIĘ </p>
-                </a>
+            <?php
+                    if(isset($_SESSION['login'])){
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>
             </div>
             <div class="koszyk_w_menu col-4">
                 <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt" /></a>

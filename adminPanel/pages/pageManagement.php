@@ -137,7 +137,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
               <div class="collapse" id="layouts">
                 <ul class="navbar-nav ps-3">
                   <li>
-                    <a href="../pages/mainPageManagement.php" class="nav-link px-3">
+                    <a href="#" class="nav-link px-3">
                       <span class="me-2"><i class="bi bi-layout-split"></i></span>
                       <span>Główna strona</span>
                     </a>
@@ -171,14 +171,14 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
                       if($_SESSION['user-type']=='admin'){
 
                     ?>
-                    <a href="./users/employeesManagement.php" class="nav-link px-3">
+                    <a href="../users/employeesManagement.php" class="nav-link px-3">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Pracownicy</span>
                     </a>
                     <?php
                       }
                     ?>
-                    <a href="../users/clientsManagement.php" class="nav-link px-3 active">
+                    <a href="../users/clientsManagement.php" class="nav-link px-3 ">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Klienci</span>
                     </a>

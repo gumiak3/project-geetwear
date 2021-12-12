@@ -9,6 +9,9 @@ html,body
 .dropdown-menu{
     z-index:9999 !important;
 }
+.user_logo{
+    width:25px;
+}
 
 .dropdown-menu a button{
     width:100%;

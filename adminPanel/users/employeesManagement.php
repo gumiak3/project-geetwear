@@ -165,11 +165,11 @@ if($_SESSION)
               <div class="collapse" id="layouts2">
                 <ul class="navbar-nav ps-3">
                   <li>
-                    <a href="../users/employeesManagement.php" class="nav-link px-3">
+                    <a href="../users/employeesManagement.php" class="nav-link px-3 active">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Pracownicy</span>
                     </a>
-                    <a href="../users/clientsManagement.php" class="nav-link px-3 active">
+                    <a href="../users/clientsManagement.php" class="nav-link px-3 ">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Klienci</span>
                     </a>
@@ -393,8 +393,8 @@ foreach($get_users as $row_users)
               <div class='col-12'> 
                 <label>TYP KONTA</label>
                 <select id='type-id' class='select-category col-12'name='type'>
-                  <option value='1'>KLIENT</option>
-                  <option value='2'>PRACOWNIK</option>
+                  <option value='worker'>KLIENT</option>
+                  <option value='admin'>PRACOWNIK</option>
                 </select>
               </div>
               <?php
@@ -531,6 +531,12 @@ foreach($get_users as $row_users)
               $('#street-id').val(data.street);
               $('#housenumber-id').val(data.house_number);
               $('#apartmentnumber-id').val(data.apartment_number);
+              if(data.type=='worker')
+              {
+                $("#type-id").val('worker');
+              }else{
+                $("#type-id").val('admin');
+              }
               
             }
         });
