@@ -1,6 +1,7 @@
 <?php
 
 if ($_SESSION && isset($_SESSION['login'])) {
+echo $_SESSION['id_user'];
 ?>
     
 <?php
