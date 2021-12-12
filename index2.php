@@ -35,8 +35,8 @@ session_start();
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
-                            if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
@@ -117,8 +117,8 @@ session_start();
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
-                            if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>

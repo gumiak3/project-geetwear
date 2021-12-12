@@ -78,7 +78,7 @@ h2{
 
 /* functional buttons */
 
-.edit_record{
+.edit_record, .edit_size{
   background:rgb(136, 82, 199);
   height:50px;
   border:none;
@@ -94,6 +94,8 @@ h2{
   height:50px;
   border:none;
   color:white;
+  width:52px;
+  border-radius:5px;
 }
 .input-to-edit{
   text-transform:uppercase;
@@ -164,7 +166,8 @@ input{
   margin-right:20px;
 }
 .delete-size{
-  margin-left:20px;
+  margin:0;
+  padding:0;
   display:inline;
 }
 .edit-size{
@@ -185,12 +188,50 @@ input{
 .sizes{
   text-align: center;
 }
-.shoes-sizes{
-  display:none;
-}
+
 input{
   margin-bottom:10px;
 }
 .main_img{
+  height:400px;
+  margin:0;
+  padding:0;
+  border:1px solid black;
+}
+.under_img{
+  height:200px;
+  border:1px solid black;
+  margin:0;
+  padding:0;
+}
+.extra_img{
+  width:auto;
+  height:100px;
+}
+.div-addInput{
   text-align: center;
+}
+.sizes{
+  text-align: center;
+}
+.add-input{
+  border:none;
+
+  background:none;
+}
+.add-square{
+  font-size:30px;
+}
+.input-radio{
+  text-align: left;
+}
+.div-status label{
+  font-weight:lighter;
+}
+.div-status input{
+  width:30px;
+  text-align:left;
+}
+.delete_record:disabled{
+  background:grey;
 }

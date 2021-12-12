@@ -33,7 +33,12 @@ LOGO + MENU
     left:15px;
    
 }
-
+ul .kategoria{
+    list-style:none;
+    display:inline-block;
+    line-height: 80px;  
+    text-transform:uppercase;
+}
 .logo{
     width:33.3%;
 }
@@ -324,7 +329,9 @@ ZAWARTOŚĆ:
         margin-top:10px;
     }
 }
-
+.select_size{
+    
+}
 .sortowanie_panel{
     margin-bottom:100px;  
     padding-bottom:15px;

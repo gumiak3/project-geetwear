@@ -56,8 +56,8 @@ and open the template in the editor.
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
-                            if ($_SESSION['user-type'] == 'admin') {
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            if ($_SESSION['user-type'] == 'admin' || $_SESSION['user-type']=='worker') {
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
@@ -127,32 +127,30 @@ and open the template in the editor.
             </div>
             <div class="logowanie_w_menu col-4">
                 <?php
-                if ($_SESSION && isset($_SESSION['login'])) {
-                ?>
-                    <div class="dropdown show">
-                        <a href="logowanie.php" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                    if($_SESSION && isset($_SESSION['login'])){
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
-                            if ($_SESSION['user-type'] == 'admin') {
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
-                                <form method='POST' action='./php/logout.php'>
-                                    <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
-                                </form>
-                            </a>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
                         </div>
-                    </div>
-                <?php
-                } else {
-                    echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
-                }
-                ?>
+                        </div>
+                      <?php
+                    }else{
+                        echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
+                    }
+                    ?>  
             </div>
             <div class="koszyk_w_menu col-4">
                 <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt" /></a>
@@ -194,7 +192,7 @@ and open the template in the editor.
             <div class="zdjecia_pod col-xs-12 col-sm-12 col-lg-6" id="zdjecia_pod">
                 <?php
                 echo '<img src="' . $row3['foto'] . '" alt="product" class="zdjecie_produktu_small">';
-                $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main = 0 AND id_product=' . $row['id_product']);
+                $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main IN (2,3) AND id_product=' . $row['id_product']);
                 foreach ($stmt4 as $row4) {
                     echo '<img src="' . $row4['foto'] . '" alt="product" class="zdjecie_produktu_small">';
                 }

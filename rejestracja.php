@@ -99,7 +99,7 @@ and open the template in the editor.
                     Email:
                     </div>
                     <div class="login_pole col-xs-12 col-sm-12 col-lg-7">
-                    <input class="input_logowanie" requried name="email" type="email" id="input_login">
+                    <input class="input_logowanie" type='text' requried name="email" type="email" id="input_login">
                     </div>
                     <div class="haslo_napis col-xs-12 col-sm-12 col-lg-5">
                     Hasło:
