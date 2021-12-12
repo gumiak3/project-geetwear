@@ -177,16 +177,14 @@ input{
 .div-of-size{
   margin:20px 0 20px 0;
 }
-.select-category, .select_sort{
+.select-category{
   background-color: #f9f9f9;
   color: #60666d;
   width:100%;
   height:50px;
   font-family: 'Open Sans', 'Helvetica Neue', 'Segoe UI', 'Calibri', 'Arial', sans-serif;
 }
-.elect_sort{
-  width:100%;
-}
+
 .sizes{
   text-align: center;
 }

@@ -401,6 +401,7 @@ foreach($get_products as $row_products)
         </div>
         <div class="modal-body">
             <form method="POST" enctype="multipart/form-data">
+            <h3 id="category_id"></h3>
             <label class=''>Główne zdjęcie</label><br>
             <div class='row'>
             <img class='main_img col-12'id="main_img" src="../../photos/produkty/empty.jpg" alt=""/>   
@@ -552,7 +553,7 @@ function readURL(input,imgId) {
     move_uploaded_file($_FILES["fileToUpload3"]["tmp_name"], $target_file_3_save);
     
     
-    $stmt_get_last_id = $pdo->query("SELECT * from products order by id_product ASC");
+    $stmt_get_last_id = $pdo->query("SELECT * from products");
     foreach($stmt_get_last_id as $row_last_id)
     {
       $id_product = $row_last_id['id_product'];
