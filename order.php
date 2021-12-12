@@ -152,10 +152,12 @@ and open the template in the editor.
     <div class="space_between_slider">
 
     </div>
-    <a href="index.php" class="back_main_page col-12">STRONA GŁÓWNA</a>
+   
     <div class="zawartosc">
         <div class="order_form">
-            
+            <?php
+            include('php/OrderForm.php');
+            ?>
         </div>
 
 

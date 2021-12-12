@@ -61,7 +61,6 @@ if (count($_SESSION['basket'])>0) {
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
-        $html .= '</div>';
         $index++;
     }
 } else {
