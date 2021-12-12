@@ -1,11 +1,12 @@
 <?php
 ob_start();
 session_start();
-if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
 
 }else{
-    header("location:../../index.php");
+    header("location:../DashBoard.php");
 }
+if($_SESSION)
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,13 +101,12 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
               </div>
             </li>
             <li>
-              <a href="../DashBoard.php" class="dashboard nav-link px-3">
+              <a href="../DashBoard.php" class="dashboard nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-speedometer2"></i></span>
                 <span>Dashboard</span>
               </a>
             </li>
             <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
-            
             <li>
               <div class="text-muted small fw-bold text-uppercase px-3 mb-3">
                 ZARZĄDZANIE
@@ -124,8 +124,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
               <a
                 class="nav-link px-3 sidebar-link"
                 data-bs-toggle="collapse"
-                href="#layouts"
-              >
+                href="#layouts">
                 <span class="me-2"><i class="bi bi-layout-split"></i></span>
                 <span>Strony</span>
                 <span class="ms-auto">
@@ -141,7 +140,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
                       <span class="me-2"><i class="bi bi-layout-split"></i></span>
                       <span>Główna strona</span>
                     </a>
-                    <a href="../pages/pageManagement.php" class="nav-link px-3 active">
+                    <a href="../pages/pageManagement.php" class="nav-link px-3 ">
                       <span class="me-2"><i class="bi bi-layout-split"></i></span>
                       <span>Podstrony</span>
                     </a>
@@ -149,7 +148,6 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
                 </ul>
               </div>
             </li>
-            <li>
             <li>
             <li>
               <a
@@ -167,17 +165,10 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
               <div class="collapse" id="layouts2">
                 <ul class="navbar-nav ps-3">
                   <li>
-                  <?php
-                      if($_SESSION['user-type']=='admin'){
-
-                    ?>
-                    <a href="./users/employeesManagement.php" class="nav-link px-3">
+                    <a href="../users/employeesManagement.php" class="nav-link px-3">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Pracownicy</span>
                     </a>
-                    <?php
-                      }
-                    ?>
                     <a href="../users/clientsManagement.php" class="nav-link px-3 active">
                       <span class="me-2"><i class="bi bi-person-fill"></i></span>
                       <span>Klienci</span>
@@ -190,8 +181,8 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>
               </a>
+              
             </li>
-            
           </ul>
         </nav>
       </div>
@@ -201,16 +192,16 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
       <div class="container-fluid">
         <div id='content'class="row">
         <div class='col-12'>
-    <h2>Podstrony</h2>
+    <h2>Pracownicy</h2>
 </div>
 <button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
 <table id="MyTable" class="table table-striped table-dark">
     <thead class="table-head">
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">NAZWA PODSTRONY</th>
-        <th scope="col">ZAWARTOŚĆ</th>
-        <th scope="col">STATUS</th>
+        <th scope="col">EMAIL</th>
+        <th scope="col">IMIĘ</th>
+        <th scope="col">NAZWISKO</th>
+        <th scope="col">TYP</th>
         <th scope="col">EDYCJA</th>
         <th scope="col">USUWANIE</th>        
         </tr>
@@ -218,23 +209,43 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
     <tbody class="table-body">
 <?php
 include("../../php/load_database.php");
-$get_subpages = $pdo->query("SELECT * FROM subpages");
-
-foreach($get_subpages as $row_subpages)
+$get_users = $pdo->query("SELECT * FROM users where type in ('worker','admin')");
+foreach($get_users as $row_users)
 {
-    echo"<tr>" ;
-    echo "<td>".$row_subpages['id_subpage']."</td>";
-    echo "<td>".$row_subpages['subpage_name']."</td>";
-    echo "<td>".$row_subpages['additional_info']."</td>";
-    if($row_subpages['status']==1){
-      echo "<td>aktywne</td>";
-    }else{
-      echo "<td>nieaktywne</td>";
+    echo "<tr>";
+    echo "<td>".$row_users['email']."</td>";
+    echo "<td>".$row_users['firstname']."</td>";
+    echo "<td>".$row_users['surname']."</td>";
+    echo "<td>".$row_users['type']."</td>";
+    ?>
+    <td>
+      <?php
+      if($row_users['type']=='admin'){
+      ?>
+      <button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" disabled class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_users['id_user']?>" value="<?=$row_users['id_user']?>"><i class="bi bi-pencil"></i></button>
+    <?php
+      }else{
+        ?>
+        <button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_users['id_user']?>" value="<?=$row_users['id_user']?>"><i class="bi bi-pencil"></i></button>
+
+        <?php
+      }
+    ?>
+    </td>
+    <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
+    <?php if($row_users['type']=="admin")
+    {
+        ?>
+            <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_users['id_user']?>" disabled><i class="bi bi-trash"></i></button>
+        <?php
+    }
+    else{
+        ?>
+            <td><button type='submit' name='delete_send' class='delete_record'value="<?=$row_users['id_user']?>"><i class="bi bi-trash"></i></button></td>
+        <?php
     }
     ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_subpages['id_subpage']?>" value="<?=$row_subpages['id_subpage']?>"><i class="bi bi-pencil"></i></button></td>
-    <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-      <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_subpages['id_subpage']?>"><i class="bi bi-trash"></i></button></td>
+      
     </form>
         
     <?php
@@ -246,23 +257,74 @@ foreach($get_subpages as $row_subpages)
 
 
 <?php
+
   if(isset($_POST['edit-submit']))
   {
-    $id = $_POST['subpage_id'];
-    $subpage_name = $_POST['subpage_name'];
-    $content = $_POST['content'];
-    $status = $_POST['status'];
-    $edit_stmt = $pdo->prepare("UPDATE subpages set subpage_name='$subpage_name',additional_info=$content,status=$status where id_subpage=$id");
-    $edit_stmt->execute();
+    if($_POST['type']!='admin')
+    {
+      $id = $_POST['user_id'];
+    $firstname = $_POST['firstname'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $city = $_POST['city'];
+    $zipcode = $_POST['zipcode'];
+    $street = $_POST['street'];
+    $house_number = $_POST['house_number'];
+    $apartmentnumber = $_POST['apartment_number'];
+    if($apartmentnumber==null)
+    {
+      $apartmentnumber=0;
+    }
+    $type = $_POST['type'];
+    $password = $_POST['password'];
+    $email_error = false;
+    $password_error = false;
+    if($password!="password")
+    {
+      $check_if_exists = $pdo->query("SELECT * FROM users where id_user not like $id");
+      foreach($check_if_exists as $row_exists)
+      {
+        if(password_verify($password,$row_exists['password']))
+        {
+          $password_error= true;
+        }
+        if($email==$row_exists['email'])
+        {
+          $email_error = true;
+        }
+      }
+    }
+    if(!$email_error)
+    {
+      $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber where id_user=$id");
+      $update_stmt->execute();
+    }
+    if(!$password_error)
+    {
+      $password = password_hash($password,PASSWORD_DEFAULT);
+      $update_password = $pdo->prepare("UPDATE users set password='$password' where id_user=$id");
+      $update_password->execute();
+    }
+    unset($_POST['edit-submit']);
     header("REFRESH:0");
+    }
   }
   if(isset($_POST['delete_send'])){
-      $idToDelete = $_POST['delete_send'];
-      $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
-      $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
-      $stmt_to_delete->execute();
-      unset($_POST);
-      header("Refresh:0");
+    $idToDelete = $_POST['delete_send'];
+    $stmt_to_delete = $pdo->prepare("DELETE FROM users where id_user like :id_user");
+    $stmt_to_delete->bindValue(':id_user',$idToDelete,PDO::PARAM_STR);
+    $get_type = $pdo->query("SELECT type FROM users where id_user=$idToDelete");
+    foreach($get_type as $row_type)
+    {
+        if($row_type['type']=="admin")
+        {
+
+        }else{
+            $stmt_to_delete->execute();
+            unset($_POST);
+            header("Refresh:0");
+        }
+    }
   }
 ?>
 <!-- EDIT RECORD MODAL--->
@@ -275,28 +337,69 @@ foreach($get_subpages as $row_subpages)
           <h4 class="modal-title">EDYCJA</h4>
         </div>
         <form method="POST" enctype="multipart/form-data">
-        <div id='modal-body'class="modal-body row">
-            <div class='cotainer-row'>
-              <input type='hidden' id='subpage_id'name='subpage_id'></input>
-              <label class='col-12'>Nazwa podstrony</label>
-              <input class='col-12' id='subpage_name'name='subpage_name' required></input>
-              <label class='col-12'>Zawartość</label>
-              <select name='content' id='subpage_content' required class='select-category'>
-                <?php
-                  $get_content = $pdo->query("SELECT * FROM categories");
-                  foreach($get_content as $row_content)
-                  {
-                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
-                  }
-                ?>
-              </select>
-              <label class='col-12'>Status</label>
-              <div class='div-status'>
-                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
-                <label for='active'>aktywna</label><br>
-                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
-                <label for='inactive'>nieaktywna</label>
+        <div id='modal-body'class="modal-body container">
+            <div class='col-12 row'>
+              <div class='col-12'>
+                <label class='col-12'>Imię</label>
+                <input class='col-12' id='firstname-id'name='firstname' required></input>
               </div>
+              <input type='hidden' id='user-id'name='user_id'></input>
+              <div>
+                <label class='col-12'>Nazwisko</label>
+                <input class='col-12' id='surname-id'name='surname'required></input>
+              </div>
+              <div>
+                <label class='col-12'>Email</label>
+                <input class='col-12' id='email-id'name='email' required></input>
+              </div>
+              <div class='col-8'>
+                <label class='col-12'>Miasto</label>
+              </div>
+              <div class='col-4'>
+                <label class='col-12'>Kod pocztowy</label>
+              </div>
+              <div class='col-8'>
+                <input class='col-12' id='city-id' name='city' ></input>
+              </div>
+              <div class='col-4'>
+                <input class='col-12' id='zipcode-id'name='zipcode' ></input>
+              </div>
+              <div class='col-6'>
+                <label class='col-12'>Ulica</label>
+              </div>
+              <div class='col-3'>
+                <label class='col-12'>Numer domu</label>
+              </div>
+              <div class='col-3'>
+                <label class='col-12'>Numer mieszkania</label>
+              </div>
+              <div class='col-6'>
+              <input class='col-12' id='street-id'name='street' ></input>
+              </div>
+              <div class='col-3'>
+                <input class='col-12' type='number' id='housenumber-id'name='house_number' ></input>               
+              </div>
+              <div class='col-3'>
+                <input class='col-12' type='number' id='apartmentnumber-id'name='apartment_number' ></input>               
+              </div>
+              <div class='col-12'>
+                <label>Hasło</label>
+                <input class='col-12' value='password' type='password' id='password-id'name='password' ></input>               
+              </div>
+              <?php
+                if($_SESSION['user-type']=='admin')
+                {
+              ?>
+              <div class='col-12'> 
+                <label>TYP KONTA</label>
+                <select id='type-id' class='select-category col-12'name='type'>
+                  <option value='1'>KLIENT</option>
+                  <option value='2'>PRACOWNIK</option>
+                </select>
+              </div>
+              <?php
+                }
+              ?>
             </div>
         </div>
         <div class="modal-footer">
@@ -328,28 +431,27 @@ foreach($get_subpages as $row_subpages)
         <div class="modal-header">
           <h4 class="modal-title">DODAWANIE</h4>
         </div>
-        <div class="modal-body">
-            <form method="POST" enctype="multipart/form-data">
-            <div class='cotainer-row'>
-              <label class='col-12'>Nazwa podstrony</label>
-              <input class='col-12' name='subpage_name' required></input>
-              <label class='col-12'>Zawartość</label>
-              <select name='content' required class='select-category'>
-                <?php
-                  $get_content = $pdo->query("SELECT * FROM categories");
-                  foreach($get_content as $row_content)
-                  {
-                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
-                  }
-                ?>
-              </select>
-              <label class='col-12'>Status</label>
-              <div class='div-status'>
-                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
-                <label for='active'>aktywna</label><br>
-                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
-                <label for='inactive'>nieaktywna</label>
+        <form method="POST" enctype="multipart/form-data">
+        <div id='modal-body'class="modal-body container">
+            <div class='col-12 row'>
+              <div class='col-12'>
+                <label class='col-12'>Imię</label>
+                <input class='col-12' type='text'id='firstname-id'name='firstname' required></input>
               </div>
+              <input type='hidden' id='user-id'name='user_id'></input>
+              <div>
+                <label class='col-12'>Nazwisko</label>
+                <input class='col-12' value="" type='text'id='surname-id'name='surname' required></input>
+              </div>
+              <div>
+                <label class='col-12'>Email</label>
+                <input class='col-12' type='email' id='email-id' name='email' required></input>
+              </div>
+              <div class='col-12'>
+                <label>Hasło</label>
+                <input class='col-12' type='password' id='password-id' name='password' required ></input>               
+              </div>
+              
             </div>
         </div>
         <div class="modal-footer">
@@ -367,13 +469,39 @@ foreach($get_subpages as $row_subpages)
   </body>
 </html>
 <?php
-  if(isset($_POST['add-submit'])){
-    $subpage_name = $_POST['subpage_name'];
-    $content = $_POST['content'];
-    $status = $_POST['status'];
-    $add_stmt = $pdo->exec("INSERT INTO subpages (subpage_name,additional_info,status) values ('$subpage_name',$content,$status)");
-    header("REFRESH:0");
-  }
+    if(isset($_POST['add-submit'])){
+        $check_emails = $pdo->query("SELECT email from users");
+        $firstname = $_POST['firstname'];
+        $surname = $_POST['surname'];
+        $email = $_POST['email'];
+
+        $emailError = false;
+        foreach($check_emails as $row_checkEmails)
+        {
+            if($row_checkEmails['email']==$email){
+                $emailError = true;
+            }
+        }
+        $password = $_POST['password'];
+        if( !preg_match( '/[^A-Za-z0-9]+/', $password) || strlen( $password) < 8)
+        {
+            
+        }else{
+            $password = password_hash($password,PASSWORD_DEFAULT);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if(!$emailError)
+            {
+                $make_account = $pdo->prepare("INSERT INTO users (firstname,surname,email,password,type) values (:firstname,:surname,:email,:password,'worker')");
+                $make_account -> bindValue(':firstname',$firstname,PDO::PARAM_STR);
+                $make_account -> bindValue(':surname',$surname,PDO::PARAM_STR);
+                $make_account -> bindValue(':email',$email,PDO::PARAM_STR);
+                $make_account -> bindValue(':password',$password,PDO::PARAM_STR);
+                $make_account -> execute();
+            }
+        }
+        header("REFRESH:0");
+    }
+    
 ?>
 
 <!-- bootstrap links -->
@@ -386,26 +514,26 @@ foreach($get_subpages as $row_subpages)
 <script>
   $(document).ready(function(){
     $(".edit_data").click(function(){
-        const subpage_id = $(this).attr("id");
-        console.log(subpage_id);
-        $.ajax({ 
+      const user_id = $(this).attr("id");
+      console.log(user_id);
+      $.ajax({ 
             type: "POST",
-            url:"edit_subpage.php",
-            data: {id: subpage_id},
+            url:"edit_user.php",
+            data: {id: user_id},
             dataType:'JSON',
             success: function(data) {
-              $("#subpage_id").val(data[0].id_subpage);
-              $("#subpage_name").val(data[0].subpage_name);
-              $("#subpage_content").val(data[0].additional_info);
-              if(data[0].status==1)
-              {
-                document.getElementById("active").checked = true;
-              }else{
-                document.getElementById("inactive").checked = true;
-              }
-                
+              $('#user-id').val(data.id_user);
+              $('#firstname-id').val(data.firstname);
+              $("#surname-id").val(data.surname);
+              $('#email-id').val(data.email);
+              $('#city-id').val(data.city);
+              $('#zipcode-id').val(data.ZIP);
+              $('#street-id').val(data.street);
+              $('#housenumber-id').val(data.house_number);
+              $('#apartmentnumber-id').val(data.apartment_number);
+              
             }
-          });
+        });
     });
   });
 </script>

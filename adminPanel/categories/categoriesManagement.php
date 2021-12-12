@@ -1,10 +1,10 @@
 <?php
 ob_start();
 session_start();
-if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
+if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
 
 }else{
-    header("location:logowanie.php");
+    header("location:../../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -119,14 +119,70 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
-              <a href="../pages/pageManagement.php" class="pages nav-link px-3">
-                <span class="me-2"><i class="bi bi-book-fill"></i></span>
+              <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#layouts">
+                <span class="me-2"><i class="bi bi-layout-split"></i></span>
                 <span>Strony</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
               </a>
-              <a href="../users/userManagement.php" class="users nav-link px-3">
-                <span class="me-2"><i class="bi bi-people"></i></span>
+              <div class="collapse" id="layouts">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="../pages/mainPageManagement.php" class="nav-link px-3">
+                      <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                      <span>Główna strona</span>
+                    </a>
+                    <a href="../pages/pageManagement.php" class="nav-link px-3 ">
+                      <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                      <span>Podstrony</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#layouts2">
+                <span class="me-2"><i class="bi bi-people-fill"></i></span>
                 <span>Użytkownicy</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
               </a>
+              <div class="collapse" id="layouts2">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <?php
+                      if($_SESSION['user-type']=='admin'){
+
+                    ?>
+                    <a href="./users/employeesManagement.php" class="nav-link px-3">
+                      <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                      <span>Pracownicy</span>
+                    </a>
+                    <?php
+                      }
+                    ?>
+                    <a href="../users/clientsManagement.php" class="nav-link px-3 active">
+                      <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                      <span>Klienci</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
               <a href="../orders/ordersManagement.php" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>

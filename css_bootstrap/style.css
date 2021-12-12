@@ -232,3 +232,6 @@ input{
   width:30px;
   text-align:left;
 }
+.delete_record:disabled{
+  background:grey;
+}

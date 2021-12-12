@@ -87,7 +87,7 @@ ul .kategoria{
     list-style:none;
     display:inline-block;
     line-height: 80px;  
-    
+    text-transform:uppercase;
 }
 ul li a, ul li a:hover{
     display: block;

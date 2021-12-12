@@ -1,10 +1,10 @@
 <?php
 ob_start();
 session_start();
-if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
+if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
 
 }else{
-    header("location:logowanie.php");
+    header("location:../../index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -119,14 +119,70 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
                 <span class="me-2"><i class="bi bi-cart-dash"></i></span>
                 <span>Produkty</span>
               </a>
-              <a href="../pages/pageManagement.php" class="pages nav-link px-3">
-                <span class="me-2"><i class="bi bi-book-fill"></i></span>
+              <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#layouts">
+                <span class="me-2"><i class="bi bi-layout-split"></i></span>
                 <span>Strony</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
               </a>
-              <a href="../users/userManagement.php" class="users nav-link px-3">
-                <span class="me-2"><i class="bi bi-people"></i></span>
+              <div class="collapse" id="layouts">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                    <a href="../pages/mainPageManagement.php" class="nav-link px-3">
+                      <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                      <span>Główna strona</span>
+                    </a>
+                    <a href="../pages/pageManagement.php" class="nav-link px-3 ">
+                      <span class="me-2"><i class="bi bi-layout-split"></i></span>
+                      <span>Podstrony</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+            <li>
+              <a
+                class="nav-link px-3 sidebar-link"
+                data-bs-toggle="collapse"
+                href="#layouts2">
+                <span class="me-2"><i class="bi bi-people-fill"></i></span>
                 <span>Użytkownicy</span>
+                <span class="ms-auto">
+                  <span class="right-icon">
+                    <i class="bi bi-chevron-down"></i>
+                  </span>
+                </span>
               </a>
+              <div class="collapse" id="layouts2">
+                <ul class="navbar-nav ps-3">
+                  <li>
+                  <?php
+                      if($_SESSION['user-type']=='admin'){
+
+                    ?>
+                    <a href="../users/employeesManagement.php" class="nav-link px-3">
+                      <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                      <span>Pracownicy</span>
+                    </a>
+                    <?php
+                      }
+                    ?>
+                    <a href="../users/clientsManagement.php" class="nav-link px-3 active">
+                      <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                      <span>Klienci</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
               <a href="../orders/ordersManagement.php" class="orders nav-link px-3">
                 <span class="me-2"><i class="bi bi-box-seam"></i></span>
                 <span>Zamówienia</span>
@@ -142,9 +198,8 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
       <div class="container-fluid">
         <div id='content'class="row">
         <div class='col-12'>
-    <h2>Użytkownicy</h2>
+    <h2>Klienci</h2>
 </div>
-<button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
 <table id="MyTable" class="table table-striped table-dark">
     <thead class="table-head">
         <tr>
@@ -159,7 +214,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin'){
     <tbody class="table-body">
 <?php
 include("../../php/load_database.php");
-$get_users = $pdo->query("SELECT * FROM users");
+$get_users = $pdo->query("SELECT * FROM users where type='user'");
 foreach($get_users as $row_users)
 {
     echo "<tr>";
@@ -168,7 +223,7 @@ foreach($get_users as $row_users)
     echo "<td>".$row_users['surname']."</td>";
     echo "<td>".$row_users['type']."</td>";
     ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_subpages['id_subpage']?>" value="<?=$row_subpages['id_subpage']?>"><i class="bi bi-pencil"></i></button></td>
+    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_users['id_user']?>" value="<?=$row_users['id_user']?>"><i class="bi bi-pencil"></i></button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
     <?php if($row_users['type']=="admin")
     {
@@ -194,14 +249,59 @@ foreach($get_users as $row_users)
 
 
 <?php
+
   if(isset($_POST['edit-submit']))
   {
-    $id = $_POST['subpage_id'];
-    $subpage_name = $_POST['subpage_name'];
-    $content = $_POST['content'];
-    $status = $_POST['status'];
-    $edit_stmt = $pdo->prepare("UPDATE subpages set subpage_name='$subpage_name',additional_info=$content,status=$status where id_subpage=$id");
-    $edit_stmt->execute();
+    $id = $_POST['user_id'];
+    $firstname = $_POST['firstname'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $city = $_POST['city'];
+    $zipcode = $_POST['zipcode'];
+    $street = $_POST['street'];
+    $house_number = $_POST['house_number'];
+    $apartmentnumber = $_POST['apartment_number'];
+    if($apartmentnumber==null)
+    {
+      $apartmentnumber=0;
+    }
+    $password = $_POST['password'];
+    if(isset($_POST['type'])){
+      $type = $_POST['type'];
+    }else{
+      $type ='user';
+    }
+    
+    
+    $email_error = false;
+    $password_error = false;
+    if($password!="password")
+    {
+      $check_if_exists = $pdo->query("SELECT * FROM users where id_user not like $id");
+      foreach($check_if_exists as $row_exists)
+      {
+        if(password_verify($password,$row_exists['password']))
+        {
+          $password_error= true;
+        }
+        if($email==$row_exists['email'])
+        {
+          $email_error = true;
+        }
+      }
+    }
+    if(!$email_error)
+    {
+      $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber, type='$type' where id_user=$id");
+      $update_stmt->execute();
+    }
+    if(!$password_error)
+    {
+      $password = password_hash($password,PASSWORD_DEFAULT);
+      $update_password = $pdo->prepare("UPDATE users set password='$password' where id_user=$id");
+      $update_password->execute();
+    }
+    
     header("REFRESH:0");
   }
   if(isset($_POST['delete_send'])){
@@ -232,28 +332,68 @@ foreach($get_users as $row_users)
           <h4 class="modal-title">EDYCJA</h4>
         </div>
         <form method="POST" enctype="multipart/form-data">
-        <div id='modal-body'class="modal-body row">
-            <div class='cotainer-row'>
-              <input type='hidden' id='subpage_id'name='subpage_id'></input>
-              <label class='col-12'>Nazwa podstrony</label>
-              <input class='col-12' id='subpage_name'name='subpage_name' required></input>
-              <label class='col-12'>Zawartość</label>
-              <select name='content' id='subpage_content' required class='select-category'>
-                <?php
-                  $get_content = $pdo->query("SELECT * FROM categories");
-                  foreach($get_content as $row_content)
-                  {
-                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
-                  }
-                ?>
-              </select>
-              <label class='col-12'>Status</label>
-              <div class='div-status'>
-                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
-                <label for='active'>aktywna</label><br>
-                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
-                <label for='inactive'>nieaktywna</label>
+        <div id='modal-body'class="modal-body container">
+            <div class='col-12 row'>
+              <div class='col-12'>
+                <label class='col-12'>Imię</label>
+                <input class='col-12' id='firstname-id'name='firstname' required></input>
               </div>
+              <input type='hidden' id='user-id'name='user_id'></input>
+              <div>
+                <label class='col-12'>Nazwisko</label>
+                <input class='col-12' id='surname-id'name='surname'required></input>
+              </div>
+              <div>
+                <label class='col-12'>Email</label>
+                <input class='col-12' id='email-id'name='email' required></input>
+              </div>
+              <div class='col-8'>
+                <label class='col-12'>Miasto</label>
+              </div>
+              <div class='col-4'>
+                <label class='col-12'>Kod pocztowy</label>
+              </div>
+              <div class='col-8'>
+                <input class='col-12' id='city-id'name='city' ></input>
+              </div>
+              <div class='col-4'>
+                <input class='col-12' id='zipcode-id'name='zipcode' ></input>
+              </div>
+              <div class='col-6'>
+                <label class='col-12'>Ulica</label>
+              </div>
+              <div class='col-3'>
+                <label class='col-12'>Numer domu</label>
+              </div>
+              <div class='col-3'>
+                <label class='col-12'>Numer mieszkania</label>
+              </div>
+              <div class='col-6'>
+              <input class='col-12' id='street-id'name='street' ></input>
+              </div>
+              <div class='col-3'>
+                <input class='col-12' type='number' id='housenumber-id'name='house_number' ></input>               
+              </div>
+              <div class='col-3'>
+                <input class='col-12' type='number' id='apartmentnumber-id'name='apartment_number' ></input>               
+              </div>
+              <div class='col-12'>
+                <input class='col-12' value='password' type='password' id='password-id'name='password' ></input>               
+              </div>
+              <?php
+                if($_SESSION['user-type']=='admin')
+                {
+              ?>
+              <div class='col-12'> 
+                <label>TYP KONTA</label>
+                <select id='type-id' class='select-category col-12'name='type'>
+                  <option value='user'>KLIENT</option>
+                  <option value='worker'>PRACOWNIK</option>
+                </select>
+              </div>
+              <?php
+                }
+              ?>
             </div>
         </div>
         <div class="modal-footer">
@@ -276,60 +416,12 @@ foreach($get_users as $row_users)
   })
         
     </script>
-   <!-- ADD RECORD MODAL-->
-   <div class="modal fade" id="addMyModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">DODAWANIE</h4>
-        </div>
-        <div class="modal-body">
-            <form method="POST" enctype="multipart/form-data">
-            <div class='cotainer-row'>
-              <label class='col-12'>Nazwa podstrony</label>
-              <input class='col-12' name='subpage_name' required></input>
-              <label class='col-12'>Zawartość</label>
-              <select name='content' required class='select-category'>
-                <?php
-                  $get_content = $pdo->query("SELECT * FROM categories");
-                  foreach($get_content as $row_content)
-                  {
-                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
-                  }
-                ?>
-              </select>
-              <label class='col-12'>Status</label>
-              <div class='div-status'>
-                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
-                <label for='active'>aktywna</label><br>
-                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
-                <label for='inactive'>nieaktywna</label>
-              </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-save" type='submit' name='add-submit'>DODAJ</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-  </div>
+   
     </main>
 
    
   </body>
 </html>
-<?php
-  if(isset($_POST['add-submit'])){
-    
-    header("REFRESH:0");
-  }
-?>
-
 <!-- bootstrap links -->
 <script src="../../js_bootstrap/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
@@ -340,7 +432,32 @@ foreach($get_users as $row_users)
 <script>
   $(document).ready(function(){
     $(".edit_data").click(function(){
-        // edit record
+      const user_id = $(this).attr("id");
+      console.log(user_id);
+      $.ajax({ 
+            type: "POST",
+            url:"edit_user.php",
+            data: {id: user_id},
+            dataType:'JSON',
+            success: function(data) {
+              $('#user-id').val(data.id_user);
+              $('#firstname-id').val(data.firstname);
+              $("#surname-id").val(data.surname);
+              $('#email-id').val(data.email);
+              $('#city-id').val(data.city);
+              $('#zipcode-id').val(data.ZIP);
+              $('#street-id').val(data.street);
+              $('#housenumber-id').val(data.house_number);
+              $('#apartmentnumber-id').val(data.apartment_number);
+              if(data.type=='user')
+              {
+                $("#type-id").val('user');
+              }
+                
+              
+              
+            }
+        });
     });
   });
 </script>
