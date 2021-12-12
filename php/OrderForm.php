@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_SESSION['login'])) {
     include('load_database.php');
     
@@ -75,7 +76,7 @@ if (isset($_SESSION['login'])) {
         <input type='number' class='contact-in' name='apartment_number' value='<?php if($apartment_number)echo $apartment_number?>' readonly></input>
     </div>
 </div>
-<button name='edit-submit' id='save-btn'class='save-btn' type='submit'>Zamów</button>
+<button name='add_order' id='save-btn'class='save-btn' type='submit'>Zamów</button>
 <?php
 } else {
     echo "Łączna cena produktów:".$_SESSION['price']+8.99;
@@ -136,7 +137,7 @@ if (isset($_SESSION['login'])) {
         <input type='number' class='contact-in' name='apartment_number'  readonly></input>
     </div>
 </div>
-<button name='edit-submit' id='save-btn'class='save-btn' type='submit'>Zamów</button>
+<button name='add_order' id='save-btn'class='save-btn' type='submit'>Zamów</button>
     <?php
 }
 ?>
