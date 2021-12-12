@@ -151,9 +151,9 @@ session_start();
                 <h1 class="title_of_product ">
                     <?php 
                         $idc = $_GET['idc'];
-                        $stmt10 = $pdo->query('SELECT subpage_name FROM subpages WHERE additional_info = "'.$idc.'"');
+                        $stmt10 = $pdo->query('SELECT category_name FROM categories WHERE id_category = "'.$idc.'"');
                         foreach($stmt10 as $row10){}
-                        echo $row10['subpage_name']
+                        echo $row10['category_name'];
                     ?>
                 </h1>
                 <from class="filtr" method="post">          
@@ -176,7 +176,10 @@ session_start();
                                 <option value="price DESC">Od najdroższych</option>
                             </select>
                         </div>
-                        <input type="submit" name="filtr">
+                        <div class='col-12'>
+                            <input type="submit" class='filter-button' value='FILTRUJ' name="filtr"></input>
+                        </div>
+                        
                     </div>
                 </form>  
             </div>             
