@@ -81,7 +81,7 @@ $html .= '<div class="zestawienie_platnosci col-xs-12 col-lg-3 row">';
     $html .='<div class="razem_zł col-6">'.$_SESSION['price'] + 8.99 .' zł'.'</div>';
     $html .='<div class="linia "></div>';
     $html .='<div class="zakonczenie_platnosci_przycisk col-12">';
-    $html .='<button class="przycisk_zakonczenia" type="button" name="button">ZREALIZUJ ZAMÓWIENIE</button>';
+    $html .='<a href="order.php"><button class="przycisk_zakonczenia" type="button" name="button">ZREALIZUJ ZAMÓWIENIE</button></a>';
     $html .='</div>';
 
 $html .= '</div>';

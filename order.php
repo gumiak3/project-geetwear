@@ -22,20 +22,6 @@ and open the template in the editor.
 </head>
 
 <body>
-    <?php
-    include('php/load_database.php');
-    $id_product = $_POST['id_product'];
-    $stmt = $pdo->query('SELECT * FROM products WHERE id_product=' . $id_product);
-    foreach ($stmt as $row) {
-
-        $stmt2 = $pdo->query('SELECT * FROM gallery WHERE id_product=' . $row['id_product']);
-        foreach ($stmt2 as $row2) {
-        }
-        $stmt3 = $pdo->query('SELECT * FROM gallery WHERE main = 1 AND id_product=' . $row['id_product']);
-        foreach ($stmt3 as $row3) {
-        }
-    }
-    ?>
 
     <div class="row" id="logo_zaw">
         <div class="help">
@@ -168,66 +154,9 @@ and open the template in the editor.
     </div>
     <a href="index.php" class="back_main_page col-12">STRONA GŁÓWNA</a>
     <div class="zawartosc">
-
-
-
-        <div class="calosc row grid ">
-            <div class="zdjecie_produktu col-xs-12 col-sm-12 col-lg-6">
-                <img src="<?php echo $row3['foto'] ?>" alt="product" id="produkt">
-            </div>
-            <div class="nazwa_produktu col-xs-12 col-sm-12 col-lg-6">
-                <h1 id="nazwa_produktu_id"><?php echo $row['product_name'] ?></h1>
-                <div class="cena_produktu col-12">
-                    <input type="hidden" class="input_ceny" value="<?php echo $row['price'] ?>">
-                    <?php echo $row['price'] ?>
-                </div>
-                <div class="opis_produktu col-12">
-                    <p>Męska koszulka polo to kwintesencja sportowej elegancji, co wpływa na fakt, że jest podstawowym elementem każdej garderoby. Czarny kolor koszulki pasuje do wszystkiego, a sama koszulka świetnie prezentuje się na sylwetce. Bezwarunkowo jest to podstawa w szafie, którą można nosić z wieloma rzeczami i zawsze wyglądać świetnie!</p>
-                    <ul>
-                        <li class="wypunktowane">Produkcja: Polska, z troską o naturalne środowisko.</li>
-                        <li class="wypunktowane">Materiał: 100% bawełna, splot pique</li>
-                        <li class="wypunktowane">Tkanina: wytrzymała, o gramaturze 210 g/m²</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="zdjecia_pod col-xs-12 col-sm-12 col-lg-6" id="zdjecia_pod">
-                <?php
-                echo '<img src="' . $row3['foto'] . '" alt="product" class="zdjecie_produktu_small">';
-                $stmt4 = $pdo->query('SELECT * FROM gallery WHERE main IN (2,3) AND id_product=' . $row['id_product']);
-                foreach ($stmt4 as $row4) {
-                    echo '<img src="' . $row4['foto'] . '" alt="product" class="zdjecie_produktu_small">';
-                }
-                ?>
-            </div>
-            <form method="POST">
-                <div class="przyciski_pod col-xs-12 col-sm-12 col-lg-6 row">
-                    <div class="ustawienie_rozmiaru col-xs-12 col-sm-3 col-lg-3">
-                        ROZMIAR:
-                        <br>
-                        <select class="input_rozmiaru" name="input_rozmiaru">
-                            <?php
-                            $stmt25 = $pdo->query('SELECT id, size FROM products WHERE id_product=' . $id_product);
-
-                            foreach ($stmt25 as $row25) {
-                                echo '<option value="' . $row25['id'] . '" title="' . $row25['size'] . '">' . $row25['size'] . '</option>';
-                            }
-                            ?>
-                        </select>
-                    </div>
-                    <div class="ustawienie_ilości col-xs-12 col-sm-3 col-lg-3">
-                        ILOŚĆ:
-                        <br>
-                        <input type="number" class="input_ilosci" name="input_ilosci" min="1" max="5" value="1">
-                    </div>
-                    <div class="przycisk_dodaj_do_koszyka col-xs-12 col-sm-6 col-lg-6">
-                        <input class="przycisk_koszyk" type="submit"  value="DO KOSZYKA" name="przycisk_koszyk">
-                    </div>
-                </div>
-            </form>
+        <div class="order_form">
+            
         </div>
-
-
-
 
 
         <div class="fotter">
@@ -292,7 +221,6 @@ and open the template in the editor.
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript' src='./jscript/profile_menu.js'></script>
-<script type='text/javascript' src='./jscript/toBasket.js'></script>
 <?php
 include("./php/logout.php");
 ?>
