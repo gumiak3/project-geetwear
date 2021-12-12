@@ -180,11 +180,15 @@ and open the template in the editor.
                 <div class="cena_produktu col-12">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <input type="hidden" class="input_ceny" value="<?php echo $row['price'] ?>">
                     <?php echo $row['price']." zł" ?>
 =======
                     <?php echo $row['price'] ?>
 >>>>>>> parent of 0740194 (basket close to working)
+=======
+                    <?php echo $row['price'] ?>
+>>>>>>> parent of 2c54e18 (add some products)
 =======
                     <?php echo $row['price'] ?>
 >>>>>>> parent of 2c54e18 (add some products)
