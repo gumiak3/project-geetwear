@@ -89,27 +89,31 @@ CREATE TABLE `gallery` (
 INSERT INTO `gallery` (`id_foto`, `id_product`, `foto`, `main`) VALUES
 (1, 1, 'photos/produkty/koszulka_1.jpg', 1),
 (2, 1, 'photos/produkty/koszulka_2.jpg', 2),
-(3, 1, 'photos/produkty/koszulka_3.jpg', 3),
-
-(4, 2, 'photos/produkty/bluza_UFO_1.jpg', 1),
-(5, 2, 'photos/produkty/bluza_UFO_2.jpg', 2),
-(6, 2, 'photos/produkty/bluza_UFO_3.jpg', 3),
-
-(8, 3, 'photos/produkty/bluza_sz_1.jpg', 1),
-(9, 3, 'photos/produkty/bluza_sz_2.jpg', 2),
-(10, 3, 'photos/produkty/bluza_sz_3.jpg', 3),
-
+(3, 1, 'photos/produkty/koszylka_3.jpg', 3),
 (11, 4, 'photos/produkty/bluza_Adid_1.jpg', 1),
 (12, 4, 'photos/produkty/bluza_Adid_2.jpg', 2),
 (13, 4, 'photos/produkty/bluza_Adid_3.jpg', 3),
-
-(14, 5, 'photos/produkty/bluza_cz_1.jpg', 1),
-(15, 5, 'photos/produkty/bluza_cz_2.jpg', 2),
-(16, 5, 'photos/produkty/bluza_cz_3.jpg', 3),
-
-(17, 6, 'photos/produkty/skieta_1.jpg', 1),
-(18, 6, 'photos/produkty/skieta_2.jpg', 2),
-(19, 6, 'photos/produkty/skieta_3.jpg', 3);
+(29, 3, 'photos/produkty/świąteczny_sweter.jpg', 1),
+(30, 3, 'photos/produkty/świąteczny_sweter_2.jpg', 2),
+(31, 3, 'photos/produkty/świąteczny_sweter_3.jpg', 3),
+(35, 5, 'photos/produkty/czerwony_sweter.jpg', 1),
+(36, 5, 'photos/produkty/czerwony_sweter_2.jpg', 2),
+(37, 5, 'photos/produkty/czerwony_sweter_3.jpg', 3),
+(41, 6, 'photos/produkty/zielony_sweter.jpg', 1),
+(42, 6, 'photos/produkty/zielony_sweter_2.jpg', 2),
+(43, 6, 'photos/produkty/zielony_sweter_3.jpg', 3),
+(44, 7, 'photos/produkty/multikolorowy_sweter.jpg', 1),
+(45, 7, 'photos/produkty/multikolorowy_sweter_2.jpg', 2),
+(46, 7, 'photos/produkty/multikolorowy_sweter_3.jpg', 3),
+(47, 8, 'photos/produkty/niebieski_sweter.jpg', 1),
+(48, 8, 'photos/produkty/niebieski_sweter_2.jpg', 2),
+(49, 8, 'photos/produkty/niebieski_sweter_3.jpg', 3),
+(50, 9, 'photos/produkty/szary_dres.jpg', 1),
+(51, 9, 'photos/produkty/szary_dres_2.jpg', 2),
+(52, 9, 'photos/produkty/szary_dres_3.jpg', 3),
+(53, 10, 'photos/produkty/brazowy_dres.jpg', 1),
+(54, 10, 'photos/produkty/brazowy_dres_2.jpg', 2),
+(55, 10, 'photos/produkty/brazowy_dres_3.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -148,35 +152,25 @@ CREATE TABLE `products` (
 
 
 INSERT INTO `products` (`id`, `id_product`, `product_name`, `size`, `id_category`, `price`, `amount`) VALUES
-(1, 1, 'Bluzka G', 'S', 1, 50, 20),
-(2, 1, 'Bluzka G', 'M', 1, 50, 20),
-(3, 1, 'Bluzka G', 'L', 1, 50, 20),
-(4, 1, 'Bluzka G', 'XL', 1, 50, 20),
-
-(5, 2, 'Bluza UFO', 'S', 2, 150, 20),
-(6, 2, 'Bluza UFO', 'M', 2, 150, 20),
-(7, 2, 'Bluza UFO', 'L', 2, 150, 20),
-(8, 2, 'Bluza UFO', 'XL', 2, 150, 20),
-
-(9, 3, 'Szara bluza z długim rękawem', 'S', 2, 89.99, 20),
-(10, 3, 'Szara bluza z długim rękawem', 'M', 2, 89.99, 20),
-(11, 3, 'Szara bluza z długim rękawem', 'L', 2, 89.99, 20),
-(12, 3, 'Szara bluza z długim rękawem', 'XL', 2, 89.99, 20),
-
-(13, 4, 'Bluza Adidas', 'S', 2, 129.99, 20),
-(14, 4, 'Bluza Adidas', 'M', 2, 129.99, 20),
-(15, 4, 'Bluza Adidas', 'L', 2, 129.99, 20),
-(16, 4, 'Bluza Adidas', 'XL', 2, 129.99, 20),
-
-(17, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
-(18, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
-(19, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
-(20, 5, 'Czarna bluza z długim rękawem', 'S', 2, 99.99, 20),
-
-(21, 6, 'Biała skieta', '38', 3, 25, 20),
-(22, 6, 'Biała skieta', '40', 3, 25, 20),
-(23, 6, 'Biała skieta', '42', 3, 25, 20),
-(24, 6, 'Biała skieta', '44', 3, 25, 20);
+(13, 4, 'Bluza Adidas', 'S', 2, 129.99, 20, NULL),
+(14, 4, 'Bluza Adidas', 'M', 2, 129.99, 20, NULL),
+(15, 4, 'Bluza Adidas', 'L', 2, 129.99, 20, NULL),
+(42, 3, 'Świąteczny sweter', 'S', 5, 199.99, 20, ''),
+(43, 3, 'Świąteczny sweter', 'M', 5, 199.99, 20, ''),
+(44, 1, 'Bluzka G', 'S', 1, 50, 20, ''),
+(45, 1, 'Bluzka G', 'M', 1, 50, 20, ''),
+(46, 1, 'Bluzka G', 'L', 1, 50, 20, ''),
+(56, 5, 'Czerwony sweter', 'S', 5, 129.99, 120, ''),
+(57, 5, 'Czerwony sweter', 'L', 5, 129.99, 200, ''),
+(59, 6, 'Zielony sweter', 'L', 5, 129.99, 20, ''),
+(60, 7, 'Kolorowy sweter', 'L', 5, 129.99, 20, ''),
+(61, 7, 'Kolorowy sweter', 'S', 5, 129.99, 20, ''),
+(62, 8, 'Niebieski sweter', 'S', 5, 139.99, 20, ''),
+(63, 8, 'Niebieski sweter', 'L', 5, 139.99, 20, ''),
+(64, 8, 'Niebieski sweter', 'XL', 5, 139.99, 20, ''),
+(67, 9, 'Szare dresiwo', 'L', 4, 99.99, 20, 'Szary dresik'),
+(68, 9, 'Szare dresiwo', 'XL', 4, 99.99, 30, 'Szary dresik'),
+(69, 10, 'Brązowe dresiwo', 'L', 4, 101.99, 20, '');
 
 
 -- --------------------------------------------------------

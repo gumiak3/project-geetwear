@@ -329,8 +329,38 @@ ZAWARTOŚĆ:
         margin-top:10px;
     }
 }
-.select_size{
-    
+.filter-button{
+    background-color: #f9f9f9;
+    color: #223254;
+    height:50px;
+    width: 200px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+      color: #5A667F
+}
+.filter-button:hover{
+    transform:translateY(-5px);
+}
+.select_size,.select_sort{
+    background-color: #f9f9f9;
+    color: #223254;
+    padding: 7px 40px 7px 12px;
+    width: 200px;
+    border: 1px solid #E8EAED;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 1px 3px -2px #9098A9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 150ms ease;
+      color: #5A667F
 }
 .sortowanie_panel{
     margin-bottom:100px;  
@@ -355,7 +385,13 @@ ZAWARTOŚĆ:
 #produkt_calosc6:hover{
     transform: scale(1.1);
 }
-
+#produkt_calosc{
+    margin-bottom:50px;
+}
+.produkty{
+    margin:0;
+    padding:0;
+}
 .slider{
     text-align: center;
     width: 100%;
@@ -373,7 +409,7 @@ ZAWARTOŚĆ:
 }
 .linia_podstrony{
     border-top:1px groove;
-    width:80%;
+    width:100%;
 }
 .panel_podstrony_2{
     background:#f1f1f1;
@@ -400,12 +436,8 @@ ZAWARTOŚĆ:
 }
 .zawartosc {
     text-align: center;
-    width:100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 10px;
-    padding-right: 20px;
-    font-family: 'Akaya Telivigala', cursive;  
+    margin:auto;
+    font-family: 'M PLUS 1p', sans-serif;
 }
 .title_of_product {
     margin:auto;
@@ -451,14 +483,22 @@ ZAWARTOŚĆ:
 }
 .produkty {
     margin-bottom: 100px;
-    position: relative;
-    right:25px;
+    font-family: 'Fruktur', cursive;
+font-family: 'Space Mono', monospace;
+font-family: 'Zen Antique', serif;
     
+}
+.produkty ul{
+    margin:0;
+    padding:0;
+}
+.title_of_product{
+    text-transform: uppercase;
 }
 .cena{
     font-size: x-large;
     font-weight: bold;
-    margin-top: 
+    
 }
 
 /*
