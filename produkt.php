@@ -178,7 +178,8 @@ and open the template in the editor.
             <div class="nazwa_produktu col-xs-12 col-sm-12 col-lg-6">
                 <h1 id="nazwa_produktu_id"><?php echo $row['product_name'] ?></h1>
                 <div class="cena_produktu col-12">
-                    <?php echo $row['price'].' zł' ?>
+                    <input type="hidden" class="input_ceny" value="<?php echo $row['price'] ?>">
+                    <?php echo $row['price'] ?>
                 </div>
                 <div class="opis_produktu col-12">
                     <p>Męska koszulka polo to kwintesencja sportowej elegancji, co wpływa na fakt, że jest podstawowym elementem każdej garderoby. Czarny kolor koszulki pasuje do wszystkiego, a sama koszulka świetnie prezentuje się na sylwetce. Bezwarunkowo jest to podstawa w szafie, którą można nosić z wieloma rzeczami i zawsze wyglądać świetnie!</p>
