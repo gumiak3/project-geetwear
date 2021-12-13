@@ -217,6 +217,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
     </thead>
     <tbody class="table-body">
 <?php
+include("../alert.php");
 include("../../php/load_database.php");
 $get_subpages = $pdo->query("SELECT * FROM subpages");
 
@@ -254,6 +255,7 @@ foreach($get_subpages as $row_subpages)
     $status = $_POST['status'];
     $edit_stmt = $pdo->prepare("UPDATE subpages set subpage_name='$subpage_name',additional_info=$content,status=$status where id_subpage=$id");
     $edit_stmt->execute();
+    $_SESSION['alert']=true;
     header("REFRESH:0");
   }
   if(isset($_POST['delete_send'])){
@@ -261,7 +263,7 @@ foreach($get_subpages as $row_subpages)
       $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
       $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
       $stmt_to_delete->execute();
-      
+      $_SESSION['alert']=true;
       unset($_POST);
       header("Refresh:0");
   }
@@ -373,6 +375,7 @@ foreach($get_subpages as $row_subpages)
     $content = $_POST['content'];
     $status = $_POST['status'];
     $add_stmt = $pdo->exec("INSERT INTO subpages (subpage_name,additional_info,status) values ('$subpage_name',$content,$status)");
+    $_SESSION['alert']=true;
     header("REFRESH:0");
   }
 ?>
@@ -383,6 +386,7 @@ foreach($get_subpages as $row_subpages)
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+<script src='../alert.js'></script>
 
 <script>
   $(document).ready(function(){

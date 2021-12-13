@@ -237,3 +237,10 @@ input{
 .delete_record:disabled{
   background:grey;
 }
+.alert{
+  width:600px;
+  position:absolute;
+  left:40%;
+  right:50%;
+  top:10%;
+}

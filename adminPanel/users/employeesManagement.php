@@ -208,6 +208,7 @@ if($_SESSION)
     </thead>
     <tbody class="table-body">
 <?php
+include("../alert.php");
 include("../../php/load_database.php");
 $get_users = $pdo->query("SELECT * FROM users where type in ('worker','admin')");
 foreach($get_users as $row_users)
@@ -298,12 +299,14 @@ foreach($get_users as $row_users)
     {
       $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber, type='$type' where id_user=$id");
       $update_stmt->execute();
+      $_SESSION['alert']=true;
     }
     if(!$password_error)
     {
       $password = password_hash($password,PASSWORD_DEFAULT);
       $update_password = $pdo->prepare("UPDATE users set password='$password' where id_user=$id");
       $update_password->execute();
+      
     }
     unset($_POST['edit-submit']);
     header("REFRESH:0");
@@ -318,11 +321,12 @@ foreach($get_users as $row_users)
     {
         if($row_type['type']=="admin")
         {
-
+          $_SESSION['alert']=false;
         }else{
-            $stmt_to_delete->execute();
-            unset($_POST);
-            header("Refresh:0");
+          $stmt_to_delete->execute();
+          $_SESSION['alert']=true;
+          unset($_POST);
+          header("Refresh:0");
         }
     }
   }
@@ -485,7 +489,7 @@ foreach($get_users as $row_users)
         $password = $_POST['password'];
         if( !preg_match( '/[^A-Za-z0-9]+/', $password) || strlen( $password) < 8)
         {
-            
+            $_SESSION['alert']=false;
         }else{
             $password = password_hash($password,PASSWORD_DEFAULT);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -497,6 +501,9 @@ foreach($get_users as $row_users)
                 $make_account -> bindValue(':email',$email,PDO::PARAM_STR);
                 $make_account -> bindValue(':password',$password,PDO::PARAM_STR);
                 $make_account -> execute();
+                $_SESSION['alert']=true;
+            }else{
+              $_SESSION['alert']=false;
             }
         }
         header("REFRESH:0");
@@ -510,7 +517,7 @@ foreach($get_users as $row_users)
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
-
+<script src='../alert.js'></script>
 <script>
   $(document).ready(function(){
     $(".edit_data").click(function(){

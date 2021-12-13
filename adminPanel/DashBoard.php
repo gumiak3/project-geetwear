@@ -202,36 +202,15 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
       <div class="container-fluid">
         <div id='content'class="row">
         <div class='col-12'>
-    <h2>Kategorie</h2>
+    <h2>SOON</h2>
 </div>
-<button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
 <table id="MyTable" class="table table-striped table-dark">
     <thead class="table-head">
-        <tr>
-        <th scope="col">ID</th>
-        <th scope="col">NAZWA</th>
-        <th scope="col">EDYCJA</th>
-        <th scope="col">USUWANIE</th>        
-        </tr>
+        
     </thead>
     <tbody class="table-body">
 <?php
 include("../php/load_database.php");
-$get_categories = $pdo->query("SELECT * FROM categories");
-foreach($get_categories as $row_categories)
-{
-    echo"<tr>" ;
-    echo "<td>".$row_categories['id_category']."</td>";
-    echo "<td>".$row_categories['category_name']."</td>";
-    ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_categories['id_category']?>" value="<?=$row_categories['id_category']?>">EDYCJA</button></td>
-    <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-        <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_categories['id_category']?>">USUŃ</button></td>
-        </form>
-        
-    <?php
-    echo "</tr>";
-}
 ?>
 </tbody>
 </table>
@@ -356,6 +335,7 @@ foreach($get_categories as $row_categories)
       $edit_stmt = $pdo->prepare("UPDATE categories set category_name=:category_name where id_category=$id");
       $edit_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
       $edit_stmt->execute();
+      
       header("Refresh:0");
   }
   if(isset($_POST['add-submit'])){

@@ -214,6 +214,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
     </thead>
     <tbody class="table-body">
 <?php
+include("../alert.php");
 include("../../php/load_database.php");
 $get_products = $pdo->query("SELECT DISTINCT id_product,product_name,id_category,price FROM products");
 
@@ -233,7 +234,7 @@ foreach($get_products as $row_products)
     <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_products['id_product']?>" value="<?=$row_products['id_product']?>"><i class="bi bi-pencil"></i></button></td>
     <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
         <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_products['id_product']?>"><i class="bi bi-trash"></i></button></td>
-        </form>
+        </form> 
         
     <?php
     echo "</tr>";
@@ -252,6 +253,7 @@ foreach($get_products as $row_products)
         $stmt_to_delete_fotos = $pdo->prepare("DELETE FROM gallery where id_product like :id_product");
         $stmt_to_delete_fotos->bindValue(':id_product',$idToDelete,PDO::PARAM_STR);
         $stmt_to_delete_fotos->execute();
+        $_SESSION['alert'] = true;
         unset($_POST);
         header("Refresh:0");
     }
@@ -529,7 +531,7 @@ function readURL(input,imgId) {
     if(basename($_FILES["fileToUpload3"]["name"])!=''){
       $stmt_add_to_gallery_main3 = $pdo->exec("UPDATE  gallery set foto='$target_file_3_path' where id_product=$id and main=3");
     }
-    
+    $_SESSION['alert']=true;
     header("REFRESH:0");
   }
   if(isset($_POST['add-submit'])){ // ADD
@@ -573,7 +575,7 @@ function readURL(input,imgId) {
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',2)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_3_path',3)");
-   
+    $_SESSION['alert'] = true;
     header("REFRESH:0"); 
   }
   function if_null($size,$amount){
@@ -648,3 +650,4 @@ $('#addMyModal').on('hidden.bs.modal', function () {
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+<script src='../alert.js'></script>

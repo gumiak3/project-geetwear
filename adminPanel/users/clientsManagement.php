@@ -213,6 +213,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
     </thead>
     <tbody class="table-body">
 <?php
+include("../alert.php");
 include("../../php/load_database.php");
 $get_users = $pdo->query("SELECT * FROM users where type='user'");
 foreach($get_users as $row_users)
@@ -294,6 +295,10 @@ foreach($get_users as $row_users)
     {
       $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber, type='$type' where id_user=$id");
       $update_stmt->execute();
+      $_SESSION['alert']=true;
+    }
+    else{
+      $_SESSION['alert']=false;
     }
     if(!$password_error)
     {
@@ -315,7 +320,12 @@ foreach($get_users as $row_users)
         {
 
         }else{
-            $stmt_to_delete->execute();
+            if($stmt_to_delete->execute()){
+              $_SESSION['alert']=true;
+            }
+            else{
+              $_SESSION['alert']=false;
+            }
             unset($_POST);
             header("Refresh:0");
         }
@@ -428,7 +438,7 @@ foreach($get_users as $row_users)
 <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
-
+<script src='../alert.js'></script>
 <script>
   $(document).ready(function(){
     $(".edit_data").click(function(){

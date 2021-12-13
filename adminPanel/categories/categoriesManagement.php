@@ -212,6 +212,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
     </thead>
     <tbody class="table-body">
 <?php
+include("../alert.php");
 include("../../php/load_database.php");
 $get_categories = $pdo->query("SELECT * FROM categories");
 foreach($get_categories as $row_categories)
@@ -253,8 +254,11 @@ foreach($get_categories as $row_categories)
           if($stmt_to_delete->execute()){
             $delete_subpages = $pdo->prepare("DELETE FROM subpages where additional_info=$idToDelete");
             $delete_subpages->execute();
+            $_SESSION['alert']=true;
           }
           
+        }else{
+          $_SESSION['alert']=false;
         }
         
         
@@ -327,6 +331,7 @@ foreach($get_categories as $row_categories)
     <script src='https://code.jquery.com/jquery-3.5.1.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js'></script>
     <script src='https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js'></script>
+    <script src='../alert.js'></script>
   </body>
 </html>
 
@@ -366,12 +371,26 @@ foreach($get_categories as $row_categories)
       $edit_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
       $edit_stmt->execute();
       header("Refresh:0");
+      if($edit_stmt->execute())
+      {
+        $_SESSION['alert']=true;
+      }else{
+        $_SESSION['alert']=false;
+      }
+      
+
   }
   if(isset($_POST['add-submit'])){
     $name = $_POST['category_name'];
     $add_stmt = $pdo->prepare("INSERT INTO categories (category_name) values (:category_name)");
     $add_stmt->bindValue(":category_name",$name,PDO::PARAM_STR);
-    $add_stmt->execute();
-    header("Refresh:0");
+    
+    if($add_stmt->execute())
+      {
+        $_SESSION['alert']=true;
+      }else{
+        $_SESSION['alert']=false;
+      }
+      header("Refresh:0");
   }
 ?>

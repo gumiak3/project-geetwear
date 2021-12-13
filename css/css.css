@@ -600,7 +600,7 @@ STOPKA :
 @media(min-width:1200px)
 {
     .zawartosc, .title_of_product{
-        width:1400px;       
+        width:1200px;       
     }
     
 }
@@ -649,4 +649,7 @@ STOPKA :
 #produkt-grid{
     margin:0 !important;
     padding:0 !important;
+}
+.alert{
+    width:200px;
 }
