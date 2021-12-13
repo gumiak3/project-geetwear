@@ -8,7 +8,7 @@ ob_start();
         <title>GEET-WEAR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/css.css" rel="stylesheet" type="text/css"/>
+        <link href="css/order.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="icons/ikona1.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="slider_javascript.js"></script>

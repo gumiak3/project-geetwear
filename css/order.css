@@ -305,6 +305,74 @@ ul li a, ul li a:hover{
 /*
 ZAWARTOŚĆ:
 */
+.profile-panel{
+    margin-top:50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding:0;
+    margin-bottom:50px;
+}
+.left-side-menu{
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    margin-top:15px;
+}
+.left-side-menu li{
+    width:100%;
+    background:#f1f1f1;
+    padding:30px;
+}
+.left-side-menu li.active{
+    background:#f6f6f6;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    transform:translateY(-2px);
+}
+input{
+    width: 60%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.left-side-menu li:hover{
+    background:#f6f6f6;
+    cursor:pointer;
+    transform:translateY(-2px);
+}
+.profile-content {
+    text-align: center;
+}
+.contact-label{
+    text-align:right;
+    padding:15px;
+}
+.contact-input{
+    text-align: left;
+}
+.contact-input input{
+    color:grey;
+    background:rgba(0, 0, 0, 0.05);
+}
+.contact-input input.editting{
+    color:black;
+    background:white;
+}
+.contact-content-div{
+    margin-top:15px;
+}
+.save-btn{
+    margin-top:50px;
+    margin-bottom:50px;
+    border-radius:10px;
+    outline:none;
+    width:100px;
+    height:50px;
+    color:white;
+    background:black;
+    border:none;
+    font-family: 'Bakbak One', cursive;
+}
 
 .slider{
     width:100%;
