@@ -20,7 +20,7 @@ function getProductsInBasket(){
     })
 }
 function DeleteProductFromBasket(deleted_position_number, deleted_positionid){
-    alert(deleted_position_number);
+    alert(deleted_position_number+" dupa");
     $.ajax({
         url: "php/DeleteFromBasket.php",
         method: 'POST',
@@ -29,6 +29,9 @@ function DeleteProductFromBasket(deleted_position_number, deleted_positionid){
             ProductPosition: deleted_position_number
         }
     }).done(function(){
-        $(deleted_positionid).remove();
+
+        // $(deleted_positionid).remove();
+        getProductsInBasket();
+
     })
 }

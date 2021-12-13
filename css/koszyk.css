@@ -325,8 +325,14 @@ ZAWARTOŚĆ:
 .caly_koszyk{
     margin-bottom: 200px;
     display:flex;
+<<<<<<< HEAD
     width:85%;
     justify-content: center;
+=======
+    justify-content: center;
+    width:85%;
+    
+>>>>>>> de9e219982c0da0673bd5e0e1835d6370e471dde
     
     
 }

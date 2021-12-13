@@ -25,7 +25,7 @@ if (count($_SESSION['basket'])>0) {
         $stmt300->bindValue(':id', $id, PDO::PARAM_STR);
         $stmt300->execute();
         foreach ($stmt300 as $row300) {
-            $price=$row300['price'];
+            $price=$row300['price']*$amount;
         }
         
 
@@ -52,9 +52,8 @@ if (count($_SESSION['basket'])>0) {
         $html .= '<div class="opis_produktu col-xs-12 col-sm-10 col-lg-10">';
         $html .= 'Męska Bluza to kwintesencja sportowej elegancji, co wpływa na fakt, że jest podstawowym elementem każdej garderoby. Czarny kolor bluzy pasuje do wszystkiego, a sama bluzy świetnie prezentuje się na sylwetce.';
         $html .= '</div>';
-        $html .= '<div class="ustawienie_ilości col-xs-12 col-sm-2 col-lg-2">ILOŚĆ:';
+        $html .= '<div class="ustawienie_ilości col-xs-12 col-sm-2 col-lg-2">ILOŚĆ:'.$amount;
         $html .= '<br>';
-        $html .= '<input type="number" class="input_ilosci" min="1" max="100" value="' . $amount . '">';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="rozmiar_koszyk">ROZMIAR:' . $row300['size'];

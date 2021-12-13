@@ -17,8 +17,18 @@ $basket = array();
 
 if(isset($_SESSION['basket'])){
     $basket = $_SESSION['basket'];
-    $basket[] = $p;
-    $_SESSION['basket'] = $basket;
+    if(in_array($p,$basket)){
+        $position=array_search($p,$basket);
+        $p2=$basket[$position];
+        $amount2 = $p2->amount;
+        $amount2+=1;
+        $p2->amount=$amount2;
+        $basket[$position]=$p2;
+    }else{
+        $basket[] = $p;
+        $_SESSION['basket'] = $basket; 
+    }
+    
 }else{
     $basket[] = $p;
     $_SESSION['basket'] = $basket;
