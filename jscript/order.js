@@ -2,14 +2,14 @@ $('button[name="add_order"]').on('click',function(e){
     if($('input[name="ceena"]').val()==0){
         alert('mordo ale nic nie zamówiłeś')
     }else{
-        DeleteProductFromBasket();
+        OrderToDatabase();
     }
     
-    
 });
-function DeleteProductFromBasket(){
+function OrderToDatabase(){
+    alert('dupa');
     $.ajax({
-        url: "php/OrderToDatabase.php",
+        url: "php\OrderToDataBase.php",
         method: 'POST',
         data: {
             fname: $('input[name="firstname"]').val(),
