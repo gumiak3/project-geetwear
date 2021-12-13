@@ -18,7 +18,7 @@
             
             ?> 
             
-        <td><button type='button' name='delete-size-send' onclick="return confirm('Czy na pewno chcesz usunąć ten rekord??');" class='delete_record col-4' id="<?=$primary_id?>" value="<?=$primary_id?>">USUŃ</button></td>
+        <td><button type='button' name='delete-size-send' onclick="return confirm('Czy na pewno chcesz usunąć ten rekord??');" class='delete_record col-4' id="<?=$primary_id?>" value="<?=$primary_id?>"><i class="bi bi-trash"></i></button></td>
  
         </div>    
             <?php

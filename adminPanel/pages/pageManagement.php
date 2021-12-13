@@ -261,6 +261,7 @@ foreach($get_subpages as $row_subpages)
       $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
       $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
       $stmt_to_delete->execute();
+      
       unset($_POST);
       header("Refresh:0");
   }
