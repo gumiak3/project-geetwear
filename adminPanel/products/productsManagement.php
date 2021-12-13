@@ -565,9 +565,10 @@ function readURL(input,imgId) {
     $amount = $_POST['amount'];
     $description = $_POST['description'];
     $count = count($size);
+    echo $category;
     for($i=0;$i<$count;$i++)
     {
-      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount,description) values ($id_product,'$product_name','$size[$i]',$id_category,$price,$amount[$i],'$description')");
+      $add_product = $pdo->exec("INSERT INTO products (id_product,product_name,size,id_category,price,amount,description) values ($id_product,'$product_name','$size[$i]',$category,$price,$amount[$i],'$description')");
     }
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_main_path',1)");
     $stmt_add_to_gallery_main = $pdo->exec("INSERT INTO gallery (id_product,foto,main) values ($id_product,'$target_file_2_path',2)");

@@ -240,13 +240,24 @@ foreach($get_categories as $row_categories)
     }
     if(isset($_POST['delete_send'])){
         $idToDelete = $_POST['delete_send'];
-        $stmt_to_delete = $pdo->prepare("DELETE FROM categories where id_category like :id_category");
-        $stmt_to_delete->bindValue(':id_category',$idToDelete,PDO::PARAM_STR);
-        $stmt_to_delete->execute();
-        if($stmt_to_delete->execute()){
-          $delete_subpages = $pdo->prepare("DELETE FROM subpages where additional_info=$idToDelete");
-          $delete_subpages->execute();
+        $product_validation;
+        $check_if_product_exist = $pdo->query("SELECT * from products where id_category=$idToDelete");
+        foreach($check_if_product_exist as $row_if_exists)
+        {
+          $product_validation = $row_if_exists['id'];
         }
+        if(!isset($product_validation)){
+          $stmt_to_delete = $pdo->prepare("DELETE FROM categories where id_category like :id_category");
+          $stmt_to_delete->bindValue(':id_category',$idToDelete,PDO::PARAM_STR);
+          $stmt_to_delete->execute();
+          if($stmt_to_delete->execute()){
+            $delete_subpages = $pdo->prepare("DELETE FROM subpages where additional_info=$idToDelete");
+            $delete_subpages->execute();
+          }
+          
+        }
+        
+        
         
         unset($_POST);
         header("Refresh:0");
