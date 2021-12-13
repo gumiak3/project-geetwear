@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 html,body
 {
     
@@ -19,6 +22,7 @@ LOGO + MENU
     color:black;
     font-weight: bold;
     text-decoration: none;
+    
 }
 .loguj:hover{
     text-decoration: underline;
@@ -301,6 +305,74 @@ ul li a, ul li a:hover{
 /*
 ZAWARTOŚĆ:
 */
+.profile-panel{
+    margin-top:50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    padding:0;
+    margin-bottom:50px;
+}
+.left-side-menu{
+    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    margin-top:15px;
+}
+.left-side-menu li{
+    width:100%;
+    background:#f1f1f1;
+    padding:30px;
+}
+.left-side-menu li.active{
+    background:#f6f6f6;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+    transform:translateY(-2px);
+}
+input{
+    width: 60%;
+  padding: 1em;
+  line-height: 1.4;
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+}
+
+.left-side-menu li:hover{
+    background:#f6f6f6;
+    cursor:pointer;
+    transform:translateY(-2px);
+}
+.profile-content {
+    text-align: center;
+}
+.contact-label{
+    text-align:right;
+    padding:15px;
+}
+.contact-input{
+    text-align: left;
+}
+.contact-input input{
+    color:grey;
+    background:rgba(0, 0, 0, 0.05);
+}
+.contact-input input.editting{
+    color:black;
+    background:white;
+}
+.contact-content-div{
+    margin-top:15px;
+}
+.save-btn{
+    margin-top:50px;
+    margin-bottom:50px;
+    border-radius:10px;
+    outline:none;
+    width:100px;
+    height:50px;
+    color:white;
+    background:black;
+    border:none;
+    font-family: 'Bakbak One', cursive;
+}
 
 .slider{
     width:100%;
@@ -436,8 +508,8 @@ ZAWARTOŚĆ:
 .title_of_product {
     text-align: center;
     padding-bottom: 10px; 
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
-    font-weight: bold;
+    font-family: 'Bebas Neue', cursive;
+    font-size:50px;
 }
 .orange_line{
     border:3px solid #ee6621;
@@ -466,12 +538,15 @@ ZAWARTOŚĆ:
     width:33%;
     
     float: left;
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
+    font-family: 'Mohave', sans-serif;
     text-align: center;
 }
 .fast, .safe, .bez {
     font-weight: bold;
     margin-bottom: 30px;
+    font-family: 'Bebas Neue', cursive;
+    font-size:25px;
+    letter-spacing: 1px;
 }
 .podpis {
     padding-left:100px;
@@ -509,10 +584,10 @@ STOPKA :
     
 }
 .btn{
-    height: 38px;  
+    height: 42px;  
     position: relative;
     background-color:#050200;
-    width:100px;
+    width:105px;
     padding: 10px;
     border:none;
     padding: 20px;
@@ -522,7 +597,13 @@ STOPKA :
     color:white;
     
 }
-
+.fotter{
+    background:#141822;
+    height:500px;
+    width:100%;
+    margin:auto;
+    color:white;
+}
 .zawartosc_fotter{
     text-align: center;
     margin-bottom:30px;
@@ -531,6 +612,8 @@ STOPKA :
 .newsletter{
     border-top: 1px solid black;
     padding-top: 100px;
+    width:1200px;
+    text-align: center;
 }
 .kontakt, .obsluga_klienta{
     font-family: Arial;
@@ -546,7 +629,7 @@ STOPKA :
 @media(max-width:501px)
 {
     .btn{
-        height: 38px;  
+        height: 48px;  
         position: relative;
         background-color:#050200;
         width:60%;
@@ -579,7 +662,7 @@ STOPKA :
 }
 .twitter, .twitter:hover{
     text-decoration: none;
-    color:black;
+    color:white;
 }
 .polityka{
     text-align: center;
@@ -599,7 +682,7 @@ STOPKA :
 
 @media(min-width:1200px)
 {
-    .zawartosc, .title_of_product{
+    .zawartosc, .title_of_product, .newsletter{
         width:1200px;       
     }
     

@@ -225,64 +225,59 @@ and open the template in the editor.
                 </div>
             </form>
         </div>
-
-
-
-
-
-        <div class="fotter">
-            <div class="newsletter row " id="newsletter">
-                <div class="napis col-xs-12 col-sm-12 col-lg-6">
-                    Chcesz otrzymywać powiadomienia o nowościach?
-                </div>
-                <div class="form col-xs-12 col-sm-12 col-lg-6">
-                    <div class="newsletter-form">
+    </div>
+    <div class="fotter">
+            <div class='content-fotter container'>
+                <div class="newsletter row " id="newsletter">
+                    <div class="napis col-xs-12 col-sm-12 col-lg-6">
+                        Chcesz otrzymywać powiadomienia o nowościach?
+                    </div>
+                    <div class="form col-xs-12 col-sm-12 col-lg-6">
+                        <div class="newsletter-form">
                         <input class="input" name="email" type="text" value="" placeholder="Twój adres e-mail">
                         <button class="btn" type="button" name="button">Zapisz się</button>
                     </div>
-                </div>
-            </div>
-            <div class="zawartosc_fotter row">
-                <div class="obsluga_klienta col-lg-6">
-                    <h3 class="napis_obsluga col-lg-12">OBSŁUGA KLIENTA</h3>
-                    <div class="polityka col-lg-6">
-                        <span>Polityka prywatności</span>
-                    </div>
-                    <div class="polityka col-lg-6">
-                        <span>Regulamin zwrotu</span>
-                    </div>
-                    <div class="polityka col-lg-6">
-                        <span>Tabela rozmiarów</span>
                     </div>
                 </div>
-
-                <div class="kontakt col-lg-6 row">
-                    <h3 class="napis_kontakt col-lg-12">KONTAKT</h3>
-                    <div class="mail col-6">
-                        <span>geetwear@gmail.com</span>
+                <div class="zawartosc_fotter row">
+                    <div class="obsluga_klienta col-lg-6">
+                        <h3 class="napis_obsluga col-lg-12">OBSŁUGA KLIENTA</h3>
+                        <div class="polityka col-lg-6">
+                            <span>Polityka prywatności</span>
+                        </div>
+                        <div class="polityka col-lg-6">
+                            <span>Regulamin zwrotu</span>
+                        </div>
+                        <div class="polityka col-lg-6">
+                            <span>Tabela rozmiarów</span>
+                        </div>
                     </div>
-                    <div class="mail_ikona col-6">
-                        <img src="ikony/poczta.png" alt="alt" class="ikona_poczty" />
+                    
+                    <div class="kontakt col-lg-6 row">
+                        <h3 class="napis_kontakt col-lg-12">KONTAKT</h3>
+                        <div class="mail col-6">
+                            <span>geetwear@gmail.com</span>
+                        </div>
+                        <div class="mail_ikona col-6">
+                            <img src="icons/poczta.png" alt="alt" class="ikona_poczty"/>
+                        </div>
+                        <div class="mail col-6">
+                            <span>435432543</span>
+                        </div>
+                        <div class="mail_ikona col-6">
+                            <img src="icons/telefon.png" alt="alt" class="ikona_poczty"/>
+                        </div>
+                        <div class="mail col-6">
+                            <a class="twitter" href="https://twitter.com/gumiak_">@Gumiak_</a>
+                        </div>
+                        <div class="mail_ikona col-6">
+                            <img src="icons/twitter.png" alt="alt" class="ikona_poczty"/>
+                        </div>
+        
+                        
                     </div>
-                    <div class="mail col-6">
-                        <span>435432543</span>
-                    </div>
-                    <div class="mail_ikona col-6">
-                        <img src="ikony/telefon.png" alt="alt" class="ikona_poczty" />
-                    </div>
-                    <div class="mail col-6">
-                        <a class="twitter" href="https://twitter.com/gumiak_">@Gumiak_</a>
-                    </div>
-                    <div class="mail_ikona col-6">
-                        <img src="ikony/twitter.png" alt="alt" class="ikona_poczty" />
-                    </div>
-
-
                 </div>
-            </div>
-
-        </div>
-    </div>
+            </div>  
 
 </body>
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
 html,body
 {
     
@@ -326,6 +326,12 @@ ZAWARTOŚĆ:
     outline: 5px solid #f1f1f1;
     margin-bottom:40px;
 }
+.title_of_product{
+    font-family: 'Bakbak One', cursive;
+}
+.napis_1,.napis_2{
+    font-family: 'Bakbak One', cursive;
+}
 .button_logowanie{
     width:150px;
     height: 60px;
@@ -336,7 +342,7 @@ ZAWARTOŚĆ:
     background: #050200;
     color:white;
     border:0;
-    
+    font-family: 'Bakbak One', cursive;
 }
 .panel_logowanie_button{
     margin-bottom:30px;
@@ -380,12 +386,12 @@ ZAWARTOŚĆ:
     margin-right: auto;
     padding-left: 10px;
     padding-right: 20px;
-    font-family: 'Akaya Telivigala', cursive;  
+    font-family: 'Bakbak One', cursive;
+      
 }
 .title_of_product {
     text-align: center;
     padding-bottom: 60px; 
-    font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
 .dropdown-menu{
     z-index:9999 !important;
@@ -436,10 +442,10 @@ STOPKA :
     
 }
 .btn{
-    height: 38px;  
+    height: 42px;  
     position: relative;
     background-color:#050200;
-    width:100px;
+    width:105px;
     padding: 10px;
     border:none;
     padding: 20px;
@@ -449,14 +455,23 @@ STOPKA :
     color:white;
     
 }
-
+.fotter{
+    background:#141822;
+    height:500px;
+    width:100%;
+    margin:auto;
+    color:white;
+}
 .zawartosc_fotter{
+    text-align: center;
     margin-bottom:30px;
     
 }
 .newsletter{
     border-top: 1px solid black;
     padding-top: 100px;
+    width:1200px;
+    text-align: center;
 }
 .kontakt, .obsluga_klienta{
     font-family: Arial;
@@ -472,7 +487,7 @@ STOPKA :
 @media(max-width:501px)
 {
     .btn{
-        height: 38px;  
+        height: 48px;  
         position: relative;
         background-color:#050200;
         width:60%;
@@ -505,7 +520,7 @@ STOPKA :
 }
 .twitter, .twitter:hover{
     text-decoration: none;
-    color:black;
+    color:white;
 }
 .polityka{
     text-align: center;
@@ -525,8 +540,8 @@ STOPKA :
 
 @media(min-width:1200px)
 {
-    .zawartosc, .title_of_product{
-        width:1400px;       
+    .zawartosc, .title_of_product, .newsletter{
+        width:1200px;       
     }
     
 }
@@ -543,7 +558,7 @@ STOPKA :
 @media(max-width:600px)
 {
     .under_products{
-        padding-botom:800px;
+        padding-bottom:800px;
     }
 }
 @media(max-width: 1000px)
@@ -572,3 +587,10 @@ STOPKA :
 
 
 
+#produkt-grid{
+    margin:0 !important;
+    padding:0 !important;
+}
+.alert{
+    width:200px;
+}

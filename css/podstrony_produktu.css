@@ -521,10 +521,10 @@ STOPKA :
     
 }
 .btn{
-    height: 38px;  
+    height: 42px;  
     position: relative;
     background-color:#050200;
-    width:100px;
+    width:105px;
     padding: 10px;
     border:none;
     padding: 20px;
@@ -534,14 +534,23 @@ STOPKA :
     color:white;
     
 }
-
+.fotter{
+    background:#141822;
+    height:500px;
+    width:100%;
+    margin:auto;
+    color:white;
+}
 .zawartosc_fotter{
+    text-align: center;
     margin-bottom:30px;
     
 }
 .newsletter{
     border-top: 1px solid black;
     padding-top: 100px;
+    width:1200px;
+    text-align: center;
 }
 .kontakt, .obsluga_klienta{
     font-family: Arial;
@@ -557,7 +566,7 @@ STOPKA :
 @media(max-width:501px)
 {
     .btn{
-        height: 38px;  
+        height: 48px;  
         position: relative;
         background-color:#050200;
         width:60%;
@@ -590,7 +599,7 @@ STOPKA :
 }
 .twitter, .twitter:hover{
     text-decoration: none;
-    color:black;
+    color:white;
 }
 .polityka{
     text-align: center;
@@ -610,7 +619,7 @@ STOPKA :
 
 @media(min-width:1200px)
 {
-    .zawartosc{
+    .zawartosc, .title_of_product, .newsletter{
         width:1200px;       
     }
     
@@ -628,7 +637,7 @@ STOPKA :
 @media(max-width:600px)
 {
     .under_products{
-        padding-botom:800px;
+        padding-bottom:800px;
     }
 }
 @media(max-width: 1000px)
@@ -657,3 +666,10 @@ STOPKA :
 
 
 
+#produkt-grid{
+    margin:0 !important;
+    padding:0 !important;
+}
+.alert{
+    width:200px;
+}
