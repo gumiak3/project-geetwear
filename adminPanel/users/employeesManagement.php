@@ -296,7 +296,7 @@ foreach($get_users as $row_users)
     }
     if(!$email_error)
     {
-      $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber where id_user=$id");
+      $update_stmt = $pdo->prepare("UPDATE users set firstname='$firstname',surname='$surname',email='$email',city='$city',street='$street',ZIP='$zipcode',house_number=$house_number, apartment_number=$apartmentnumber, type='$type' where id_user=$id");
       $update_stmt->execute();
     }
     if(!$password_error)
@@ -393,8 +393,8 @@ foreach($get_users as $row_users)
               <div class='col-12'> 
                 <label>TYP KONTA</label>
                 <select id='type-id' class='select-category col-12'name='type'>
-                  <option value='worker'>KLIENT</option>
-                  <option value='admin'>PRACOWNIK</option>
+                  <option value='worker'>PRACOWNIK</option>
+                  <option value='user'>KLIENT</option>
                 </select>
               </div>
               <?php
@@ -531,12 +531,7 @@ foreach($get_users as $row_users)
               $('#street-id').val(data.street);
               $('#housenumber-id').val(data.house_number);
               $('#apartmentnumber-id').val(data.apartment_number);
-              if(data.type=='worker')
-              {
-                $("#type-id").val('worker');
-              }else{
-                $("#type-id").val('admin');
-              }
+              $('#type-id').val(data.type);
               
             }
         });

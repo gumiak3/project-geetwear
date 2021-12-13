@@ -164,14 +164,14 @@ and open the template in the editor.
         </div>
         <div class="zawartosc"> 
             <div class="profile-panel row">
-                <div class='div-left-side-menu col-3'>
+                <div class='div-left-side-menu col-md-3 col-lg-3 col-sm-12'>
                     <ul class='left-side-menu'>
                         <li id='contact-details-btn'>Dane kontaktowe</li>
                         <li id='orders-btn'>Zamówienia</li>
                         <li></li>
                     </ul>
                 </div>
-                <div id='profile-content'class='profile-content col-9'>
+                <div id='profile-content'class='profile-content col-sm-12 col-md-9 col-lg-9'>
                 </div>
             </div>
             <div class="fotter">
