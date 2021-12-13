@@ -14,7 +14,7 @@ $html .= '<div class="tabela_koszyka  col-xs-5 col-lg-9 row">';
 $html .= '<div class="napis_koszyk col-12">KOSZYK</div>';
 $html .= '<div class="srodek_koszyk">';
 $_SESSION['price'] = 0;
-if (isset($_SESSION['baasket'])) {
+if (isset($_SESSION['basket'])) {
     if (count($_SESSION['basket']) > 0) {
         $basket = $_SESSION['basket'];
         foreach ($basket as $product) {

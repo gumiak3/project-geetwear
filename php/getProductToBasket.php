@@ -21,7 +21,7 @@ if(isset($_SESSION['basket'])){
         $position=array_search($p,$basket);
         $p2=$basket[$position];
         $amount2 = $p2->amount;
-        $amount2+=1;
+        $amount2+=$p->amount;
         $p2->amount=$amount2;
         $basket[$position]=$p2;
     }else{
