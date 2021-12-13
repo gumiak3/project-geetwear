@@ -1,9 +1,9 @@
 <?php
     session_start();
-    if($_SESSION && $_SESSION['login']){
+    if($_SESSION && isset($_SESSION['login'])){
         header("location:profile.php");
     }
-    
+    ob_start();
 ?>
 <!DOCTYPE html>
 <!--
@@ -42,22 +42,47 @@ and open the template in the editor.
         </div>
         <script>
             $(function(){
-                $(".toggle").on("click",function(){
+                let deviceWidth;
+                $(window).resize(function(){
+                    
+                    deviceWidth = $(window).width();
+                    if(deviceWidth>=951)
+                    {
                     if($(".kategoria").hasClass("active")){
                         $(".kategoria").removeClass("active");
                         $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass('active');
+                        $(".bar2").removeClass('active');
+                        $(".bar3").removeClass('active');
+                        console.log(deviceWidth);
+                    }
+                    }
+                });
+                $(".toggle").on("click",function(){             
+                    if($(".kategoria").hasClass("active")){
+                        $(".kategoria").removeClass("active");
+                        $(".menu_cale").removeClass("active");
+                        $(".bar1").removeClass("active");
+                        $(".bar2").removeClass("active");
+                        $(".bar3").removeClass("active");
                     }
                     else{
                         $(".kategoria").addClass("active");
                         $(".menu_cale").addClass("active");
+                        $(".bar1").addClass("active");
+                        $(".bar2").addClass("active");
+                        $(".bar3").addClass("active");
                     }
                 });
+                
             });
         </script>
         <nav class="nabar sticky-top" id="menu_cale">
             <div class="po_zmianie grid row gridcount">
                 <div class="toggle col-4">
-                    <span class="bars"></span>
+                <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
                 </div>
                 <div class="logowanie_w_menu col-4">
                     <a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>
@@ -68,15 +93,7 @@ and open the template in the editor.
                 
             </div>
            
-            <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
-                <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
-                <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
-                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
-                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
-                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
-                <li class="kategoria"><a href="Inne.html">INNE</a></li>
-            </ul>
+            
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 

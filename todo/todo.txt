@@ -13,4 +13,8 @@ rejestracja
 
 
 panel admina
-    edycja i dodawanie za pomocą modalu
+    PRODUKTY
+        MOŻLIWOŚC EDYCJI ZDJĘĆ PRODUKTÓW
+        DODAWANIE PRODUKTÓW
+            DODAWANIE ZDJĘĆ produktu
+            

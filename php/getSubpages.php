@@ -1,4 +1,4 @@
-<form method="get">
+<form method="">
     <ul class="menu_cale">
     <?php
         include('load_database.php');
@@ -7,5 +7,5 @@
             echo '<li class="kategoria"><a href="index2.php?idc='.$row100['additional_info'].'">'.$row100['subpage_name'].'</a></li>';
         }
     ?>
-    </ul>
+    </ul>   
 </from>

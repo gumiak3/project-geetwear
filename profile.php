@@ -23,6 +23,9 @@ and open the template in the editor.
         <link href="css/profile.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="newjavascript.js"></script>
     </head>
     <body>
         <?php
@@ -40,7 +43,7 @@ and open the template in the editor.
             <div class="rightsite">
                 <div class="logowanie">
                     <?php
-                    if($_SESSION){
+                    if(isset($_SESSION['login'])){
                         ?>
                         <div class="dropdown show">
                         <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,12 +52,12 @@ and open the template in the editor.
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="./profile.php">Profil</a>
                             <?php
-                            if($_SESSION['user-type']=='admin'){
-                                echo "<a class='dropdown-item' href='./admin_panel.php'>Zarządzaj</a>";
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
                             }
                             ?>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><form method='POST'>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
                             <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
                             </form></a>
                         </div>
@@ -120,9 +123,27 @@ and open the template in the editor.
 
                 </div>
                 <div class="logowanie_w_menu col-4">
-                    <?php
-                    if($_SESSION){
-                        echo '<a href="logowanie.php"><p class="loguj"><img class="user_logo" src="./icons/user.png"></p></a>';
+                <?php
+                    if(isset($_SESSION['login'])){
+                        ?>
+                        <div class="dropdown show">
+                        <a href="logowanie.php"role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <p class="loguj"><img class="user_logo" src="./icons/user.png"></p>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="./profile.php">Profil</a>
+                            <?php
+                            if($_SESSION['user-type']=='admin' || $_SESSION['user-type']=='worker'){
+                                echo "<a class='dropdown-item' href='./adminPanel/DashBoard.php'>Zarządzaj</a>";
+                            }
+                            ?>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#"><form method='POST' action='./php/logout.php'>
+                            <button name='log_out' type='submit' class='log-out'>Wyloguj się</button>
+                            </form></a>
+                        </div>
+                        </div>
+                      <?php
                     }else{
                         echo '<a href="logowanie.php"><p class="loguj"> ZALOGUJ SIĘ </p></a>';
                     }
@@ -134,29 +155,23 @@ and open the template in the editor.
                 
             </div>
            
-            <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.php">NOWOŚCI</a></li>
-                <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
-                <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
-                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
-                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
-                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
-                <li class="kategoria"><a href="Inne.html">INNE</a></li>
-            </ul>
+            <?php
+            include('php/getSubpages.php');
+            ?>
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 
         </div>
         <div class="zawartosc"> 
             <div class="profile-panel row">
-                <div class='div-left-side-menu col-3'>
+                <div class='div-left-side-menu col-md-3 col-lg-3 col-sm-12'>
                     <ul class='left-side-menu'>
                         <li id='contact-details-btn'>Dane kontaktowe</li>
                         <li id='orders-btn'>Zamówienia</li>
                         <li></li>
                     </ul>
                 </div>
-                <div id='profile-content'class='profile-content col-9'>
+                <div id='profile-content'class='profile-content col-sm-12 col-md-9 col-lg-9'>
                 </div>
             </div>
             <div class="fotter">
@@ -221,9 +236,12 @@ and open the template in the editor.
 <script type='text/javascript'src='./jscript/profile_menu.js'></script>
 
 <?php
-    include("./php/logout.php");
+session_start();
+    if(isset($_POST['log_out'])){
+        session_destroy();
+        header("location:logowanie.php");
+    }
 ?>
-
 <?php
     if(isset($_POST['edit-submit'])){
         $id = $_SESSION['id_user'];

@@ -183,6 +183,12 @@ ul li a, ul li a:hover{
         background:#f1f1f1;
         
     }
+    ul .kategoria{
+        list-style:none;
+        display:inline-block;
+        line-height: 80px;  
+        text-transform:uppercase;
+    }
     .kategoria a{
         position:relative;
         left:-30px;
