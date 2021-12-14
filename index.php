@@ -59,9 +59,14 @@ ob_start();
                 </div>
                 <div class="koszyk">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
-                    <span class='basket_number'>
+                    <input name="basket_number" type="hidden" value="<?php if(isset($_SESSION['basket'])){echo count($_SESSION['basket']);}else{echo 0;} ?>">
+                    <span class='basket_number' id='basket_number'>
                         <?php
-                            echo "(0)";
+                            if(isset($_SESSION['basket'])){
+                                echo '('.count($_SESSION['basket']).')';
+                            }else{
+                                echo '(0)';
+                            }
                         ?>
                     </span>
                 </div>
@@ -141,9 +146,14 @@ ob_start();
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
-                    <span class='basket_number'>
-                        <?php
-                            echo "(0)";
+                    <input name="basket_number" type="hidden" value="<?php if(isset($_SESSION['basket'])){echo count($_SESSION['basket']);}else{echo 0;} ?>">
+                    <span class='basket_number' id='basket_number'>
+                    <?php
+                            if(isset($_SESSION['basket'])){
+                                echo '('.count($_SESSION['basket']).')';
+                            }else{
+                                echo '(0)';
+                            }
                         ?>
                     </span>
                 </div>

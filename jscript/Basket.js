@@ -28,7 +28,8 @@ function DeleteProductFromBasket(deleted_position_number, deleted_positionid){
             ProductPosition: deleted_position_number
         }
     }).done(function(){
-
+        var ilos = parseInt($('input[name="basket_number"]').val())+1;
+        document.getElementById("basket_number").innerHTML = "("+ilos+")";
         // $(deleted_positionid).remove();
         getProductsInBasket();
 
