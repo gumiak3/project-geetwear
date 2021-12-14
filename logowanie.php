@@ -37,6 +37,7 @@ and open the template in the editor.
                 </div>
                 <div class="koszyk">
                     <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    
                 </div>
             </div>      
         </div>
@@ -89,6 +90,13 @@ and open the template in the editor.
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.php"><img class="koszy" src="ikony/koszyk.png" alt="alt"/></a>
+                    <span class='number-of-items'>
+                    <?php
+                        if(isset($_SESSION['basket'])){
+                            echo "(".count($_SESSION['basket']).")";
+                        }
+                    ?>
+                    </span>
                 </div>
                 
             </div>

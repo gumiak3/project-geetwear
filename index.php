@@ -59,6 +59,7 @@ ob_start();
                 </div>
                 <div class="koszyk">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
+                    
                 </div>
             </div>      
         </div>

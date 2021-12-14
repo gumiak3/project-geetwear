@@ -499,7 +499,11 @@ font-family: 'Zen Antique', serif;
     font-size:15px;
     font-family: 'Open Sans', sans-serif;
 }
-
+.number-of-items{
+    position:relative;
+    top:15px;
+    left:-5px;
+}
 /*
 STOPKA :
 */

@@ -278,7 +278,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>  
-
+           
 </body>
 
 </html>
@@ -288,6 +288,7 @@ and open the template in the editor.
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript' src='./jscript/profile_menu.js'></script>
 <script type='text/javascript' src='./jscript/toBasket.js'></script>
+
 <?php
 include("./php/logout.php");
 ?>

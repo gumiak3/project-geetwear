@@ -92,3 +92,4 @@ $html .= '</div>';
 $html .= '</div>';
 
 echo $html;
+$_SESSION['alert']=true;
