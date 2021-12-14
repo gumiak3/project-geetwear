@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 html,body
 {
     
@@ -330,12 +334,17 @@ ZAWARTOŚĆ:
 
 .nazwa_produktu{
     text-align: left;
+    
+}
+#nazwa_produktu_id{
+    font-family: 'Bebas Neue', cursive;
 }
 .cena_produktu{
     margin-top:20px;
     margin-bottom:20px;
     font-size:20px;
     font-weight: bold; 
+    font-family: 'Open Sans', sans-serif;
 }
 .zdjecia_pod{
     text-align: center;
@@ -352,6 +361,7 @@ ZAWARTOŚĆ:
     background: #f1f1f1;
     font-size:22px;
     text-align-last:center;
+    border:1px solid black;
 }
 .input_ilosci:focus, .input_rozmiaru:focus{
     outline: none;
@@ -440,7 +450,9 @@ ZAWARTOŚĆ:
     padding-bottom: 100px; 
     font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
-
+.przyciski_pod{
+    font-family: 'Bakbak One', cursive;
+}
 
 /*
 STOPKA :

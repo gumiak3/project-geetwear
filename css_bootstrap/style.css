@@ -1,7 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 body,
 button {
   font-family: "Inter", sans-serif;
+}
+button{
+  border-radius:5px;
+
 }
 :root {
   --offcanvas-width: 270px;
@@ -131,6 +140,10 @@ h2{
 
 
 }
+h2{
+  font-family: 'Open Sans', sans-serif;
+  text-transform:uppercase;
+}
 .add-btn:hover{
   background:#fb8332;
   transform:translateY(-1px);
@@ -243,4 +256,24 @@ input{
   left:40%;
   right:50%;
   top:10%;
+}
+.number-of-users{
+  display:flex;
+  justify-content:center;
+
+}
+.order-stats{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.quick-stats{
+  text-align: center;
+  height:200px;
+  color:white;
+}
+
+.order-ammount{
+  font-size:25px;
+
 }

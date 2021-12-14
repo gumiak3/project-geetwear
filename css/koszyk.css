@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 html,body
 {
     
@@ -341,6 +346,7 @@ ZAWARTOŚĆ:
     background:#050200;
     color:white;
     border:none;
+    font-family: 'Bakbak One', cursive;
 }
 .przycisk_zakonczenia:focus{
     outline:none;
@@ -381,8 +387,13 @@ ZAWARTOŚĆ:
     font-weight: bold;
 }
 .nazwa{
-    font-weight: bold;
+    
+    font-size:18px;
     text-decoration: underline;
+    font-family: 'Bebas Neue', cursive;
+}
+.opis_produktu{
+    font-family: 'Roboto', sans-serif;
 }
 .opis_produktu_koszyk{
     position: relative;
@@ -433,7 +444,7 @@ ZAWARTOŚĆ:
     margin-top:15px;
     
     padding-bottom:15px;
-    font-family: 'Dela Gothic One';
+    font-family: 'Roboto', sans-serif;
     height: 40px;
     
 }

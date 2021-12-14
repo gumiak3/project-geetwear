@@ -203,17 +203,14 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
         <div id='content'class="row">
         <div class='col-12'>
     <h2>SOON</h2>
+    <div class='dashboard-content container-row'>
+    </div>
 </div>
-<table id="MyTable" class="table table-striped table-dark">
-    <thead class="table-head">
-        
-    </thead>
-    <tbody class="table-body">
+
 <?php
 include("../php/load_database.php");
 ?>
-</tbody>
-</table>
+
 
 
 <?php

@@ -493,8 +493,12 @@ font-family: 'Zen Antique', serif;
 .cena{
     font-size: x-large;
     font-weight: bold;
+    
 }
-
+.product-title a{
+    font-size:15px;
+    font-family: 'Open Sans', sans-serif;
+}
 
 /*
 STOPKA :
