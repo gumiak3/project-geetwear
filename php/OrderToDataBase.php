@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['add_order'])) {
-    include('load_database.php');
+ 
     class Product
     {
         public $id;

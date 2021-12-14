@@ -101,9 +101,7 @@ and open the template in the editor.
                 
             </div>
            
-            <?php
-            include('php/getSubpages.php');
-           ?> 
+    
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 
