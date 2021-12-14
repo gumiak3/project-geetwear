@@ -39,7 +39,7 @@ if (isset($_POST['add_order'])) {
     $order_date = '"' . date("Y/m/d") . '"';
 
     if (isset($_SESSION['login'])) {
-        $stmt70 = $pdo->exec('INSERT INTO orders (id_order,	order_date,	status) VALUES (' . $current_order . ', ' . $order_date . ', "cumming")');
+        $stmt70 = $pdo->exec('INSERT INTO orders (id_order,	order_date,	status) VALUES (' . $current_order . ', ' . $order_date . ', "nadchodzace")');
         foreach ($basket as $product) {
             
             $id = $product->id;
@@ -75,7 +75,7 @@ if (isset($_POST['add_order'])) {
             }
 
 
-        $stmt71 = $pdo->exec('INSERT INTO orders (id_order,	order_date,	status) VALUES (' . $current_order . ', ' . $order_date . ', "cumming")');
+        $stmt71 = $pdo->exec('INSERT INTO orders (id_order,	order_date,	status) VALUES (' . $current_order . ', ' . $order_date . ', "nadchodzace")');
         foreach ($basket as $product) {
 
             $id = $product->id;

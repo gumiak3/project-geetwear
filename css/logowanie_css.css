@@ -306,6 +306,7 @@ ZAWARTOŚĆ:
     margin-bottom:30px;
 }
 .input_logowanie{
+    
     width:300px;
     height: 40px;
 }
@@ -321,6 +322,11 @@ ZAWARTOŚĆ:
     line-height: 10px;
     right:40px;
     
+}
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
 }
 #input_haslo, #input_login{ 
     outline: 5px solid #f1f1f1;

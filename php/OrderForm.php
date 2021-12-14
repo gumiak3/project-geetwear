@@ -2,8 +2,6 @@
 include('load_database.php');
 include('OrderToDataBase.php');
 if (isset($_SESSION['login'])) {
-
-
     $stmt30 = $pdo->prepare('SELECT * FROM users WHERE id_user = :id');
     $stmt30->bindValue(':id', $_SESSION['id_user'], PDO::PARAM_STR);
     $stmt30->execute();
@@ -93,6 +91,7 @@ if (isset($_SESSION['login'])) {
             </div>
         </div>
         <br>
+</div>
         <!-- payment type -->
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -116,9 +115,7 @@ if (isset($_SESSION['login'])) {
         <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów"></div>
     </form>
 <?php
-if(isset($_POST['add_order'])){
-    echo 'eeeelo';
-}
+
 } else {
     echo '<input type="hidden" name="ceena" value="' . $_SESSION['price'] . '">';
     if ($_SESSION['price'] == 0) {

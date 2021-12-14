@@ -305,7 +305,11 @@ ul li a, ul li a:hover{
 /*
 ZAWARTOŚĆ:
 */
-
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 .slider{
     width:100%;
     overflow:hidden; 
