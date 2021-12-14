@@ -1,5 +1,4 @@
 <?php
-echo 'dupa';
 if(isset($_POST['add_order'])){
     echo 'eeeeeelo';
     class Product
