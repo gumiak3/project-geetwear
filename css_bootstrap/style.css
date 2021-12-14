@@ -277,3 +277,13 @@ input{
   font-size:25px;
 
 }
+.title{
+  margin-top:30px;
+}
+.ordered_products_table{
+  width:100%;
+  margin-top:50px;
+}
+.products{
+  margin-bottom:50px;
+}

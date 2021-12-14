@@ -121,8 +121,7 @@ CREATE TABLE `orders` (
   `id_order` int(11) NOT NULL,
   `order_date` date DEFAULT NULL,
   `shipment_date` date DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
-  `id_basket` int(11) DEFAULT NULL
+  `status` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

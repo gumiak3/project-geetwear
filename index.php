@@ -59,7 +59,11 @@ ob_start();
                 </div>
                 <div class="koszyk">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
-                    
+                    <span class='basket_number'>
+                        <?php
+                            echo "(0)";
+                        ?>
+                    </span>
                 </div>
             </div>      
         </div>
@@ -137,6 +141,11 @@ ob_start();
                 </div>
                 <div class="koszyk_w_menu col-4">
                     <a href="koszyk.php"><img class="koszy" src="icons/koszyk.png" alt="alt"/></a>
+                    <span class='basket_number'>
+                        <?php
+                            echo "(0)";
+                        ?>
+                    </span>
                 </div>
                 
             </div>

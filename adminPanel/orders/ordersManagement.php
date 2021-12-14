@@ -210,56 +210,58 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
         <th scope="col">ID</th>
         <th scope="col">DATA ZAMÓWIENIA</th>
         <th scope="col">DATA ZAKOŃCZENIA</th>
-        <th scope="col">STATUS</th>        
+        <th scope="col">SZCZEGÓŁY</th> 
+        <th scope="col">OPERACJE</th>       
         </tr>
     </thead>
     <tbody class="table-body">
 <?php
 include("../../php/load_database.php");
-$get_subpages = $pdo->query("SELECT * FROM subpages");
-
-foreach($get_subpages as $row_subpages)
+$get_orders = $pdo->query("SELECT * FROM orders ORDER BY id_order DESC");
+foreach($get_orders as $row_orders)
 {
-    echo"<tr>" ;
-    echo "<td>".$row_subpages['id_subpage']."</td>";
-    echo "<td>".$row_subpages['subpage_name']."</td>";
-    echo "<td>".$row_subpages['additional_info']."</td>";
-    if($row_subpages['status']==1){
-      echo "<td>aktywne</td>";
-    }else{
-      echo "<td>nieaktywne</td>";
-    }
-    ?>
-    <td><button name='edit_send' class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_subpages['id_subpage']?>" value="<?=$row_subpages['id_subpage']?>"><i class="bi bi-pencil"></i></button></td>
-    <form method="POST" onsubmit="return confirm('Czy na pewno chcesz usunąć ten rekord?');">
-      <td><button type='submit' name='delete_send' class='delete_record' value="<?=$row_subpages['id_subpage']?>"><i class="bi bi-trash"></i></button></td>
-    </form>
-        
-    <?php
-    echo "</tr>";
+  echo "<tr>";
+  echo "<td>".$row_orders['id_order']."</td>";
+  echo "<td>".$row_orders['order_date']."</td>";
+  echo "<td>".$row_orders['shipment_date']."</td>";
+  ?>
+  <td><button class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_orders['id_order']?>" value="<?=$row_categories['id_category']?>">SZCZEGÓŁY</button></td>
+  <form method="POST"">
+        <td><button type='submit' name='change-status' class='edit_record btn btn-info btn-lg' value="<?=$row_orders['id_order']?>"><?=$row_orders['status']?></button></td>
+        </form>
+  <?php
+  echo "</tr>";
 }
+
+
 ?>
 </tbody>
 </table>
 
 
 <?php
-  if(isset($_POST['edit-submit']))
-  {
-    $id = $_POST['subpage_id'];
-    $subpage_name = $_POST['subpage_name'];
-    $content = $_POST['content'];
-    $status = $_POST['status'];
-    $edit_stmt = $pdo->prepare("UPDATE subpages set subpage_name='$subpage_name',additional_info=$content,status=$status where id_subpage=$id");
-    $edit_stmt->execute();
-    header("REFRESH:0");
-  }
-  if(isset($_POST['delete_send'])){
-      $idToDelete = $_POST['delete_send'];
-      $stmt_to_delete = $pdo->prepare("DELETE FROM subpages where id_subpage like :id_subpage");
-      $stmt_to_delete->bindValue(':id_subpage',$idToDelete,PDO::PARAM_STR);
-      $stmt_to_delete->execute();
-      
+  
+  if(isset($_POST['change-status'])){
+      $order_id = $_POST['change-status'];
+      $status;
+      $shipment_date='';
+      $order_info = $pdo->query("SELECT * FROM orders where id_order=$order_id");
+      foreach($order_info as $row_info)
+      {
+        $status = $row_info['status'];
+      }
+      if($status=='nadchodzace')
+      {
+        $status = 'w trakcie';
+      }else if($status=='w trakcie'){
+        $status = 'zrealizowano';
+        $shipment_date = date("Y/m/d");
+      }
+      $update_status = $pdo->exec("UPDATE orders set status='$status' where id_order=$order_id");
+      if($shipment_date!='')
+      {
+        $update_shipmentdate = $pdo->exec("UPDATE orders set shipment_date='$shipment_date' where id_order=$order_id");
+      }
       unset($_POST);
       header("Refresh:0");
   }
@@ -271,38 +273,48 @@ foreach($get_subpages as $row_subpages)
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">EDYCJA</h4>
+          <h4 class="modal-title">SZCZEGÓŁY ZAMÓWIENIA</h4>
         </div>
-        <form method="POST" enctype="multipart/form-data">
-        <div id='modal-body'class="modal-body row">
-            <div class='cotainer-row'>
-              <input type='hidden' id='subpage_id'name='subpage_id'></input>
-              <label class='col-12'>Nazwa podstrony</label>
-              <input class='col-12' id='subpage_name'name='subpage_name' required></input>
-              <label class='col-12'>Zawartość</label>
-              <select name='content' id='subpage_content' required class='select-category'>
-                <?php
-                  $get_content = $pdo->query("SELECT * FROM categories");
-                  foreach($get_content as $row_content)
-                  {
-                    echo "<option value=".$row_content['id_category'].">".$row_content['category_name']."</option>";
-                  }
-                ?>
-              </select>
-              <label class='col-12'>Status</label>
-              <div class='div-status'>
-                <input required class='input-radio' type='radio' id='active' name='status' value='1'></input>
-                <label for='active'>aktywna</label><br>
-                <input required class='input-radio' type='radio' id='inactive' name='status' value='0'></input>  
-                <label for='inactive'>nieaktywna</label>
-              </div>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-12 row'>
             </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Imię</label>
+                <p class='col-6'id='firstname-id'></p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Nazwisko</label>
+                <p class='col-6'id='surname-id'>XD</p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Miasto</label>
+                <p class='col-6'id='city-id'>XD</p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Ulica</label>
+                <p class='col-6'id='street-id'>XD</p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Kod pocztowy</label>
+                <p class='col-6'id='zip-id'>XD</p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Numer domu</label>
+                <p class='col-6'id='housenumber-id'>XD</p>
+            </div>
+            <div class='contact-label col-12 row'>
+                <label class='col-6'>Numer mieszkania</label>
+                <p class='col-6'id='apartmentnumber-id'>XD</p>
+            </div>
+            <div id='ordered-products' class='products container-row'>
+              
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-        <button class="btn-save" type='submit' name='edit-submit'>ZAPISZ</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Zamknij</button>
         </div>
-        </form>
       </div>
       
     </div>
@@ -365,15 +377,7 @@ foreach($get_subpages as $row_subpages)
    
   </body>
 </html>
-<?php
-  if(isset($_POST['add-submit'])){
-    $subpage_name = $_POST['subpage_name'];
-    $content = $_POST['content'];
-    $status = $_POST['status'];
-    $add_stmt = $pdo->exec("INSERT INTO subpages (subpage_name,additional_info,status) values ('$subpage_name',$content,$status)");
-    header("REFRESH:0");
-  }
-?>
+
 
 <!-- bootstrap links -->
 <script src="../../js_bootstrap/bootstrap.bundle.min.js"></script>
@@ -385,24 +389,30 @@ foreach($get_subpages as $row_subpages)
 <script>
   $(document).ready(function(){
     $(".edit_data").click(function(){
-        const subpage_id = $(this).attr("id");
-        console.log(subpage_id);
+        const order_id = $(this).attr("id");
+        console.log(order_id);
         $.ajax({ 
             type: "POST",
-            url:"edit_subpage.php",
-            data: {id: subpage_id},
+            url:"order_details_user.php",
+            data: {id: order_id},
             dataType:'JSON',
             success: function(data) {
-              $("#subpage_id").val(data[0].id_subpage);
-              $("#subpage_name").val(data[0].subpage_name);
-              $("#subpage_content").val(data[0].additional_info);
-              if(data[0].status==1)
-              {
-                document.getElementById("active").checked = true;
-              }else{
-                document.getElementById("inactive").checked = true;
-              }
-                
+              document.getElementById("firstname-id").innerHTML = data[0].firstname;
+              document.getElementById("surname-id").innerHTML = data[0].surname;
+              document.getElementById("city-id").innerHTML = data[0].city;
+              document.getElementById("street-id").innerHTML = data[0].street;
+              document.getElementById("zip-id").innerHTML = data[0].ZIP;
+              document.getElementById("housenumber-id").innerHTML = data[0].house_number;
+              document.getElementById("apartmentnumber-id").innerHTML = data[0].apartment_number;
+            }
+          });
+          $.ajax({ 
+            type: "POST",
+            url:"order_details_products.php",
+            data: {id: order_id},
+            success: function(data) {
+              console.log(data);
+              document.getElementById("ordered-products").innerHTML = data;
             }
           });
     });

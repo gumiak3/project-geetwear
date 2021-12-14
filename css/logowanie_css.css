@@ -323,6 +323,11 @@ ZAWARTOŚĆ:
     right:40px;
     
 }
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 #input_haslo, #input_login{ 
     outline: 5px solid #f1f1f1;
     margin-bottom:40px;

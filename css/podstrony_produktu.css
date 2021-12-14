@@ -663,7 +663,11 @@ STOPKA :
         padding-bottom:1000px;
     }
 }
-
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 
 
 #produkt-grid{

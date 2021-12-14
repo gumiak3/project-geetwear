@@ -1,5 +1,6 @@
 <?php
 include('load_database.php');
+include('OrderToDataBase.php');
 if (isset($_SESSION['login'])) {
     $stmt30 = $pdo->prepare('SELECT * FROM users WHERE id_user = :id');
     $stmt30->bindValue(':id', $_SESSION['id_user'], PDO::PARAM_STR);
@@ -22,8 +23,10 @@ if (isset($_SESSION['login'])) {
         echo "Łączna cena produktów:" . $_SESSION['price'] + 8.99 . ' zł';
     }
 ?>
-    <form method='POST'>
-    <div class='contact-content-div row'>
+<form method="POST">
+</form>
+    <form method="POST">
+        <div class='contact-content-div row'>
             <div class='contact-label col-3'>
                 <label>Imię</label>
             </div>
@@ -89,10 +92,28 @@ if (isset($_SESSION['login'])) {
         </div>
         <br>
 </div>
-</form>
         <!-- payment type -->
-        
-        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Płatość przy odbiorze
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Blik
+            </label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault3">
+                Przelew
+            </label>
+        </div>
+        <br><br>
+        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów"></div>
+    </form>
 <?php
 
 } else {
@@ -104,6 +125,8 @@ if (isset($_SESSION['login'])) {
     }
 
 ?>
+<form method="POST">
+</form>
     <form method="POST">
         <div class='contact-content-div row'>
             <div class='contact-label col-3'>
@@ -190,11 +213,11 @@ if (isset($_SESSION['login'])) {
             </label>
         </div>
         <br><br>
-        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów">
+        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów"></div>
     </form>
 
 <?php
 }
-include('OrderToDataBase.php');
+
 
 ?>

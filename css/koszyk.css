@@ -611,6 +611,11 @@ STOPKA :
     text-decoration: none;
     left:50px;
 }
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 .twitter, .twitter:hover{
     text-decoration: none;
     color:white;

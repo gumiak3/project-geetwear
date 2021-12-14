@@ -593,6 +593,11 @@ STOPKA :
         padding-bottom:800px;
     }
 }
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 @media(max-width: 1000px)
 {
     .fast_delivery, .secured, .safety {

@@ -9,6 +9,11 @@ html,body
 /*
 LOGO + MENU
 */
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 .loguj{
     color:black;
     font-weight: bold;

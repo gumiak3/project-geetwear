@@ -27,6 +27,11 @@ LOGO + MENU
     position: relative;
     left:15px; 
 }
+.basket_number{
+    position: relative;
+    top:12px;
+    right:3px;
+}
 .logo{
     width:33.3%;
 }
