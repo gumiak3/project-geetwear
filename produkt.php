@@ -206,7 +206,7 @@ and open the template in the editor.
                         <br>
                         <select class="input_rozmiaru" name="input_rozmiaru">
                             <?php
-                            $stmt25 = $pdo->query('SELECT id, size FROM products WHERE id_product=' . $id_product);
+                            $stmt25 = $pdo->query('SELECT * FROM products WHERE id_product=' . $id_product);
 
                             foreach ($stmt25 as $row25) {
                                 echo '<option value="' . $row25['id'] . '" title="' . $row25['size'] . '">' . $row25['size'] . '</option>';

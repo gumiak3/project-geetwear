@@ -2,18 +2,20 @@ $('button[name="add_order"]').on('click',function(e){
     if($('input[name="ceena"]').val()==0){
         alert('mordo ale nic nie zamówiłeś')
     }else{
+        alert('dupa');
         OrderToDatabase();
+        alert('dupaaaa');
     }
     
 });
 function OrderToDatabase(){
-    alert('dupa');
     $.ajax({
         url: "php\OrderToDataBase.php",
         method: 'POST',
         data: {
             fname: $('input[name="firstname"]').val(),
             sname: $('input[name="surname"]').val(),
+            email: $('input[name="email"]').val(),
             city: $('input[name="city"]').val(),
             street: $('input[name="street"]').val(),
             zip: $('input[name="zip"]').val(),

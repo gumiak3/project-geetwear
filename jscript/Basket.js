@@ -20,7 +20,6 @@ function getProductsInBasket(){
     })
 }
 function DeleteProductFromBasket(deleted_position_number, deleted_positionid){
-    alert(deleted_position_number+" dupa");
     $.ajax({
         url: "php/DeleteFromBasket.php",
         method: 'POST',
