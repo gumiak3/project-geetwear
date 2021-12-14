@@ -203,7 +203,7 @@ if($_SESSION['login'] && $_SESSION['user-type']=='admin' || $_SESSION['user-type
         <div class='col-12'>
     <h2>Zamówienia</h2>
 </div>
-<button class="add-btn" data-toggle="modal" data-target="#addMyModal"  class='edit_record' data-toggle="modal" data-target="mymodal" >DODAJ REKORD</button>
+
 <table id="MyTable" class="table table-striped table-dark">
     <thead class="table-head">
         <tr>
@@ -225,7 +225,7 @@ foreach($get_orders as $row_orders)
   echo "<td>".$row_orders['order_date']."</td>";
   echo "<td>".$row_orders['shipment_date']."</td>";
   ?>
-  <td><button class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_orders['id_order']?>" value="<?=$row_categories['id_category']?>">SZCZEGÓŁY</button></td>
+  <td><button class="edit_data btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  class='edit_record' data-toggle="modal" data-target="mymodal"id="<?=$row_orders['id_order']?>">SZCZEGÓŁY</button></td>
   <form method="POST"">
         <td><button type='submit' name='change-status' class='edit_record btn btn-info btn-lg' value="<?=$row_orders['id_order']?>"><?=$row_orders['status']?></button></td>
         </form>

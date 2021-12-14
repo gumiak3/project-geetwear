@@ -21,7 +21,7 @@ function getContactDetails(){
 }
 function getOrders(){
     $.ajax({
-        url:"./php/user_orders.php",
+        url:"./php/profile_orders.php",
         method: 'POST'
     }).done(function( data ){
         $("#profile-content").html(data);

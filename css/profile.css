@@ -362,6 +362,9 @@ input{
     color:grey;
     background:rgba(0, 0, 0, 0.05);
 }
+.exit{
+    background:none;
+}
 .contact-input input.editting{
     color:black;
     background:white;
@@ -412,6 +415,20 @@ input{
     cursor:pointer;
     box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
 }
+.order-ammount{
+    font-size:25px;
+  
+  }
+  .title{
+    margin-top:30px;
+  }
+  .ordered_products_table{
+    width:100%;
+    
+  }
+  .products{
+    margin-bottom:50px;
+  }
 /*
 STOPKA :
 */
@@ -431,19 +448,13 @@ STOPKA :
     height: 40px;
     
 }
-.btn{
-    height: 42px;  
-    position: relative;
-    background-color:#050200;
-    width:105px;
-    padding: 10px;
+.btn-exit{
     border:none;
-    padding: 20px;
-    display: inline-block;
-    right:106px;
-    top:-2px;
+}
+.edit_data{
+    border-radius:10px;
+    background:grey;
     color:white;
-    
 }
 .fotter{
     background:#141822;
