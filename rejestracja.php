@@ -64,15 +64,9 @@ and open the template in the editor.
                 
             </div>
            
-            <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
-                <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
-                <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
-                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
-                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
-                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
-                <li class="kategoria"><a href="Inne.html">INNE</a></li>
-            </ul>
+            <?php
+            include('php/getSubpages.php');
+           ?> 
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 

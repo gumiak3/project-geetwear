@@ -1,5 +1,6 @@
 <?php
 include('load_database.php');
+include('OrderToDataBase.php');
 if (isset($_SESSION['login'])) {
 
 
@@ -24,6 +25,8 @@ if (isset($_SESSION['login'])) {
         echo "Łączna cena produktów:" . $_SESSION['price'] + 8.99 . ' zł';
     }
 ?>
+<form method="POST">
+</form>
     <form method="POST">
         <div class='contact-content-div row'>
             <div class='contact-label col-3'>
@@ -110,7 +113,7 @@ if (isset($_SESSION['login'])) {
             </label>
         </div>
         <br><br>
-        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów">
+        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów"></div>
     </form>
 <?php
 if(isset($_POST['add_order'])){
@@ -125,6 +128,8 @@ if(isset($_POST['add_order'])){
     }
 
 ?>
+<form method="POST">
+</form>
     <form method="POST">
         <div class='contact-content-div row'>
             <div class='contact-label col-3'>
@@ -211,11 +216,11 @@ if(isset($_POST['add_order'])){
             </label>
         </div>
         <br><br>
-        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów">
+        <input name='add_order' id='save-btn' class='save-btn' type='submit' value="Zamów"></div>
     </form>
 
 <?php
 }
-include('OrderToDataBase.php');
+
 
 ?>
