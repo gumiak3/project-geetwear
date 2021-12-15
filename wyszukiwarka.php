@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>GETT-WEAR</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/css.css" rel="stylesheet" type="text/css"/>
         <link href="css/wyszukiwarka.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/png" href="ikony/ikona1.png">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -83,26 +84,24 @@ and open the template in the editor.
             </div>
            
             <ul class="menu_cale">
-                <li class="kategoria"><a href="nowosc.html">NOWOŚCI</a></li>
                 <li class="kategoria"><a href="bluzy.html">BLUZY</a></li>
                 <li class="kategoria"><a href="Koszulki.html">KOSZULKI</a></li>
-                <li class="kategoria"><a href="Skarpety.html">SKARPETY</a></li>
-                <li class="kategoria"><a href="Bielizna.html">BIELIZNA</a></li>
-                <li class="kategoria"><a href="Gadżety.html">GADŻETY</a></li>
-                <li class="kategoria"><a href="Inne.html">INNE</a></li>
+                <li class="kategoria"><a href="Skarpety.html">SKIETY</a></li>
             </ul>
         </nav>
         <!-- reszta -->
         <div class="space_between_slider"> 
         </div>
         <div class="zawartosc">  
-            <h2 class="h1 title_of_product col-lg-12 ">Nie możesz znaleźć produktu?</h2>    
+            <div id="duzy_napis"><h2 class="h1 title_of_product col-lg-12 ">Nie możesz znaleźć produktu?</h2></div>    
             <form>
-            <input type="text" id="szukaj" placeholder="Wyszukaj"> 
-           
-            <input type="submit" value="SZUKAJ" id="wyslij">
-            </form>     
-            <div class="fotter">
+            <input type="text" value="" id="szukaj" placeholder="Wyszukaj"> 
+            </form>
+            <div id="productsData"></div>
+            <br>   
+   
+        </div>
+        <div class="fotter">
             <div class="newsletter row " id="newsletter">
                 <div class="napis col-xs-12 col-sm-12 col-lg-6">
                     Chcesz otrzymywać powiadomienia o nowościach?
@@ -153,6 +152,7 @@ and open the template in the editor.
             </div>
                 
         </div>
-        </div>     
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type='text/javascript'src='jscript/Search.js'></script>     
     </body>
 </html>
